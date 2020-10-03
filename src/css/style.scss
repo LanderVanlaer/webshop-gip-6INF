@@ -17,18 +17,22 @@ body {
 
 h1 {
     font-size: 4rem;
+    color: #0c0c0c;
 }
 
 h2 {
     font-size: 3.25rem;
+    color: #4e4e4e;
 }
 
 h3 {
     font-size: 2.75rem;
+    color: #5e5e5e;
 }
 
 h4 {
     font-size: 2.2rem;
+    color: #6e6e6e;
 }
 
 p {
@@ -44,17 +48,39 @@ a:active {
 
 input {
     outline: none;
-}
 
-input[type="search"] {
-    font-size: 2rem;
+    &[type="search"] {
+        font-size: 2rem;
 
-    //remove X input search
-    &::-webkit-search-cancel-button,
-    &::-webkit-search-decoration,
-    &::-webkit-search-results-button,
-    &::-webkit-search-results-decoration {
-        display: none;
+        //remove X input search
+        &::-webkit-search-cancel-button,
+        &::-webkit-search-decoration,
+        &::-webkit-search-results-button,
+        &::-webkit-search-results-decoration {
+            display: none;
+        }
+    }
+
+    &[type="checkbox"] {
+        position: absolute;
+        left: -999999px;
+
+        &~span.checkbox-custom {
+            display: inline-block;
+            border: 2px solid black;
+            width: 1em;
+            height: 1em;
+            border-radius: 5px;
+        }
+
+        &:checked~span.checkbox-custom {
+            background-image: url("/images/check.svg");
+            background-size: contain;
+        }
+
+        &:focus~span.checkbox-custom {
+            box-shadow: 0 0 0 .05em #424242a4, 0 0 .15em .04em #2929298a;
+        }
     }
 }
 
