@@ -25,11 +25,11 @@ query.forEach((v, k) => {
         });
 });
 
-//Submit on check
+//Submit on check for all elements
 ELEMENTS.forEach(e => e.addEventListener('change', submit));
 
 /**
- * Changin URL by the {@link properties} without reloading the page
+ * Changing URL by the {@link properties} without reloading the page
  */
 function submit() {
     const params = new URLSearchParams();
@@ -41,5 +41,5 @@ function submit() {
                 break;
         }
     })
-    history.pushState(null, document.title, location.pathname + "?" + params.toString());
+    history.pushState(null, document.title, location.pathname + (params.toString() ? "?" + params.toString() : ''));
 }
