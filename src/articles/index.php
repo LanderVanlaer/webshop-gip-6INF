@@ -10,35 +10,7 @@
 </head>
 
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li id="logo">
-                    <a href="/">
-                        <img src="/images/logo_basic.svg" alt="logo">
-                    </a>
-                </li>
-                <li id="search">
-                    <div>
-                        <input type="search" name="search-bar" id="search-bar" placeholder="Search">
-                        <ul>
-                            <li><a href="#">DATA</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li id="user">
-                    <a href="#">
-                        <img src="/images/Icon_user.svg" alt="user">
-                    </a>
-                </li>
-                <li id="basket">
-                    <a href="#">
-                        <img src="/images/Icon_basket.svg" alt="basket">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <?php include "../resources/header.php" ?>
     <main>
         <aside>
             <form name="properties" method="GET">
@@ -79,7 +51,7 @@
         <section>
         </section>
     </main>
-    <footer></footer>
+    <?php include "../resources/footer.php" ?>
     <script src="/js/header.js"></script>
     <script src="/js/articles/properties_menu.js"></script>
 </body>

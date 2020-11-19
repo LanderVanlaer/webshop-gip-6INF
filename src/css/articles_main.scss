@@ -7,7 +7,7 @@ main {
     max-width: 1500px;
     margin: 0 auto;
 
-    >* {
+    > * {
         font-size: medium;
     }
 
@@ -19,7 +19,6 @@ main {
     }
 
     aside {
-        background-color: #a83f3f86;
         width: $aside-width;
 
         form {
@@ -27,10 +26,10 @@ main {
                 list-style: none;
             }
 
-            >ul {
+            > ul {
                 padding-left: 10px;
 
-                >li {
+                > li {
                     display: block;
                     margin-top: 2rem;
 
@@ -44,7 +43,7 @@ main {
                         ul li label {
                             font-size: 1.7rem;
 
-                            input~span.checkbox-custom {
+                            input ~ span.checkbox-custom {
                                 margin: 0px 10px;
                                 width: 1em;
                                 height: 1em;
@@ -57,7 +56,6 @@ main {
     }
 
     section {
-        background-color: #48a83f86;
         width: calc(100% - #{$aside-width});
     }
 }
