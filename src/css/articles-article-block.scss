@@ -1,0 +1,103 @@
+article {
+    //background-color: #09BDEA;
+    display: inline-block;
+    width: 280px;
+    height: 400px;
+    margin-right: 10rem;
+    border-radius: 15px;
+    padding: 1rem;
+    background-color: #00000005;
+
+    &:hover {
+        background-color: #00000010;
+    }
+
+    * {
+        vertical-align: middle;
+    }
+
+    a {
+        text-decoration: none;
+
+        img.thumbnail {
+            display: block;
+            width: 256px;
+            margin: 0 auto;
+        }
+
+        > div {
+            display: block;
+
+            h4.product-name {
+                display: inline-block;
+                float: left;
+                max-width: calc(100% - 70px);
+            }
+
+            img.brand {
+                float: right;
+                height: 40px;
+                width: 70px;
+            }
+
+            .star-rating {
+                clear: both;
+                padding-top: .5rem;
+                height: 30px;
+
+                div.stars, h5.amount-of-reviews {
+                    font-size: 1.5rem;
+                    display: inline-block;
+                }
+
+                h5.amount-of-reviews {
+                    margin-left: 5px;
+                }
+
+                .star {
+                    display: inline-block;
+                    width: 2rem;
+                }
+
+            }
+
+            .description {
+                text-align: justify;
+                height: 100px;
+                vertical-align: middle;
+                font-size: 1.5rem;
+                padding-top: 5px;
+            }
+
+            .bottom {
+                height: 66px;
+                text-align: right;
+
+                * {
+                    vertical-align: bottom;
+                    display: inline-block;
+                }
+
+                h3 {
+                    float: left;
+                    font-size: 3rem;
+                    margin-top: 20px;
+                }
+
+                .basket {
+                    border-radius: 5px;
+
+                    &:hover {
+                        background-color: #00000015;
+                    }
+
+                    img {
+                        margin: 3px 0;
+                        float: right;
+                        width: 60px;
+                    }
+                }
+            }
+        }
+    }
+}

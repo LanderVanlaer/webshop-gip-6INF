@@ -12,6 +12,10 @@ footer {
         vertical-align: middle;
     }
 
+    a:hover {
+        color: #663AE6;
+    }
+
     .copy {
         font-size: 2rem;
     }
@@ -22,6 +26,10 @@ footer {
 
         div {
             display: inline-block;
+            margin: 0 1rem;
+            a{
+                margin: 0 2px;
+            }
         }
     }
 }
