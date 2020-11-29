@@ -3,13 +3,13 @@ article {
     display: inline-block;
     width: 280px;
     height: 400px;
-    margin-right: 10rem;
+    margin: 0 10rem 5rem 0;
     border-radius: 15px;
     padding: 1rem;
-    background-color: #00000005;
+    background-color: rgba(0, 0, 0, 0.01);
 
     &:hover {
-        background-color: #00000010;
+        background-color: rgba(0, 0, 0, 0.03);
     }
 
     * {
@@ -85,10 +85,11 @@ article {
                 }
 
                 .basket {
-                    border-radius: 5px;
-
                     &:hover {
-                        background-color: #00000015;
+                        img {
+                            border-radius: 5px;
+                            background-color: rgba(0, 0, 0, 0.05);
+                        }
                     }
 
                     img {
