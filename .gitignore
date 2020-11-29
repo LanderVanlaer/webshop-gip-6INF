@@ -110,3 +110,6 @@ fabric.properties
 *.css.map
 *.sass.map
 *.scss.map
+
+# Voor copyright redenen
+src/images/products/
