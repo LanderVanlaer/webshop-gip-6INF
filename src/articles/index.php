@@ -50,17 +50,83 @@
         </aside>
         <section>
             <?php
-                $product = array(
-                    "name" => "DC-FZ1000 II",
-                    "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
-                    "src" => "/images/products/01_FZ1000M2_thumbnail.png",
-                    "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
-                    "stars" => 3,
-                    "amountOfReviews" => 100,
-                    "price" => 1599.99,
-                    "link" => "#"
+                $products = array(
+                    array(
+                        "name" => "DC-FZ1000 II",
+                        "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
+                        "src" => "/images/products/01_FZ1000M2_thumbnail.png",
+                        "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
+                        "stars" => 3,
+                        "amountOfReviews" => 1,
+                        "price" => 1599.99,
+                        "link" => "#"
+                    ),
+                    array(
+                        "name" => "LUMIX DC-G9 Systeemcamera",
+                        "brand" => array("name" => "Panasonic", "src" => "/images/brands/panasonic.svg"),
+                        "src" => "/images/products/01_171121.png",
+                        "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
+                        "stars" => 5,
+                        "amountOfReviews" => 100,
+                        "price" => 1599.99,
+                        "link" => "#"
+                    ),
+                    array(
+                        "name" => "DC-FZ1000 II",
+                        "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
+                        "src" => "/images/products/01_FZ1000M2_thumbnail.png",
+                        "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ...",
+                        "stars" => 1,
+                        "amountOfReviews" => 100,
+                        "price" => 1599.99,
+                        "link" => "#"
+                    ),
+                    array(
+                        "name" => "DC-FZ1000 II",
+                        "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
+                        "src" => "/images/products/01_FZ1000M2_thumbnail.png",
+                        "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
+                        "stars" => 0,
+                        "amountOfReviews" => 100,
+                        "price" => 1599.99,
+                        "link" => "#"
+                    ),
+                    array(
+                        "name" => "DC-FZ1000 II",
+                        "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
+                        "src" => "/images/products/01_FZ1000M2_thumbnail.png",
+                        "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
+                        "stars" => 3,
+                        "amountOfReviews" => 100,
+                        "price" => 1599.99,
+                        "link" => "#"
+                    ),
+                    array(
+                        "name" => "DC-FZ1000 II",
+                        "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
+                        "src" => "/images/products/02_FZ1000M2.png",
+                        "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
+                        "stars" => 3,
+                        "amountOfReviews" => 100,
+                        "price" => 1000,
+                        "link" => "#"
+                    ),
+                    array(
+                        "name" => "DC-FZ1000 II",
+                        "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
+                        "src" => "/images/products/03_FZ1000M2.png",
+                        "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
+                        "stars" => 3,
+                        "amountOfReviews" => 100,
+                        "price" => 1599.99,
+                        "link" => "#"
+                    ),
                 );
-                include "../resources/articles/article.php" ?>
+
+                foreach ($products as $product) {
+                    include "../resources/articles/article.php";
+                }
+            ?>
         </section>
     </main>
     <?php include "../resources/footer.php" ?>
