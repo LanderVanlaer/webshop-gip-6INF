@@ -21,6 +21,20 @@
 | categorieId | int | PK
 | naam | string
 
+# CategorieSpecificatie
+| Naam | type | andere |
+| --- | --- | --- |
+| categorieSpecificatieId | int | PK
+| categorieId | Categorie.categorieId | FK
+| naam | string
+
+# ArtikelCategorieSpecificatie
+| Naam | type | andere |
+| --- | --- | --- |
+| categorieId | Categorie.categorieId | FK
+| artikelId | Artikel.artikelId | FK
+| value | string
+
 # Merk
 | Naam | type | andere |
 | --- | --- | --- |
