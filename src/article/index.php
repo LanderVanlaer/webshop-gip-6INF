@@ -48,7 +48,53 @@
 <body>
     <?php include "../resources/header.php" ?>
     <main>
-
+        <div class="product-name-logo">
+            <div class="left">
+                <h1 class="product-name"><?= $product["name"] ?> &#9866; <?= $product["brand"]["name"] ?></h1>
+            </div>
+            <div class="right">
+                <img src="<?= $product["brand"]["src"] ?>" alt="Logo <?= $product["brand"]["name"] ?>">
+            </div>
+        </div>
+        <div class="product-top">
+            <div class="images">
+                <ul class="big-images">
+                    <?php
+                        foreach ($product["img"] as $i => $src) {
+                            if ($i == 0)
+                                echo "<li> <img class='active' src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
+                            else
+                                echo "<li> <img src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
+                        }
+                    ?>
+                </ul>
+                <div class="images-thumbnails">
+                    <ul>
+                        <?php
+                            foreach ($product["img"] as $i => $src) {
+                                if ($i == 0)
+                                    echo "<li> <img class='active' src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
+                                else
+                                    echo "<li> <img src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
+                            }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="price-buy">
+                <div class="price-like">
+                    <div>
+                        <h1 class="price">&euro; <?= $product["price"] ?></h1>
+                    </div>
+                    <div>
+                        <button class="like">
+                            <img class="active" src="/images/Icon_love_outline.svg" alt="like">
+                            <img src="/images/Icon_love_solid.svg" alt="like">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <?php include "../resources/footer.php" ?>
 </body>

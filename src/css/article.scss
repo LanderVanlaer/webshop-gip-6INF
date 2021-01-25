@@ -1,0 +1,122 @@
+main {
+    .product-name-logo {
+
+        > * {
+            display: inline-block;
+            width: 50%;
+        }
+
+        .left {
+            h1.product-name {
+                margin: 10px 5px;
+                font-size: 5rem;
+            }
+        }
+
+        .right {
+            text-align: right;
+            padding-right: 50px;
+
+            img {
+                max-width: calc(100% - 50px);
+                max-height: 5rem;
+            }
+        }
+    }
+
+    .product-top {
+        > div {
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .images {
+            background: #00000020;
+
+            ul.big-images {
+                li {
+                    img {
+                        width: 100%;
+                        display: none;
+
+                        &.active {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            .images-thumbnails {
+                ul {
+                    width: 100%;
+                    background-color: rgba(0, 0, 0, 0.05);
+
+                    li {
+                        display: inline-block;
+                        border-radius: 5px;
+
+                        &:hover {
+                            background-color: rgba(0, 0, 0, 0.08);
+                        }
+
+                        img {
+                            width: 100px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .price-buy {
+            padding: 10px;
+
+            .price-like {
+                > div {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 25%;
+                    height: 100%;
+                    text-align: center;
+
+                    &:nth-child(1) {
+                        width: 75%;
+                    }
+
+                    h1.price {
+                        text-align: right;
+                        font-size: 5rem;
+                    }
+
+                    button.like {
+                        background-color: #09BDEA;
+                        border: none;
+                        border-radius: 5px;
+                        padding: 10px;
+                        box-shadow: 1px 1px 6px #545454;
+                        margin: 2px;
+
+                        &:hover {
+                            background-color: #0cabd4;
+                        }
+
+                        &:active {
+                            border: 1px solid #00000005;
+                            margin: 1px;
+                            outline: none;
+                        }
+
+                        img {
+                            display: none;
+                            width: 50px;
+
+                            &.active {
+                                display: block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
