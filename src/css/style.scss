@@ -91,5 +91,28 @@ input {
     }
 }
 
+button.btn-blue {
+    background-color: #09BDEA;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 1px 1px 6px #545454;
+    margin: 2px;
+
+    &:focus {
+        outline: 1px solid #ffffff;
+    }
+
+    &:active {
+        border: 1px solid #00000005;
+        margin: 1px;
+        outline: none;
+    }
+
+    &:hover {
+        background-color: #0cabd4;
+    }
+}
+
 @import 'header';
 @import 'footer';

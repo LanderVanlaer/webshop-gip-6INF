@@ -87,11 +87,16 @@
                         <h1 class="price">&euro; <?= $product["price"] ?></h1>
                     </div>
                     <div>
-                        <button class="like">
-                            <img class="active" src="/images/Icon_love_outline.svg" alt="like">
-                            <img src="/images/Icon_love_solid.svg" alt="like">
+                        <button class="btn-blue like">
+                            <img id="btn-notliked" class="active" src="/images/Icon_love_outline.svg" alt="like">
+                            <img id="btn-liked" src="/images/Icon_love_solid.svg" alt="like">
                         </button>
                     </div>
+                </div>
+                <div class="add-to-shopping-list">
+                    <button class="btn-blue">
+                        <img src="/images/Icon_basket-white.svg" alt="like">
+                    </button>
                 </div>
             </div>
         </div>
