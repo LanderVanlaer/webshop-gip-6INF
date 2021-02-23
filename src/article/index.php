@@ -73,7 +73,7 @@
                         <?php
                             foreach ($product["img"] as $i => $src) {
                                 if ($i == 0)
-                                    echo "<li> <img class='active' src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
+                                    echo "<li class='active'> <img src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
                                 else
                                     echo "<li> <img src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
                             }
@@ -102,6 +102,7 @@
         </div>
     </main>
     <?php include "../resources/footer.php" ?>
+    <script src="/js/article/imagesThumbnails.js"></script>
 </body>
 
 </html>
