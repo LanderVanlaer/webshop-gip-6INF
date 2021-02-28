@@ -1,0 +1,19 @@
+form {
+    div.message {
+        font-size: 2rem;
+        color: #752525;
+        background-color: rgb(221, 221, 221);
+        text-align: justify;
+        display: inline-block;
+        margin: 1rem auto;
+        padding: 1rem;
+        border-radius: 5px;
+    }
+
+    input.required {
+        &::after {
+            content: "*";
+            color: red;
+        }
+    }
+}

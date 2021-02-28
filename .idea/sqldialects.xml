@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$USER_HOME$/Downloads/gigacam.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/Gigacam.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/Adress.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/Article.sql" dialect="MySQL" />
@@ -19,5 +18,6 @@
     <file url="file://$PROJECT_DIR$/sql/tables/ShoppingCartArticle.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/Specification.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/Visited.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/admin/login.php" dialect="GenericSQL" />
   </component>
 </project>

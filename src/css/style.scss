@@ -91,13 +91,15 @@ input {
     }
 }
 
-button.btn-blue {
+.btn-blue {
     background-color: #09BDEA;
     border: none;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 1px 1px 6px #545454;
     margin: 2px;
+    color: white;
+    font-weight: bold;
 
     &:focus {
         outline: 1px solid #ffffff;
@@ -111,6 +113,14 @@ button.btn-blue {
 
     &:hover {
         background-color: #0cabd4;
+    }
+}
+
+a.btn-blue {
+    &, &:focus, &:active, &:visited {
+        font-size: 2rem;
+        color: white;
+        text-decoration: none;
     }
 }
 

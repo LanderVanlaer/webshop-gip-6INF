@@ -1,0 +1,25 @@
+main form {
+    font-size: 3rem;
+
+    table {
+        margin: 0 auto;
+
+        tr {
+            td {
+                padding: 10px;
+
+                &[colspan="2"] {
+                    text-align: center;
+                }
+
+                input {
+                    font-size: 2rem;
+                }
+
+                button.btn-blue {
+                    font-size: 3rem;
+                }
+            }
+        }
+    }
+}
