@@ -12,6 +12,7 @@
     <file url="file://$PROJECT_DIR$/sql/tables/Category.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/Country.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/Customer.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Employee.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/Order.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/OrderArticle.sql" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/sql/tables/Province.sql" dialect="MySQL" />
