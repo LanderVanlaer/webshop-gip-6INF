@@ -3,15 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2021 at 06:00 PM
+-- Generation Time: Feb 28, 2021 at 01:30 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 8.0.1
 
-SET
-    SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET
-    time_zone = "+00:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
@@ -22,10 +20,6 @@ SET
 --
 -- Database: `gigacam`
 --
-CREATE
-    DATABASE IF NOT EXISTS `gigacam` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE
-    `gigacam`;
 
 -- --------------------------------------------------------
 
@@ -161,6 +155,22 @@ CREATE TABLE `customer`
     `registration_code` varchar(255) DEFAULT NULL,
     `active`            tinyint(1)   DEFAULT NULL,
     `address_id`        int(11)      DEFAULT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employee`
+--
+
+CREATE TABLE `employee`
+(
+    `id`        int(11)      NOT NULL,
+    `password`  varchar(255) NOT NULL,
+    `username`  varchar(127) NOT NULL,
+    `firstname` varchar(63) DEFAULT NULL,
+    `lastname`  varchar(63) DEFAULT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -335,6 +345,12 @@ ALTER TABLE `customer`
     ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `employee`
+--
+ALTER TABLE `employee`
+    ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `order`
 --
 ALTER TABLE `order`
@@ -426,6 +442,12 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
+    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `employee`
+--
+ALTER TABLE `employee`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
