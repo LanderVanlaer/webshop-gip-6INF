@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$USER_HOME$/Downloads/gigacam.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/Gigacam.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Adress.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Article.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/ArticleCategory.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/ArticleImage.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/ArticleSpecification.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Brand.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Category.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Country.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Customer.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Order.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/OrderArticle.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Province.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/ShoppingCartArticle.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Specification.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/sql/tables/Visited.sql" dialect="MySQL" />
+  </component>
+</project>
