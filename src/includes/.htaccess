@@ -1,1 +1,8 @@
-Deny from all
+AuthUserFile C:/.htaccess
+AuthGroupFile /dev/null
+AuthName "Aanmelden met gebruikersnaam en wachtwoord, aub"
+AuthType Basic
+
+<Limit GET POST>
+require valid-user
+</Limit>
