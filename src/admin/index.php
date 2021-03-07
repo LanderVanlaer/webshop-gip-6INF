@@ -1,8 +1,5 @@
 <?php
-    include "../includes/basicFunctions.inc.php";
-    session_start();
-
-    if (!isAdmin()) redirect("/admin/login");
+    include "../includes/admin/admin.inc.php";
 ?>
 <!doctype html>
 <html lang="nl">

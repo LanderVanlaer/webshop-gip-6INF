@@ -1,32 +1,36 @@
 <?php
     include "../../includes/validateFunctions.inc.php";
     include "../../includes/basicFunctions.inc.php";
+    include "../../includes/admin/adminFunctions.inc.php";
+
     session_start();
-    
+
+    if (isAdmin()) redirect("/admin");
+
     $one_empty = $not_found = false;
-    
+
     if (!empty($_POST)) {
         $username = var_validate($_POST["username"]);
         $password = var_validate($_POST["password"]);
-        
+
         if (!$one_empty = is_one_empty($username, $password)) {
             include "../../includes/connection.inc.php";
-            
+
             $query = $con->prepare("SELECT * FROM `employee` WHERE username = ? LIMIT 1");
             $query->bind_param("s", $username);
             $query->execute();
-            
+
             $res = $query->get_result();
-            
+
             if ($row = $res->fetch_assoc()) {
-                
+
                 if (password_verify($password, $row["password"])) {
                     $_SESSION["admin"] = $row;
                     redirect("/admin/index.php");
                 } else $not_found = true;
-                
+
             } else $not_found = true;
-            
+
             $con->close();
         }
     }
