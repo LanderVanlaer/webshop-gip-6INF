@@ -1,6 +1,6 @@
 <?php
-    include "../includes/validateFunctions.inc.php";
-    include "../includes/basicFunctions.inc.php";
+    include "../../includes/validateFunctions.inc.php";
+    include "../../includes/basicFunctions.inc.php";
     session_start();
     
     $one_empty = $not_found = false;
@@ -10,7 +10,7 @@
         $password = var_validate($_POST["password"]);
         
         if (!$one_empty = is_one_empty($username, $password)) {
-            include "../includes/connection.inc.php";
+            include "../../includes/connection.inc.php";
             
             $query = $con->prepare("SELECT * FROM `employee` WHERE username = ? LIMIT 1");
             $query->bind_param("s", $username);
@@ -41,11 +41,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/admin/admin.css">
     <link rel="stylesheet" href="/css/form.css">
-    <?php include "../resources/admin/head.php"; ?>
+    <?php include "../../resources/admin/head.php"; ?>
 </head>
 
 <body>
-    <?php include "../resources/admin/header.php"; ?>
+    <?php include "../../resources/admin/header.php"; ?>
     <main>
         <h1>Admin login</h1>
         <form name="login" action="#" method="post">
@@ -75,7 +75,7 @@
             </table>
         </form>
     </main>
-    <?php include "../resources/admin/footer.php"; ?>
+    <?php include "../../resources/admin/footer.php"; ?>
 </body>
 
 </html>

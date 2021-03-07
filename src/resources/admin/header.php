@@ -9,9 +9,9 @@
             <li id="home">
                 <a class="btn-blue" href="/admin">Admin</a>
             </li>
-            <?php if ($_SERVER['REQUEST_URI'] != "/admin/login.php") { ?>
+            <?php if ($_SERVER['PHP_SELF'] != "/admin/login/index.php" && $_SERVER['PHP_SELF'] != "/admin/login/index.php/") { ?>
                 <li id="login-logout">
-                    <a class="btn-blue" href="/admin/logout.php">Logout</a>
+                    <a class="btn-blue" href="/admin/logout">Logout</a>
                 </li>
             <?php } ?>
         </ul>

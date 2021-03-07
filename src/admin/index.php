@@ -2,7 +2,7 @@
     include "../includes/basicFunctions.inc.php";
     session_start();
 
-    if (empty($_SESSION["admin"]) || empty($_SESSION["admin"]["id"])) redirect("login.php");
+    if (!isAdmin()) redirect("/admin/login");
 ?>
 <!doctype html>
 <html lang="nl">
