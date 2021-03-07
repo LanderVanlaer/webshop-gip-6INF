@@ -2,7 +2,7 @@
     include "../../../includes/admin/admin.inc.php";
     include "../../../includes/validateFunctions.inc.php";
 
-    $one_empty = $executed = $succes = false;
+    $one_empty = $duplicate = $executed = $succes = $last_id = false;
 
     if (!empty($_POST)) {
         $nameD = var_validate($_POST['nameD']);
@@ -12,14 +12,35 @@
         if (!is_one_empty($nameD, $nameF, $nameE)) {
             include "../../../includes/connection.inc.php";
 
-            $query = $con->prepare("INSERT INTO `category`(nameD, nameF, nameE) VALUES (?, ?, ?)");
-
+            //Check if not duplicate
+            $query = $con->prepare("SELECT id FROM `category` WHERE nameD = ? OR nameF = ? OR nameE = ? LIMIT 1");
             $query->bind_param('sss', $nameD, $nameF, $nameE);
 
-            $executed = true;
+            $query->execute();
 
-            $succes = $query->execute();
+            $res = $query->get_result();
 
+            if ($res->num_rows <= 0) {
+                $query->close();
+
+                $query = $con->prepare("INSERT INTO `category`(nameD, nameF, nameE) VALUES (?, ?, ?)");
+
+                $query->bind_param('sss', $nameD, $nameF, $nameE);
+
+                $executed = true;
+
+                $succes = $query->execute();
+
+                if ($succes) {
+                    $last_id = $con->insert_id;
+                }
+            } else {
+                //duplicate
+                $duplicate = true;
+                $last_id = $res->fetch_assoc()['id'];
+            }
+
+            $query->close();
             $con->close();
         } else {
             $one_empty = true;
@@ -42,15 +63,25 @@
     <main>
         <h1>Toevoegen categorie</h1>
         <form action="#" method="post">
-            <?php if ($one_empty) { ?>
+            <?php if ($one_empty): ?>
                 <div class="message">
                     Gelieve alle verplichte velden in te vullen
                 </div>
-            <?php } else if ($executed) { ?>
+            <?php elseif ($duplicate): ?>
                 <div class="message">
-                    <?= $succes ? "Succes" : "Failed"; ?>
+                    Er bestaat al een categorie met deze naam, id: <?= $last_id ?>
                 </div>
-            <?php } ?>
+            <?php elseif ($executed): ?>
+                <?php if ($succes): ?>
+                    <div class="message">
+                        Categorie toegevoegd met id: <?= $last_id ?>
+                    </div>
+                <?php else: ?>
+                    <div class="message">
+                        Er is iets misgelopen
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
             <table>
                 <tr>
                     <td><label class="required" for="nameD">Naam Nederlands</label></td>
