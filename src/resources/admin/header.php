@@ -14,6 +14,9 @@
                     <a class="btn-blue" href="/admin/logout">Logout</a>
                 </li>
             <?php } ?>
+            <li id="add">
+                <a class="btn-blue" href="/admin/add">Add</a>
+            </li>
         </ul>
     </nav>
 </header>

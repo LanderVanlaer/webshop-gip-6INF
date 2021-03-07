@@ -1,0 +1,20 @@
+main {
+    text-align: center;
+
+    nav {
+        display: inline-block;
+
+        ul {
+            li {
+                list-style: none;
+
+                a.btn-blue {
+                    &, &:active {
+                        display: block;
+                        margin: 2rem;
+                    }
+                }
+            }
+        }
+    }
+}

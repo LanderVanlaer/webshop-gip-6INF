@@ -10,9 +10,9 @@ form {
         border-radius: 5px;
     }
 
-    input.required {
+    .required {
         &::after {
-            content: "*";
+            content: "\00a0*"; //nbsp
             color: red;
         }
     }

@@ -1,0 +1,19 @@
+main {
+    font-size: 2rem;
+
+    form {
+        display: block;
+
+        table {
+            margin: 10px auto;
+
+            tr td {
+                padding: 5px;
+            }
+        }
+
+        button[type="submit"] {
+            font-size: 2rem;
+        }
+    }
+}
