@@ -113,6 +113,7 @@ fabric.properties
 
 # Voor copyright redenen
 src/images/products/
+src/images/brands/
 
 #TypeScript
 src/**/*.js.map
