@@ -33,6 +33,23 @@
 
                 if ($succes) {
                     $last_id = $con->insert_id;
+                    $query->close();
+
+                    $query = $con->prepare("INSERT INTO `specification`(category_id, nameD, nameF, nameE) VALUES ($last_id, ?, ?, ?)");
+
+                    $id = 0;
+                    do {
+                        $nameSpecD = var_validate($_POST["nameSpecD$id"]);
+                        $nameSpecF = var_validate($_POST["nameSpecD$id"]);
+                        $nameSpecE = var_validate($_POST["nameSpecD$id"]);
+
+                        if (!is_one_empty($nameSpecD, $nameSpecF, $nameSpecE)) {
+                            $query->bind_param('sss', $nameSpecD, $nameSpecF, $nameSpecE);
+                            $executed = $query->execute();
+                        }
+
+                        $id++;
+                    } while (isset($_POST["nameSpecD$id"]) || isset($_POST["nameSpecF$id"]) || isset($_POST["nameSpecE$id"]));
                 }
             } else {
                 //duplicate
@@ -56,6 +73,7 @@
     <?php include "../../../resources/admin/head.php"; ?>
     <link rel="stylesheet" href="/css/admin/add/style.css">
     <link rel="stylesheet" href="/css/form.css">
+    <script defer src="/js/admin/add/category-dynamic.js"></script>
     <title>Admin - Add Category</title>
 </head>
 <body>
@@ -82,25 +100,40 @@
                     </div>
                 <?php endif; ?>
             <?php endif; ?>
-            <table>
-                <tr>
-                    <td><label class="required" for="nameD">Naam Nederlands</label></td>
-                    <td><input required type="text" name="nameD" id="nameD" maxlength="31"></td>
-                </tr>
-                <tr>
-                    <td><label class="required" for="nameF">Naam Frans</label></td>
-                    <td><input required type="text" name="nameF" id="nameF" maxlength="31"></td>
-                </tr>
-                <tr>
-                    <td><label class="required" for="nameE">Naam English</label></td>
-                    <td><input required type="text" name="nameE" id="nameE" maxlength="31"></td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <button class="btn-blue" type="submit">Sumit</button>
-                    </td>
-                </tr>
-            </table>
+            <fieldset>
+                <legend>Category</legend>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><label class="required" for="nameD">Naam Nederlands</label></td>
+                            <td><input required type="text" name="nameD" id="nameD" maxlength="31"></td>
+                        </tr>
+                        <tr>
+                            <td><label class="required" for="nameF">Naam Frans</label></td>
+                            <td><input required type="text" name="nameF" id="nameF" maxlength="31"></td>
+                        </tr>
+                        <tr>
+                            <td><label class="required" for="nameE">Naam English</label></td>
+                            <td><input required type="text" name="nameE" id="nameE" maxlength="31"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Specifications</legend>
+                <table id="specifications">
+                    <thead>
+                        <tr>
+                            <th>Nederlands</th>
+                            <th>Frans</th>
+                            <th>Engels</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </fieldset>
+            <button class="btn-blue" type="submit">Submit</button>
         </form>
     </main>
     <?php include "../../../resources/admin/footer.php"; ?>

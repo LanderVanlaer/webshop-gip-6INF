@@ -1,4 +1,6 @@
 form {
+    margin: 10px;
+
     div.message {
         font-size: 2rem;
         color: #752525;
@@ -8,6 +10,17 @@ form {
         margin: 1rem auto;
         padding: 1rem;
         border-radius: 5px;
+    }
+
+    fieldset {
+        margin: 50px 10px;
+        padding: 5px 0;
+        border: none;
+
+        legend {
+            padding: 0 10px;
+            font-size: 3rem;
+        }
     }
 
     .required {
