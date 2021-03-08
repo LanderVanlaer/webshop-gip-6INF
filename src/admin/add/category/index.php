@@ -40,8 +40,8 @@
                     $id = 0;
                     do {
                         $nameSpecD = var_validate($_POST["nameSpecD$id"]);
-                        $nameSpecF = var_validate($_POST["nameSpecD$id"]);
-                        $nameSpecE = var_validate($_POST["nameSpecD$id"]);
+                        $nameSpecF = var_validate($_POST["nameSpecF$id"]);
+                        $nameSpecE = var_validate($_POST["nameSpecE$id"]);
 
                         if (!is_one_empty($nameSpecD, $nameSpecF, $nameSpecE)) {
                             $query->bind_param('sss', $nameSpecD, $nameSpecF, $nameSpecE);
