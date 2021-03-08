@@ -2,7 +2,7 @@
     include "../../../includes/admin/admin.inc.php";
     include "../../../includes/validateFunctions.inc.php";
 
-    $one_empty = $passwordNotMatch = $duplicate = $executed = $succes = $last_id = false;
+    $one_empty = $passwordNotMatch = $passwordFail = $duplicate = $executed = $succes = $last_id = false;
 
     if (!empty($_POST)) {
         $username = var_validate($_POST['username']);
@@ -12,38 +12,42 @@
         $passwordConfirm = var_validate($_POST['passwordConfirm']);
 
         if (!is_one_empty($username, $firstname, $lastname, $password, $passwordConfirm)) {
-            if ($password === $passwordConfirm) {
-                include "../../../includes/connection.inc.php";
+            $passwordFail = password_not_possible($password);
 
-                //Check if not duplicate
-                $query = $con->prepare("SELECT id FROM `employee` WHERE username = ? LIMIT 1");
-                $query->bind_param('s', $username);
+            if (!count($passwordFail)) {
+                if ($password === $passwordConfirm) {
+                    include "../../../includes/connection.inc.php";
 
-                $query->execute();
+                    //Check if not duplicate
+                    $query = $con->prepare("SELECT id FROM `employee` WHERE username = ? LIMIT 1");
+                    $query->bind_param('s', $username);
 
-                $res = $query->get_result();
+                    $query->execute();
 
-                if ($res->num_rows <= 0) {
+                    $res = $query->get_result();
+
+                    if ($res->num_rows <= 0) {
+                        $query->close();
+
+                        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+                        $query = $con->prepare("INSERT INTO `employee`(password, username, firstname, lastname) VALUES (?, ?, ?, ?)");
+                        $query->bind_param('ssss', $hashedPassword, $username, $firstname, $lastname);
+                        $executed = true;
+                        $succes = $query->execute();
+
+                        if ($succes) $last_id = $con->insert_id;
+                    } else {
+                        //duplicate
+                        $duplicate = true;
+                        $last_id = $res->fetch_assoc()['id'];
+                    }
                     $query->close();
-
-                    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-                    $query = $con->prepare("INSERT INTO `employee`(password, username, firstname, lastname) VALUES (?, ?, ?, ?)");
-                    $query->bind_param('ssss', $hashedPassword, $username, $firstname, $lastname);
-                    $executed = true;
-                    $succes = $query->execute();
-
-                    if ($succes) $last_id = $con->insert_id;
+                    $con->close();
                 } else {
-                    //duplicate
-                    $duplicate = true;
-                    $last_id = $res->fetch_assoc()['id'];
+                    //password mismatch
+                    $passwordNotMatch = true;
                 }
-                $query->close();
-                $con->close();
-            } else {
-                //password mismatch
-                $passwordNotMatch = true;
             }
         } else {
             //one field empty
@@ -74,6 +78,12 @@
             <?php elseif ($passwordNotMatch): ?>
                 <div class="message">
                     De 2 wachtwoorden zijn niet gelijk aan elkaar
+                </div>
+            <?php elseif ($passwordFail): ?>
+                <div class="message">
+                    <?php foreach ($passwordFail as $s) {
+                        echo "$s<br>";
+                    } ?>
                 </div>
             <?php elseif ($duplicate): ?>
                 <div class="message">
