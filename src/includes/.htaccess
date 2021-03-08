@@ -1,4 +1,4 @@
-AuthUserFile C:/.htaccess
+AuthUserFile C:/.htpasswd
 AuthGroupFile /dev/null
 AuthName "Aanmelden met gebruikersnaam en wachtwoord, aub"
 AuthType Basic
