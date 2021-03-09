@@ -3,35 +3,53 @@
     include "../../includes/basicFunctions.inc.php";
     include "../../includes/admin/adminFunctions.inc.php";
 
+    define("H_CAPTCHA_API_KEY", '3e7a1904-27c7-4bfc-b392-99c68f690f23');
+
     session_start();
 
     if (isAdmin()) redirect("/admin");
 
-    $one_empty = $not_found = false;
+    $one_empty = $not_found = $hcaptchaFail = false;
 
     if (!empty($_POST)) {
-        $username = var_validate($_POST["username"]);
-        $password = var_validate($_POST["password"]);
+        $data = array(
+                'secret' => "0x1D3C92B9e7D52594976A623BFE8f870884e4A154",
+                'response' => $_POST['h-captcha-response']
+        );
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($verify);
 
-        if (!$one_empty = is_one_empty($username, $password)) {
-            include "../../includes/connection.inc.php";
+        $responseData = json_decode($response);
+        if ($responseData->success) {
+            $username = var_validate($_POST["username"]);
+            $password = var_validate($_POST["password"]);
 
-            $query = $con->prepare("SELECT * FROM `employee` WHERE username = ? LIMIT 1");
-            $query->bind_param("s", $username);
-            $query->execute();
+            if (!$one_empty = is_one_empty($username, $password)) {
+                include "../../includes/connection.inc.php";
 
-            $res = $query->get_result();
+                $query = $con->prepare("SELECT * FROM `employee` WHERE username = ? LIMIT 1");
+                $query->bind_param("s", $username);
+                $query->execute();
 
-            if ($row = $res->fetch_assoc()) {
+                $res = $query->get_result();
 
-                if (password_verify($password, $row["password"])) {
-                    $_SESSION["admin"] = $row;
-                    redirect("/admin/index.php");
+                if ($row = $res->fetch_assoc()) {
+
+                    if (password_verify($password, $row["password"])) {
+                        $_SESSION["admin"] = $row;
+                        redirect("/admin/index.php");
+                    } else $not_found = true;
+
                 } else $not_found = true;
 
-            } else $not_found = true;
-
-            $con->close();
+                $con->close();
+            }
+        } else {
+            $hcaptchaFail = true;
         }
     }
 ?>
@@ -46,6 +64,7 @@
     <link rel="stylesheet" href="/css/admin/admin.css">
     <link rel="stylesheet" href="/css/form.css">
     <?php include "../../resources/admin/head.php"; ?>
+    <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
 </head>
 
 <body>
@@ -61,6 +80,10 @@
                 <div class="message">
                     Wachtwoord of username fout
                 </div>
+            <?php } elseif ($hcaptchaFail) { ?>
+                <div class="message">
+                    Gelieve de hCaptcha in te vullen
+                </div>
             <?php } ?>
             <table>
                 <tr>
@@ -70,6 +93,11 @@
                 <tr>
                     <td><label for="password">Password</label></td>
                     <td><input type="password" name="password" id="password"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="h-captcha" data-sitekey="<?= H_CAPTCHA_API_KEY ?>"></div>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">
