@@ -91,9 +91,10 @@ CREATE TABLE `articleimage`
 
 CREATE TABLE `articlespecification`
 (
-    `id`         int(11)     NOT NULL,
-    `article_id` int(11)     NOT NULL,
-    `value`      varchar(31) NOT NULL
+    `id`               int(11)     NOT NULL,
+    `article_id`       int(11)     NOT NULL,
+    `specification_id` int(11)     NOT NULL,
+    `value`            varchar(31) NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
