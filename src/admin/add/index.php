@@ -19,6 +19,7 @@
                 <li><a class="btn-blue" href="category">Categorie</a></li>
                 <li><a class="btn-blue" href="employee">Werknemer</a></li>
                 <li><a class="btn-blue" href="brand">Merk</a></li>
+                <li><a class="btn-blue" href="article">Article</a></li>
             </ul>
         </nav>
     </main>
