@@ -1,38 +1,48 @@
 <?php
     include "../../../includes/admin/admin.inc.php";
     include "../../../includes/validateFunctions.inc.php";
-
+    
     define("ALLOWED_FILES", array('jpg', 'jpeg', 'png', 'svg'));
-
+    
     $one_empty = $notAllowedFile = $fileTooLarge = $executed = $succes = $last_id = false;
     if (!empty($_POST)) {
-        $name = var_validate($_POST['brandName']);
-        $file = $_FILES['image'];
-
-        if (!is_one_empty($name, $file["tmp_name"])) {
+        $name = var_validate($_POST["name"]);
+        $brand = var_validate($_POST["brand"]);
+        $price = var_validate($_POST["price"]);
+        
+        $descriptionD = var_validate($_POST["descriptionD"]);
+        $descriptionF = var_validate($_POST["descriptionF"]);
+        $descriptionE = var_validate($_POST["descriptionE"]);
+        
+        $thumbnailImage = $_FILES['thumbnailImage'];
+        $images = $_FILES['images'];
+        
+        print_r($_FILES);
+        
+        if (!is_one_empty($name) && false) {
             $fileNameEx = explode(".", $file["name"]);
             if (in_array(end($fileNameEx), ALLOWED_FILES) && $file['error'] === 0) {
                 if ($file['size'] <= 1000000) { //1MB
                     include "../../../includes/connection.inc.php";
-
+                    
                     //Check if not duplicate
                     $query = $con->prepare("SELECT id FROM `brand` WHERE name = ? LIMIT 1");
                     $query->bind_param('s', $name);
                     $query->execute();
                     $res = $query->get_result();
-
+                    
                     $query->close();
-
+                    
                     //$name . strtolower(end($fileNameEx)); //WARNING
                     $newFileName = uniqid('', true) . '.' . strtolower(end($fileNameEx));
                     $fileDestination = "../../../images/brands/$newFileName";
                     move_uploaded_file($file['tmp_name'], $fileDestination);
-
+                    
                     $query = $con->prepare("INSERT INTO `brand`(name, logo) VALUES (?, ?)");
                     $query->bind_param('ss', $name, $newFileName);
                     $executed = true;
                     $succes = $query->execute();
-
+                    
                     if ($succes) $last_id = $con->insert_id;
                     $query->close();
                     $con->close();
@@ -64,7 +74,7 @@
 <body>
     <?php include "../../../resources/admin/header.php"; ?>
     <main>
-        <h1>Toevoegen merk</h1>
+        <h1>Toevoegen artikel</h1>
         <form action="#" method="post" enctype="multipart/form-data">
             <?php if ($one_empty): ?>
                 <div class="message">
@@ -90,7 +100,7 @@
                 <?php endif; ?>
             <?php endif; ?>
             <fieldset>
-                <legend>Merk</legend>
+                <legend>Artikel</legend>
                 <table>
                     <tbody>
                         <tr>
@@ -99,25 +109,64 @@
                         </tr>
                         <tr>
                             <td><label class="required" for="brand">Merk</label></td>
-                            <td><input type="text" name="brand" id="brand"></td>
+                            <td>
+                                <input type="text" name="brand" id="brand">
+                                <input class="none" type="number" name="brand_id">
+                            </td>
                             <td><label class="required" for="price">Prijs</label></td>
                             <td><input type="number" name="price" id="price"></td>
                         </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Beschrijving</legend>
+                <table>
+                    <tr>
+                        <td><label for="descriptionD">Nederlands</label></td>
+                        <td colspan="3"><textarea name="descriptionD" id="descriptionD" cols="50" rows="7"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label for="descriptionF">Frans</label></td>
+                        <td colspan="3"><textarea name="descriptionF" id="descriptionF" cols="50" rows="7"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td><label for="descriptionE">Engels</label></td>
+                        <td colspan="3"><textarea name="descriptionE" id="descriptionE" cols="50" rows="7"></textarea></td>
+                    </tr>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Images</legend>
+                <table>
+                    <tbody>
                         <tr>
-                            <td>Beschrijving</td>
+                            <td><label for="thumbnailImage">Thumbnail</label></td>
+                            <td><label for="images">Foto's</label></td>
                         </tr>
                         <tr>
-                            <td><label for="descriptionD">Nederlands</label></td>
-                            <td colspan="3"><textarea name="descriptionD" id="descriptionD" cols="50" rows="7"></textarea></td>
+                            <td>
+                                <input type="file" name="thumbnailImage">
+                            </td>
+                            <td colspan="3">
+                                <input type="file" name="images[]" multiple>
+                            </td>
                         </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <fieldset>
+                <legend>Specificaties</legend>
+                <table>
+                    <thead>
                         <tr>
-                            <td><label for="descriptionF">Frans</label></td>
-                            <td colspan="3"><textarea name="descriptionF" id="descriptionF" cols="50" rows="7"></textarea></td>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
-                        <tr>
-                            <td><label for="descriptionE">Engels</label></td>
-                            <td colspan="3"><textarea name="descriptionE" id="descriptionE" cols="50" rows="7"></textarea></td>
-                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr></tr>
                     </tbody>
                 </table>
             </fieldset>

@@ -77,9 +77,10 @@ CREATE TABLE `articlecategory`
 
 CREATE TABLE `articleimage`
 (
-    `id`         int(11)      NOT NULL,
-    `path`       varchar(255) NOT NULL,
-    `article_id` int(11)      NOT NULL
+    `id`          int(11)      NOT NULL,
+    `path`        varchar(255) NOT NULL,
+    `article_id`  int(11)      NOT NULL,
+    `isThumbnail` BOOLEAN      NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
