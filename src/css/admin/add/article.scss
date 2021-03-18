@@ -1,0 +1,15 @@
+main {
+    form {
+        table {
+            tbody#categoryBodySearch {
+                tr {
+                    opacity: .65;
+
+                    &.selected {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}

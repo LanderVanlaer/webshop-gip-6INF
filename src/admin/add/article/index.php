@@ -69,6 +69,9 @@
     <?php include "../../../resources/admin/head.php"; ?>
     <link rel="stylesheet" href="/css/admin/add/style.css">
     <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/admin/add/article.css">
+    <script src="/js/admin/add/article-category-dynamic.js" defer></script>
+    <script src="/js/admin/add/article-specification-dynamic.js" defer></script>
     <title>Admin - Add article</title>
 </head>
 <body>
@@ -156,17 +159,43 @@
                 </table>
             </fieldset>
             <fieldset>
+                <legend>Categorieën</legend>
+                <div class="split">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Toegevoegd</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoryBody">
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="4">Zoeken</th>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <input type="search" name="categorySearch" id="categorySearch">
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody id="categoryBodySearch">
+                        </tbody>
+                    </table>
+                </div>
+            </fieldset>
+            <fieldset>
                 <legend>Specificaties</legend>
                 <table>
                     <thead>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th colspan="3">Naam</th>
+                            <th>Waarde</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr></tr>
+                    <tbody id="specificationBody">
                     </tbody>
                 </table>
             </fieldset>

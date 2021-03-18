@@ -127,5 +127,17 @@ a.btn-blue {
     text-align: center;
 }
 
+div.split {
+    font-size: 0;
+    vertical-align: top;
+
+    > * {
+        display: inline-block;
+        width: 50%;
+        font-size: initial;
+        vertical-align: top;
+    }
+}
+
 @import 'header';
 @import 'footer';
