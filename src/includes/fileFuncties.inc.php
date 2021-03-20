@@ -2,7 +2,7 @@
     /**
      * De bestand extensies die gebruikt mogen worden voor het uploaden van foto's (images)
      */
-    define("UPLOAD_IMAGE_EXTENSIONS", array('jpg', 'jpeg', 'png', 'svg'));
+    define("UPLOAD_IMAGE_EXTENSIONS", array('jpg', 'jpeg', 'png', 'svg', 'jfif'));
 
     /**
      * Kijkt na of de gegeven array een file is.
@@ -10,7 +10,7 @@
      * @param $file array Een array
      * @return bool ofdat de gegeven array een bestand vormt
      */
-    function is_file($file) {
+    function is_file_array($file) {
         return isset($file)
             && isset($file["name"])
             && isset($file["type"])
@@ -40,7 +40,7 @@
     function format_file_array($array) {
         $files = array();
         if (!empty($array['name'])) {
-            for ($i = 0; $i < count(array()); $i++) {
+            for ($i = 0; $i < count($array["name"]); $i++) {
                 $files[] = array(
                     "name" => $array["name"][$i],
                     "type" => $array["type"][$i],
@@ -57,9 +57,24 @@
      * Zegt ofdat de file kleiner dan of gelijk aan de gegeven bytes is.
      *
      * @param $file array Het bestand
-     * @param $byte int Het aantal bytes waar het bestand kleiner dan of gelijk aan moet zijn
+     * @param $bytes int Het aantal bytes waar het bestand kleiner dan of gelijk aan moet zijn
      * @return bool ofdat de gegeven array een file is en ofdat de file kleiner dan of gelijk aan de gegeven bytes is
      */
-    function file_size_less($file, $byte) {
-        return is_file($file) && $file['size'] <= $byte;
+    function file_size_less($file, $bytes) {
+        return is_file_array($file) && $file['size'] <= $bytes;
+    }
+
+    /**
+     * Slaagt een bestand op, op de harde schijf
+     *
+     * @param $file array Het bestand dat moet worden opgeslagen
+     * @param $d string (Directory) De map naar waar het bestand moet worden opgeslagen
+     * @return string De nieuwe naam van het bestand
+     */
+    function file_save($file, $d) {
+        $fileNameEx = explode(".", $file["name"]);
+        $newFileName = uniqid('', true) . '.' . strtolower(end($fileNameEx));
+        $fileDestination = "$d/$newFileName";
+        move_uploaded_file($file['tmp_name'], $fileDestination);
+        return $newFileName;
     }

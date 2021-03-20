@@ -1,9 +1,9 @@
 <?php
     include "../../../includes/admin/admin.inc.php";
     include "../../../includes/validateFunctions.inc.php";
-    
-    define("ALLOWED_FILES", array('jpg', 'jpeg', 'png', 'svg'));
-    
+    include "../../../includes/fileFuncties.inc.php";
+
+
     $one_empty = $notAllowedFile = $fileTooLarge = $duplicate = $executed = $succes = $last_id = false;
     if (!empty($_POST)) {
         $name = var_validate($_POST['brandName']);
@@ -11,8 +11,8 @@
 
         if (!is_one_empty($name, $file["tmp_name"])) {
             $fileNameEx = explode(".", $file["name"]);
-            if (in_array(end($fileNameEx), ALLOWED_FILES) && $file['error'] === 0) {
-                if ($file['size'] <= 1000000) { //1MB
+            if (is_image($file) && $file['error'] === 0) {
+                if (file_size_less($file, 1000000)) { //1MB
                     include "../../../includes/connection.inc.php";
 
                     //Check if not duplicate
@@ -24,11 +24,7 @@
                     if ($res->num_rows <= 0) {
                         $query->close();
 
-                        //$name . strtolower(end($fileNameEx)); //WARNING
-                        $newFileName = uniqid('', true) . '.' . strtolower(end($fileNameEx));
-                        $fileDestination = "../../../images/brands/$newFileName";
-                        move_uploaded_file($file['tmp_name'], $fileDestination);
-
+                        $newFileName = file_save($file, "../../../images/brands");
 
                         $query = $con->prepare("INSERT INTO `brand`(name, logo) VALUES (?, ?)");
                         $query->bind_param('ss', $name, $newFileName);

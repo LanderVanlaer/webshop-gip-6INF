@@ -46,7 +46,7 @@ const updateAddedCategoriesDOM: () => void = () => {
     categoryBodyAdded.innerHTML = null;
 
     selectedCategories.forEach((c: ICategory) => {
-        const tr: HTMLTableRowElement = generateTabloRowCategories(generateTableRowTableDataCategories(c.id, c.nameD, c.nameF, c.nameE));
+        const tr: HTMLTableRowElement = generateTabloRowCategories(`<td>${c.nameD}</td><td>${c.nameF}</td><td>${c.nameE}</td><td>${c.id}</td><td class="none"><input type="text" name="categories[]" value="${c.id}"></td>`);
 
         tr.addEventListener('click', () => {
             if (!toggleCategory(c)) {
@@ -86,9 +86,6 @@ const getAllSpecifications: () => Array<ISpecification> = () => {
     return selectedCategories.reduce((a: Array<ISpecification>, c: ICategory) => [...a, ...c.specs], []);
 };
 
-const generateTableRowTableDataCategories: (id: number, nameD: string, nameF: string, nameE: string) => string =
-    (id, nameD, nameF, nameE) => `<td>${nameD}</td><td>${nameF}</td><td>${nameE}</td><td>${id}</td>`;
-
 const generateTabloRowCategories: (tds) => HTMLTableRowElement = (tds) => {
     const tr: HTMLTableRowElement = document.createElement<"tr">("tr");
     tr.innerHTML = tds;
@@ -109,7 +106,7 @@ categorySearch.addEventListener('input', async () => {
                 const regex: RegExp = new RegExp(`(.*)(${value})(.*)`, 'gi');
                 const bold: (s: string) => string = (s: string) => s.replaceAll(regex, "$1<b>$2</b>$3");
 
-                const tr: HTMLTableRowElement = generateTabloRowCategories(generateTableRowTableDataCategories(c.id, bold(c.nameD), bold(c.nameF), bold(c.nameE)));
+                const tr: HTMLTableRowElement = generateTabloRowCategories(`<td>${bold(c.nameD)}</td><td>${bold(c.nameF)}</td><td>${bold(c.nameE)}</td><td>${c.id}</td>`);
 
                 if (selectedCategories.some((v: ICategory) => v.id === c.id))
                     tr.classList.add('selected');
