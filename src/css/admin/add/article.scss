@@ -1,12 +1,29 @@
 main {
     form {
         table {
-            tbody#categoryBodySearch {
-                tr {
-                    opacity: .65;
+            tbody {
+                td#brand-dynamic {
+                    position: relative;
 
-                    &.selected {
-                        opacity: 1;
+                    div.data {
+                        background-color: white;
+                        position: absolute;
+                        left: 0;
+                        top: 50px;
+
+                        div {
+                            display: block;
+                        }
+                    }
+                }
+
+                &#categoryBodySearch {
+                    tr {
+                        opacity: .65;
+
+                        &.selected {
+                            opacity: 1;
+                        }
                     }
                 }
             }

@@ -14,8 +14,9 @@
         $descriptionE = var_validate($_POST["descriptionE"]);
         
         $categories = array();
-        foreach ($_POST["categories"] as $cat) $categories[] = intval($cat);
-
+        if (!empty($_POST["categories"]))
+            foreach ($_POST["categories"] as $cat) $categories[] = intval($cat);
+        
         $specs = preg_grep_keys("/^specification_\d+$/i", $_POST);
         
         $thumbnailImage = $_FILES['thumbnailImage'];
@@ -24,46 +25,46 @@
         if (!is_one_empty($name, $brandId, $price, $descriptionD, $descriptionF, $descriptionE, $categories, $specs, $thumbnailImage, $images)) {
             //nakijken of de gegeven images weldeglijk images zijn
             $are_images = is_image($thumbnailImage) && $thumbnailImage['error'] == 0;
-
+            
             for ($i = 0; $i < count($images) && $are_images; $i++)
                 if (!is_image($images[$i]) || $thumbnailImage['error'] != 0)
                     $are_images = false;
-
+            
             if ($are_images) {
                 //nakijken of de gegeven images niet te groot zijn
                 $bytes = 2500000; //2.5 MB
                 $images_file_size_ok = file_size_less($thumbnailImage, $bytes);
-
+                
                 for ($i = 0; $i < count($images) && $images_file_size_ok; $i++)
                     if (!file_size_less($images[$i], $bytes))
                         $images_file_size_ok = false;
-
+                
                 if ($images_file_size_ok) {
                     include "../../../includes/connection.inc.php";
-
+                    
                     //Check if not duplicate
                     $query = $con->prepare("SELECT id FROM `article` WHERE name = ? LIMIT 1");
                     $query->bind_param('s', $name);
                     $query->execute();
                     $res = $query->get_result();
-
+                    
                     if ($res->num_rows <= 0) {
                         $query->close();
-
+                        
                         $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/add.sql"));
                         $query->bind_param('issssd', $brandId, $name, $descriptionD, $descriptionF, $descriptionE, $price);
                         $query->execute();
                         $last_id = $query->insert_id;
                         $query->close();
-
+                        
                         //save images
                         $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleImage-add.sql"));
-
+                        
                         $newFileName = file_save($thumbnailImage, "../../../images/articles");
                         $num = 1;
                         $query->bind_param('sii', $newFileName, $last_id, $num);
                         $query->execute();
-
+                        
                         $num = 0;
                         foreach ($images as $image) {
                             $newFileName = file_save($image, "../../../images/articles");
@@ -71,19 +72,19 @@
                             $query->execute();
                         }
                         $query->close();
-
+                        
                         //save categories
                         $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleCategory-add.sql"));
-
+                        
                         foreach ($categories as $cat) {
                             $query->bind_param('ii', $cat, $last_id);
                             $query->execute();
                         }
                         $query->close();
-
+                        
                         //save specifications
                         $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleSpecification-add.sql"));
-
+                        
                         foreach ($specs as $specKey => $specValue) {
                             preg_match('/^specification_(\d+)$/i', $specKey, $match);
                             $specId = $match[1];
@@ -96,7 +97,7 @@
                         $duplicate = true;
                         $last_id = $res->fetch_assoc()['id'];
                     }
-
+                    
                     $query->close();
                     $con->close();
                 } else {
@@ -124,6 +125,7 @@
     <link rel="stylesheet" href="/css/form.css">
     <link rel="stylesheet" href="/css/admin/add/article.css">
     <script src="/js/admin/add/article-category-dynamic.js" defer></script>
+    <script src="/js/admin/add/article-brand-dynamic.js" defer></script>
     <title>Admin - Add article</title>
 </head>
 <body>
@@ -168,9 +170,10 @@
                         </tr>
                         <tr>
                             <td><label class="required" for="brand">Merk</label></td>
-                            <td>
-                                <input type="text" name="brand" id="brand">
+                            <td id="brand-dynamic">
+                                <input type="text" name="brand" id="brand" autocomplete="off">
                                 <input class="none" type="number" name="brand_id">
+                                <div class="data"></div>
                             </td>
                             <td><label class="required" for="price">Prijs</label></td>
                             <td><input type="number" name="price" id="price"></td>
