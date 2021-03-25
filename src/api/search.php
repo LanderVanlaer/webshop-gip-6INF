@@ -1,6 +1,5 @@
 <?php
     include '../includes/api/api.inc.php';
-    include '../includes/admin/admin.inc.php';
     include '../includes/validateFunctions.inc.php';
 
     $data = array("categories" => array(), "articles" => array());
