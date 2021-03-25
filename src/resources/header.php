@@ -1,3 +1,4 @@
+<div id="searching-overlay" style="display: none"></div>
 <header>
     <nav>
         <ul>
@@ -10,7 +11,6 @@
                 <div>
                     <input type="search" name="search-bar" id="search-bar" placeholder="Search">
                     <ul>
-                        <li><a href="#">DATA</a></li>
                     </ul>
                 </div>
             </li>
