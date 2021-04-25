@@ -2,7 +2,7 @@
     /**
      * De bestand extensies die gebruikt mogen worden voor het uploaden van foto's (images)
      */
-    define("UPLOAD_IMAGE_EXTENSIONS", array('jpg', 'jpeg', 'png', 'svg', 'jfif'));
+    const UPLOAD_IMAGE_EXTENSIONS = array('jpg', 'jpeg', 'png', 'svg', 'jfif');
 
     /**
      * Kijkt na of de gegeven array een file is.

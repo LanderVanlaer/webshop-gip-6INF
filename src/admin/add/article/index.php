@@ -1,9 +1,16 @@
 <?php
+
+    include_once "../../../includes/Error.php";
+
+    use includes\Error as Error;
+
     include "../../../includes/admin/admin.inc.php";
     include "../../../includes/validateFunctions.inc.php";
     include "../../../includes/fileFuncties.inc.php";
-    
-    $one_empty = $notAllowedFile = $fileTooLarge = $duplicate = $executed = $succes = $last_id = false;
+
+    $error = 0;
+    $executed = $succes = $last_id = false;
+
     if (!empty($_POST)) {
         $name = var_validate($_POST["name"]);
         $brandId = var_validate($_POST["brand_id"]);
@@ -22,97 +29,101 @@
         $thumbnailImage = $_FILES['thumbnailImage'];
         $images = format_file_array($_FILES['images']);
         
-        if (!is_one_empty($name, $brandId, $price, $descriptionD, $descriptionF, $descriptionE, $categories, $specs, $thumbnailImage, $images)) {
-            //nakijken of de gegeven images weldeglijk images zijn
-            $are_images = is_image($thumbnailImage) && $thumbnailImage['error'] == 0;
-            
-            for ($i = 0; $i < count($images) && $are_images; $i++)
-                if (!is_image($images[$i]) || $thumbnailImage['error'] != 0)
-                    $are_images = false;
-            
-            if ($are_images) {
-                //nakijken of de gegeven images niet te groot zijn
-                $bytes = 2500000; //2.5 MB
-                $images_file_size_ok = file_size_less($thumbnailImage, $bytes);
-                
-                for ($i = 0; $i < count($images) && $images_file_size_ok; $i++)
-                    if (!file_size_less($images[$i], $bytes))
-                        $images_file_size_ok = false;
-                
-                if ($images_file_size_ok) {
-                    include "../../../includes/connection.inc.php";
-                    
-                    //Check if not duplicate
-                    $query = $con->prepare("SELECT id FROM `article` WHERE name = ? LIMIT 1");
-                    $query->bind_param('s', $name);
-                    $query->execute();
-                    $res = $query->get_result();
-                    
-                    if ($res->num_rows <= 0) {
-                        $query->close();
-                        
-                        $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/add.sql"));
-                        $query->bind_param('issssd', $brandId, $name, $descriptionD, $descriptionF, $descriptionE, $price);
-                        $query->execute();
-                        $last_id = $query->insert_id;
-                        $query->close();
-                        
-                        //save images
-                        $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleImage-add.sql"));
-                        
-                        $newFileName = file_save($thumbnailImage, "../../../images/articles");
-                        $num = 1;
-                        $query->bind_param('sii', $newFileName, $last_id, $num);
-                        $query->execute();
-                        
-                        $num = 0;
-                        foreach ($images as $image) {
-                            $newFileName = file_save($image, "../../../images/articles");
-                            $query->bind_param('sii', $newFileName, $last_id, $num);
-                            $query->execute();
-                        }
-                        $query->close();
-                        
-                        //save categories
-                        $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleCategory-add.sql"));
-                        
-                        foreach ($categories as $cat) {
-                            $query->bind_param('ii', $cat, $last_id);
-                            $query->execute();
-                        }
-                        $query->close();
-                        
-                        //save specifications
-                        $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleSpecification-add.sql"));
-                        
-                        foreach ($specs as $specKey => $specValue) {
-                            preg_match('/^specification_(\d+)$/i', $specKey, $match);
-                            $specId = $match[1];
-                            $query->bind_param('isi', $last_id, $specValue, $specId);
-                            $query->execute();
-                        }
-                        $succes = true;
-                    } else {
-                        //duplicate
-                        $duplicate = true;
-                        $last_id = $res->fetch_assoc()['id'];
-                    }
-                    
-                    $query->close();
-                    $con->close();
-                } else {
-                    //File too large
-                    $fileTooLarge = true;
-                }
-            } else {
-                //not allowed file
-                $notAllowedFile = true;
-            }
-        } else {
-            //one field empty
-            $one_empty = true;
+        if (is_one_empty($name, $brandId, $price, $descriptionD, $descriptionF, $descriptionE, $categories, $specs, $thumbnailImage, $images)) {
+            $error = Error::empty_value;
+            goto end;
         }
+
+        //nakijken of de gegeven images weldeglijk images zijn
+        $are_images = is_image($thumbnailImage) && $thumbnailImage['error'] == 0;
+
+        for ($i = 0; $i < count($images) && $are_images; $i++)
+            if (!is_image($images[$i]) || $thumbnailImage['error'] != 0)
+                $are_images = false;
+
+        if (!$are_images) {
+            $error = Error::file_not_allowed;
+            goto end;
+        }
+
+        //nakijken of de gegeven images niet te groot zijn
+        $bytes = 2500000; //2.5 MB
+        $images_file_size_ok = file_size_less($thumbnailImage, $bytes);
+
+        for ($i = 0; $i < count($images) && $images_file_size_ok; $i++)
+            if (!file_size_less($images[$i], $bytes))
+                $images_file_size_ok = false;
+
+        if (!$images_file_size_ok) {
+            $error = Error::file_too_large;
+            goto end;
+        }
+
+        include "../../../includes/connection.inc.php";
+
+        //Check if not duplicate
+        $query = $con->prepare("SELECT id FROM `article` WHERE name = ? LIMIT 1");
+        $query->bind_param('s', $name);
+        $query->execute();
+        $res = $query->get_result();
+
+        if ($res->num_rows > 0) {
+            //duplicate
+            $last_id = $res->fetch_assoc()['id'];
+            $error = Error::duplicate;
+            goto end;
+        }
+
+        $query->close();
+
+        $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/add.sql"));
+        $query->bind_param('issssd', $brandId, $name, $descriptionD, $descriptionF, $descriptionE, $price);
+        $query->execute();
+        $last_id = $query->insert_id;
+        $query->close();
+
+        //save images
+        $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleImage-add.sql"));
+
+        $newFileName = file_save($thumbnailImage, "../../../images/articles");
+        $num = 1;
+        $query->bind_param('sii', $newFileName, $last_id, $num);
+        $query->execute();
+
+        $num = 0;
+        foreach ($images as $image) {
+            $newFileName = file_save($image, "../../../images/articles");
+            $query->bind_param('sii', $newFileName, $last_id, $num);
+            $query->execute();
+        }
+        $query->close();
+
+        //save categories
+        $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleCategory-add.sql"));
+
+        foreach ($categories as $cat) {
+            $query->bind_param('ii', $cat, $last_id);
+            $query->execute();
+        }
+        $query->close();
+
+        //save specifications
+        $query = $con->prepare(file_get_contents("../../../sql/admin/add/article/articleSpecification-add.sql"));
+
+        $executed = true;
+
+        foreach ($specs as $specKey => $specValue) {
+            preg_match('/^specification_(\d+)$/i', $specKey, $match);
+            $specId = $match[1];
+            $query->bind_param('isi', $last_id, $specValue, $specId);
+            $query->execute();
+        }
+        $succes = true;
+
+        $query->close();
+        $con->close();
     }
+    end:
 ?>
 <!doctype html>
 <html lang="nl">
@@ -133,32 +144,30 @@
     <main>
         <h1>Toevoegen artikel</h1>
         <form action="#" method="post" enctype="multipart/form-data">
-            <?php if ($one_empty): ?>
+            <?php if ($error || $executed): ?>
                 <div class="message">
-                    Gelieve alle verplichte velden in te vullen
+                    <?php switch ($error) {
+                        case Error::empty_value:
+                            echo "Gelieve alle verplichte velden in te vullen";
+                            break;
+                        case Error::file_not_allowed:
+                            echo "U kan geen bestanden uploaden van dit type";
+                            break;
+                        case Error::file_too_large:
+                            echo "Het bestand is te groot";
+                            break;
+                        case Error::duplicate:
+                            echo "Er bestaat al een artikel met deze naam, id: $last_id";
+                            break;
+                    }
+                        if ($executed) {
+                            if ($succes)
+                                echo "Merk toegevoegd met id: $last_id";
+                            else
+                                echo "Er is iets misgelopen";
+                        }
+                    ?>
                 </div>
-            <?php elseif ($notAllowedFile): ?>
-                <div class="message">
-                    U kan geen bestanden uploaden van dit type
-                </div>
-            <?php elseif ($fileTooLarge): ?>
-                <div class="message">
-                    Het bestand is te groot
-                </div>
-            <?php elseif ($duplicate): ?>
-                <div class="message">
-                    Er bestaat al een artikel met deze naam, id: <?= $last_id ?>
-                </div>
-            <?php elseif ($executed): ?>
-                <?php if ($succes): ?>
-                    <div class="message">
-                        Merk toegevoegd met id: <?= $last_id ?>
-                    </div>
-                <?php else: ?>
-                    <div class="message">
-                        Er is iets misgelopen
-                    </div>
-                <?php endif; ?>
             <?php endif; ?>
             <fieldset>
                 <legend>Artikel</legend>
