@@ -71,6 +71,8 @@
             //duplicate
             $last_id = $res->fetch_assoc()['id'];
             $error = Error::duplicate;
+            $query->close();
+            $con->close();
             goto end;
         }
 
@@ -144,31 +146,7 @@
     <main>
         <h1>Toevoegen artikel</h1>
         <form action="#" method="post" enctype="multipart/form-data">
-            <?php if ($error || $executed): ?>
-                <div class="message">
-                    <?php switch ($error) {
-                        case Error::empty_value:
-                            echo "Gelieve alle verplichte velden in te vullen";
-                            break;
-                        case Error::file_not_allowed:
-                            echo "U kan geen bestanden uploaden van dit type";
-                            break;
-                        case Error::file_too_large:
-                            echo "Het bestand is te groot";
-                            break;
-                        case Error::duplicate:
-                            echo "Er bestaat al een artikel met deze naam, id: $last_id";
-                            break;
-                    }
-                        if ($executed) {
-                            if ($succes)
-                                echo "Merk toegevoegd met id: $last_id";
-                            else
-                                echo "Er is iets misgelopen";
-                        }
-                    ?>
-                </div>
-            <?php endif; ?>
+            <?php Error::print_admin_message($error, $executed, $succes, $last_id); ?>
             <fieldset>
                 <legend>Artikel</legend>
                 <table>
