@@ -1,9 +1,15 @@
 <?php
+    include_once "../../../includes/Error.php";
+
+    use includes\Error as Error;
+
     include "../../../includes/admin/admin.inc.php";
     include "../../../includes/validateFunctions.inc.php";
 
-    $one_empty = $passwordNotMatch = $passwordFail = $duplicate = $executed = $succes = $last_id = false;
+    $error = 0;
+    $passwordFail = $executed = $succes = $last_id = false;
 
+    $username = $firstname = $lastname = $password = $passwordConfirm = "";
     if (!empty($_POST)) {
         $username = var_validate($_POST['username']);
         $firstname = var_validate($_POST['firstname']);
@@ -11,48 +17,52 @@
         $password = var_validate($_POST['password']);
         $passwordConfirm = var_validate($_POST['passwordConfirm']);
 
-        if (!is_one_empty($username, $firstname, $lastname, $password, $passwordConfirm)) {
-            $passwordFail = password_not_possible($password);
-
-            if (!count($passwordFail)) {
-                if ($password === $passwordConfirm) {
-                    include "../../../includes/connection.inc.php";
-
-                    //Check if not duplicate
-                    $query = $con->prepare("SELECT id FROM `employee` WHERE username = ? LIMIT 1");
-                    $query->bind_param('s', $username);
-
-                    $query->execute();
-
-                    $res = $query->get_result();
-
-                    if ($res->num_rows <= 0) {
-                        $query->close();
-
-                        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-                        $query = $con->prepare("INSERT INTO `employee`(password, username, firstname, lastname) VALUES (?, ?, ?, ?)");
-                        $query->bind_param('ssss', $hashedPassword, $username, $firstname, $lastname);
-                        $executed = true;
-                        $succes = $query->execute();
-
-                        if ($succes) $last_id = $con->insert_id;
-                    } else {
-                        //duplicate
-                        $duplicate = true;
-                        $last_id = $res->fetch_assoc()['id'];
-                    }
-                    $query->close();
-                    $con->close();
-                } else {
-                    //password mismatch
-                    $passwordNotMatch = true;
-                }
-            }
-        } else {
-            //one field empty
-            $one_empty = true;
+        if (is_one_empty($username, $firstname, $lastname, $password, $passwordConfirm)) {
+            $error = Error::empty_value;
+            goto end;
         }
+
+        $passwordFail = password_not_possible($password);
+        if (count($passwordFail)) {
+            goto end;
+        }
+
+        if ($password != $passwordConfirm) {
+            $error = Error::password_not_match;
+            goto end;
+        }
+
+        include "../../../includes/connection.inc.php";
+
+        //Check if not duplicate
+        $query = $con->prepare("SELECT id FROM `employee` WHERE username = ? LIMIT 1");
+        $query->bind_param('s', $username);
+
+        $query->execute();
+
+        $res = $query->get_result();
+
+        if ($res->num_rows > 0) {
+            $error = Error::duplicate;
+            $last_id = $res->fetch_assoc()['id'];
+            $query->close();
+            $con->close();
+            goto end;
+        }
+        $query->close();
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $query = $con->prepare("INSERT INTO `employee`(password, username, firstname, lastname) VALUES (?, ?, ?, ?)");
+        $query->bind_param('ssss', $hashedPassword, $username, $firstname, $lastname);
+        $executed = true;
+        $succes = $query->execute();
+
+        if ($succes) $last_id = $con->insert_id;
+
+        $query->close();
+        $con->close();
+        end:
     }
 ?>
 <!doctype html>
@@ -71,50 +81,30 @@
     <main>
         <h1>Toevoegen werknemer</h1>
         <form action="#" method="post">
-            <?php if ($one_empty): ?>
-                <div class="message">
-                    Gelieve alle verplichte velden in te vullen
-                </div>
-            <?php elseif ($passwordNotMatch): ?>
-                <div class="message">
-                    De 2 wachtwoorden zijn niet gelijk aan elkaar
-                </div>
-            <?php elseif ($passwordFail): ?>
-                <div class="message">
-                    <?php foreach ($passwordFail as $s) {
-                        echo "$s<br>";
-                    } ?>
-                </div>
-            <?php elseif ($duplicate): ?>
-                <div class="message">
-                    Er bestaat al een werknemer met deze gebruikersnaam, id: <?= $last_id ?>
-                </div>
-            <?php elseif ($executed): ?>
-                <?php if ($succes): ?>
-                    <div class="message">
-                        Werknemer toegevoegd met id: <?= $last_id ?>
-                    </div>
-                <?php else: ?>
-                    <div class="message">
-                        Er is iets misgelopen
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
+            <?php
+                Error::print_admin_message($error, $executed, $succes, $last_id);
+                if ($passwordFail) {
+                    $str = "";
+                    foreach ($passwordFail as $s) {
+                        $str .= "$s<br>";
+                    }
+                    Error::print_message($str);
+                } ?>
             <fieldset>
                 <legend>Werknemer</legend>
                 <table>
                     <tbody>
                         <tr>
                             <td><label class="required" for="username">Gebruikersnaam</label></td>
-                            <td><input required type="text" name="username" id="username" maxlength="127"></td>
+                            <td><input required type="text" name="username" id="username" maxlength="127" value="<?= $username ?>"></td>
                         </tr>
                         <tr>
                             <td><label class="required" for="firstname">Voornaam</label></td>
-                            <td><input required type="text" name="firstname" id="firstname" maxlength="63"></td>
+                            <td><input required type="text" name="firstname" id="firstname" maxlength="63" value="<?= $firstname ?>"></td>
                         </tr>
                         <tr>
                             <td><label class="required" for="lastname">Achternaam</label></td>
-                            <td><input required type="text" name="lastname" id="lastname" maxlength="63"></td>
+                            <td><input required type="text" name="lastname" id="lastname" maxlength="63" value="<?= $lastname ?>"></td>
                         </tr>
                         <tr>
                             <td><label class="required" for="password">Wachtwoord</label></td>
