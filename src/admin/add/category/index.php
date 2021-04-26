@@ -1,67 +1,74 @@
 <?php
+    include_once "../../../includes/Error.php";
+
+    use includes\Error as Error;
+
     include "../../../includes/admin/admin.inc.php";
     include "../../../includes/validateFunctions.inc.php";
 
-    $one_empty = $duplicate = $executed = $succes = $last_id = false;
+    $error = 0;
+    $executed = $succes = $last_id = false;
 
     if (!empty($_POST)) {
         $nameD = var_validate($_POST['nameD']);
         $nameF = var_validate($_POST['nameF']);
         $nameE = var_validate($_POST['nameE']);
 
-        if (!is_one_empty($nameD, $nameF, $nameE)) {
-            include "../../../includes/connection.inc.php";
+        if (is_one_empty($nameD, $nameF, $nameE)) {
+            $error = Error::empty_value;
+            goto end;
+        }
+        include "../../../includes/connection.inc.php";
 
-            //Check if not duplicate
-            $query = $con->prepare("SELECT id FROM `category` WHERE nameD = ? OR nameF = ? OR nameE = ? LIMIT 1");
-            $query->bind_param('sss', $nameD, $nameF, $nameE);
+        //Check if not duplicate
+        $query = $con->prepare("SELECT id FROM `category` WHERE nameD = ? OR nameF = ? OR nameE = ? LIMIT 1");
+        $query->bind_param('sss', $nameD, $nameF, $nameE);
 
-            $query->execute();
+        $query->execute();
 
-            $res = $query->get_result();
+        $res = $query->get_result();
 
-            if ($res->num_rows <= 0) {
-                $query->close();
-
-                $query = $con->prepare("INSERT INTO `category`(nameD, nameF, nameE) VALUES (?, ?, ?)");
-
-                $query->bind_param('sss', $nameD, $nameF, $nameE);
-
-                $executed = true;
-
-                $succes = $query->execute();
-
-                if ($succes) {
-                    $last_id = $con->insert_id;
-                    $query->close();
-
-                    $query = $con->prepare("INSERT INTO `specification`(category_id, nameD, nameF, nameE) VALUES ($last_id, ?, ?, ?)");
-
-                    $id = 0;
-                    do {
-                        $nameSpecD = var_validate($_POST["nameSpecD$id"]);
-                        $nameSpecF = var_validate($_POST["nameSpecF$id"]);
-                        $nameSpecE = var_validate($_POST["nameSpecE$id"]);
-
-                        if (!is_one_empty($nameSpecD, $nameSpecF, $nameSpecE)) {
-                            $query->bind_param('sss', $nameSpecD, $nameSpecF, $nameSpecE);
-                            $executed = $query->execute();
-                        }
-
-                        $id++;
-                    } while (isset($_POST["nameSpecD$id"]) || isset($_POST["nameSpecF$id"]) || isset($_POST["nameSpecE$id"]));
-                }
-            } else {
-                //duplicate
-                $duplicate = true;
-                $last_id = $res->fetch_assoc()['id'];
-            }
-
+        if ($res->num_rows > 0) {
+            $error = Error::duplicate;
+            $last_id = $res->fetch_assoc()['id'];
             $query->close();
             $con->close();
-        } else {
-            $one_empty = true;
+            goto end;
         }
+        $query->close();
+
+        $query = $con->prepare("INSERT INTO `category`(nameD, nameF, nameE) VALUES (?, ?, ?)");
+
+        $query->bind_param('sss', $nameD, $nameF, $nameE);
+
+        $executed = true;
+
+        $succes = $query->execute();
+
+        if (!$succes) {
+            goto end;
+        }
+        $last_id = $con->insert_id;
+        $query->close();
+
+        $query = $con->prepare("INSERT INTO `specification`(category_id, nameD, nameF, nameE) VALUES ($last_id, ?, ?, ?)");
+
+        $id = 0;
+        do {
+            $nameSpecD = var_validate($_POST["nameSpecD$id"]);
+            $nameSpecF = var_validate($_POST["nameSpecF$id"]);
+            $nameSpecE = var_validate($_POST["nameSpecE$id"]);
+
+            if (!is_one_empty($nameSpecD, $nameSpecF, $nameSpecE)) {
+                $query->bind_param('sss', $nameSpecD, $nameSpecF, $nameSpecE);
+                $executed = $query->execute();
+            }
+            $id++;
+        } while (isset($_POST["nameSpecD$id"]) && isset($_POST["nameSpecF$id"]) && isset($_POST["nameSpecE$id"]));
+
+        $query->close();
+        $con->close();
+        end:
     }
 ?>
 <!doctype html>
@@ -81,25 +88,7 @@
     <main>
         <h1>Toevoegen categorie</h1>
         <form action="#" method="post">
-            <?php if ($one_empty): ?>
-                <div class="message">
-                    Gelieve alle verplichte velden in te vullen
-                </div>
-            <?php elseif ($duplicate): ?>
-                <div class="message">
-                    Er bestaat al een categorie met deze naam, id: <?= $last_id ?>
-                </div>
-            <?php elseif ($executed): ?>
-                <?php if ($succes): ?>
-                    <div class="message">
-                        Categorie toegevoegd met id: <?= $last_id ?>
-                    </div>
-                <?php else: ?>
-                    <div class="message">
-                        Er is iets misgelopen
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
+            <?php Error::print_admin_message($error, $executed, $succes, $last_id); ?>
             <fieldset>
                 <legend>Category</legend>
                 <table>
