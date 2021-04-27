@@ -1,21 +1,27 @@
 <?php
+    include_once "../../includes/Error.php";
+
+    use includes\Error as Error;
+
     include "../../includes/validateFunctions.inc.php";
     include "../../includes/basicFunctions.inc.php";
     include "../../includes/admin/adminFunctions.inc.php";
 
-    define("H_CAPTCHA_API_KEY", '3e7a1904-27c7-4bfc-b392-99c68f690f23');
+    const H_CAPTCHA_API_KEY = '3e7a1904-27c7-4bfc-b392-99c68f690f23';
 
     session_start();
 
     if (isAdmin()) redirect("/admin");
 
-    $one_empty = $not_found = $hcaptchaFail = false;
+    $error = 0;
+    $one_empty = $not_found = false;
 
     if (!empty($_POST)) {
         $data = array(
                 'secret' => "0x1D3C92B9e7D52594976A623BFE8f870884e4A154",
                 'response' => $_POST['h-captcha-response']
         );
+
         $verify = curl_init();
         curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
         curl_setopt($verify, CURLOPT_POST, true);
@@ -24,33 +30,43 @@
         $response = curl_exec($verify);
 
         $responseData = json_decode($response);
-        if ($responseData->success) {
-            $username = var_validate($_POST["username"]);
-            $password = var_validate($_POST["password"]);
-
-            if (!$one_empty = is_one_empty($username, $password)) {
-                include "../../includes/connection.inc.php";
-
-                $query = $con->prepare("SELECT * FROM `employee` WHERE username = ? LIMIT 1");
-                $query->bind_param("s", $username);
-                $query->execute();
-
-                $res = $query->get_result();
-
-                if ($row = $res->fetch_assoc()) {
-
-                    if (password_verify($password, $row["password"])) {
-                        $_SESSION["admin"] = $row;
-                        redirect("/admin/index.php");
-                    } else $not_found = true;
-
-                } else $not_found = true;
-
-                $con->close();
-            }
-        } else {
-            $hcaptchaFail = true;
+        if (!$responseData->success) {
+            $error = Error::h_captscha;
+            goto end;
         }
+
+        $username = var_validate($_POST["username"]);
+        $password = var_validate($_POST["password"]);
+
+        if ($one_empty = is_one_empty($username, $password)) {
+            $error = Error::empty_value;
+            goto end;
+        }
+        include "../../includes/connection.inc.php";
+
+        $query = $con->prepare("SELECT * FROM `employee` WHERE username = ? LIMIT 1");
+        $query->bind_param("s", $username);
+        $query->execute();
+
+        $res = $query->get_result();
+        $row = $res->fetch_assoc();
+
+        if (!$row) {
+            $error = Error::login_fail;
+            $con->close();
+            goto end;
+        }
+        $con->close();
+
+        if (!password_verify($password, $row["password"])) {
+            $error = Error::login_fail;
+            goto end;
+        }
+
+        $_SESSION["admin"] = $row;
+        redirect("/admin/index.php");
+
+        end:
     }
 ?>
 
@@ -72,19 +88,7 @@
     <main>
         <h1>Admin login</h1>
         <form name="login" action="#" method="post">
-            <?php if ($one_empty) { ?>
-                <div class="message">
-                    Gelieve alle verplichte velden in te vullen
-                </div>
-            <?php } elseif ($not_found) { ?>
-                <div class="message">
-                    Wachtwoord of username fout
-                </div>
-            <?php } elseif ($hcaptchaFail) { ?>
-                <div class="message">
-                    Gelieve de hCaptcha in te vullen
-                </div>
-            <?php } ?>
+            <?php Error::print_admin_message($error); ?>
             <table>
                 <tr>
                     <td><label for="username">Username</label></td>

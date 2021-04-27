@@ -8,12 +8,14 @@
         const file_not_allowed = 3;
         const file_too_large = 4;
         const password_not_match = 6;
+        const h_captscha = 7;
+        const login_fail = 8;
 
         public static final function print_message($str) {
             echo "<div class='message'>$str</div>";
         }
 
-        public static final function print_admin_message($error, $executed, $succes, $last_id) {
+        public static final function print_admin_message($error, $executed = false, $succes = false, $last_id = 0) {
             if ($error || $executed) {
                 echo "<div class='message'>";
                 switch ($error) {
@@ -31,6 +33,12 @@
                         break;
                     case Error::password_not_match:
                         echo "De 2 wachtwoorden zijn niet gelijk aan elkaar";
+                        break;
+                    case Error::h_captscha:
+                        echo "Gelieve de hCaptcha in te vullen";
+                        break;
+                    case Error::login_fail:
+                        echo "Wachtwoord of username fout";
                         break;
                     default:
                         if ($executed) {
