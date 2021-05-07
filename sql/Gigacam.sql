@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2021 at 01:30 PM
--- Server version: 10.4.16-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: May 07, 2021 at 02:24 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `gigacam`
 --
+CREATE DATABASE IF NOT EXISTS `gigacam` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `gigacam`;
 
 -- --------------------------------------------------------
 
@@ -27,12 +29,13 @@ SET time_zone = "+00:00";
 -- Table structure for table `address`
 --
 
-CREATE TABLE `address`
+DROP TABLE IF EXISTS `address`;
+CREATE TABLE IF NOT EXISTS `address`
 (
-    `id`          int(11)      NOT NULL,
-    `township_id` int(11)      NOT NULL,
-    `street`      varchar(255) NOT NULL,
-    `number`      int(4)       NOT NULL
+    `id`        int(11) NOT NULL AUTO_INCREMENT,
+    `street_id` int(11) NOT NULL,
+    `number`    int(4)  NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -42,9 +45,10 @@ CREATE TABLE `address`
 -- Table structure for table `article`
 --
 
-CREATE TABLE `article`
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE IF NOT EXISTS `article`
 (
-    `id`           int(11)     NOT NULL,
+    `id`           int(11)     NOT NULL AUTO_INCREMENT,
     `brand_id`     int(11)     NOT NULL,
     `name`         varchar(32) NOT NULL,
     `descriptionD` varchar(1023)        DEFAULT NULL,
@@ -52,7 +56,8 @@ CREATE TABLE `article`
     `descriptionE` varchar(1023)        DEFAULT NULL,
     `price`        float(7, 2) NOT NULL,
     `visible`      tinyint(1)           DEFAULT NULL,
-    `create_date`  timestamp   NOT NULL DEFAULT current_timestamp()
+    `create_date`  timestamp   NOT NULL DEFAULT current_timestamp(),
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -62,7 +67,8 @@ CREATE TABLE `article`
 -- Table structure for table `articlecategory`
 --
 
-CREATE TABLE `articlecategory`
+DROP TABLE IF EXISTS `articlecategory`;
+CREATE TABLE IF NOT EXISTS `articlecategory`
 (
     `category_id` int(11) NOT NULL,
     `article_id`  int(11) NOT NULL
@@ -75,12 +81,14 @@ CREATE TABLE `articlecategory`
 -- Table structure for table `articleimage`
 --
 
-CREATE TABLE `articleimage`
+DROP TABLE IF EXISTS `articleimage`;
+CREATE TABLE IF NOT EXISTS `articleimage`
 (
-    `id`          int(11)      NOT NULL,
+    `id`          int(11)      NOT NULL AUTO_INCREMENT,
     `path`        varchar(255) NOT NULL,
     `article_id`  int(11)      NOT NULL,
-    `isThumbnail` BOOLEAN      NULL
+    `isThumbnail` tinyint(1) DEFAULT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -90,12 +98,14 @@ CREATE TABLE `articleimage`
 -- Table structure for table `articlespecification`
 --
 
-CREATE TABLE `articlespecification`
+DROP TABLE IF EXISTS `articlespecification`;
+CREATE TABLE IF NOT EXISTS `articlespecification`
 (
-    `id`               int(11)     NOT NULL,
+    `id`               int(11)     NOT NULL AUTO_INCREMENT,
     `article_id`       int(11)     NOT NULL,
     `specification_id` int(11)     NOT NULL,
-    `value`            varchar(31) NOT NULL
+    `value`            varchar(31) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -105,11 +115,13 @@ CREATE TABLE `articlespecification`
 -- Table structure for table `brand`
 --
 
-CREATE TABLE `brand`
+DROP TABLE IF EXISTS `brand`;
+CREATE TABLE IF NOT EXISTS `brand`
 (
-    `id`   int(11)     NOT NULL,
+    `id`   int(11)     NOT NULL AUTO_INCREMENT,
     `name` varchar(31) NOT NULL,
-    `logo` varchar(127) DEFAULT NULL
+    `logo` varchar(127) DEFAULT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -119,12 +131,14 @@ CREATE TABLE `brand`
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category`
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category`
 (
-    `id`    int(11)     NOT NULL,
+    `id`    int(11)     NOT NULL AUTO_INCREMENT,
     `nameD` varchar(31) NOT NULL,
     `nameF` varchar(31) NOT NULL,
-    `nameE` varchar(31) NOT NULL
+    `nameE` varchar(31) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -134,10 +148,12 @@ CREATE TABLE `category`
 -- Table structure for table `country`
 --
 
-CREATE TABLE `country`
+DROP TABLE IF EXISTS `country`;
+CREATE TABLE IF NOT EXISTS `country`
 (
-    `id`   int(11)     NOT NULL,
-    `name` varchar(31) NOT NULL
+    `id`   int(11)     NOT NULL AUTO_INCREMENT,
+    `name` varchar(31) NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -147,16 +163,18 @@ CREATE TABLE `country`
 -- Table structure for table `customer`
 --
 
-CREATE TABLE `customer`
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE IF NOT EXISTS `customer`
 (
-    `id`                int(11)      NOT NULL,
+    `id`                int(11)      NOT NULL AUTO_INCREMENT,
     `firstname`         varchar(63)  NOT NULL,
     `lastname`          varchar(63)  NOT NULL,
     `email`             varchar(127) NOT NULL,
     `password`          varchar(255) NOT NULL,
     `registration_code` varchar(255) DEFAULT NULL,
     `active`            tinyint(1)   DEFAULT NULL,
-    `address_id`        int(11)      DEFAULT NULL
+    `address_id`        int(11)      DEFAULT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -166,13 +184,15 @@ CREATE TABLE `customer`
 -- Table structure for table `employee`
 --
 
-CREATE TABLE `employee`
+DROP TABLE IF EXISTS `employee`;
+CREATE TABLE IF NOT EXISTS `employee`
 (
-    `id`        int(11)      NOT NULL,
+    `id`        int(11)      NOT NULL AUTO_INCREMENT,
     `password`  varchar(255) NOT NULL,
     `username`  varchar(127) NOT NULL,
     `firstname` varchar(63) DEFAULT NULL,
-    `lastname`  varchar(63) DEFAULT NULL
+    `lastname`  varchar(63) DEFAULT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -182,13 +202,15 @@ CREATE TABLE `employee`
 -- Table structure for table `order`
 --
 
-CREATE TABLE `order`
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order`
 (
-    `id`                  int(11)   NOT NULL,
+    `id`                  int(11)   NOT NULL AUTO_INCREMENT,
     `date`                timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
     `purchase_address_id` int(11)   NOT NULL,
     `delivery_address_id` int(11)   NOT NULL,
-    `customer_id`         int(11)   NOT NULL
+    `customer_id`         int(11)   NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -198,25 +220,13 @@ CREATE TABLE `order`
 -- Table structure for table `orderarticle`
 --
 
-CREATE TABLE `orderarticle`
+DROP TABLE IF EXISTS `orderarticle`;
+CREATE TABLE IF NOT EXISTS `orderarticle`
 (
-    `order_id`   int(11) NOT NULL,
+    `order_id`   int(11) NOT NULL AUTO_INCREMENT,
     `article_id` int(11) NOT NULL,
-    `amount`     int(2)  NOT NULL
-) ENGINE = InnoDB
-  DEFAULT CHARSET = latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `province`
---
-
-CREATE TABLE `province`
-(
-    `id`         int(11)     NOT NULL,
-    `name`       varchar(31) NOT NULL,
-    `country_id` int(11)     NOT NULL
+    `amount`     int(2)  NOT NULL,
+    PRIMARY KEY (`order_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -226,11 +236,13 @@ CREATE TABLE `province`
 -- Table structure for table `shoppingcart`
 --
 
-CREATE TABLE `shoppingcart`
+DROP TABLE IF EXISTS `shoppingcart`;
+CREATE TABLE IF NOT EXISTS `shoppingcart`
 (
-    `id`           int(11)   NOT NULL,
+    `id`           int(11)   NOT NULL AUTO_INCREMENT,
     `customers_id` int(11)   NOT NULL,
-    `date`         timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+    `date`         timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -240,7 +252,8 @@ CREATE TABLE `shoppingcart`
 -- Table structure for table `shoppingcartarticle`
 --
 
-CREATE TABLE `shoppingcartarticle`
+DROP TABLE IF EXISTS `shoppingcartarticle`;
+CREATE TABLE IF NOT EXISTS `shoppingcartarticle`
 (
     `shoppingcart_id` int(11) NOT NULL,
     `article_id`      int(11) NOT NULL,
@@ -254,13 +267,31 @@ CREATE TABLE `shoppingcartarticle`
 -- Table structure for table `specification`
 --
 
-CREATE TABLE `specification`
+DROP TABLE IF EXISTS `specification`;
+CREATE TABLE IF NOT EXISTS `specification`
 (
-    `id`          int(11)     NOT NULL,
+    `id`          int(11)     NOT NULL AUTO_INCREMENT,
     `category_id` int(11)     NOT NULL,
     `nameD`       varchar(31) NOT NULL,
     `nameF`       varchar(31) NOT NULL,
-    `nameE`       varchar(31) NOT NULL
+    `nameE`       varchar(31) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `street`
+--
+
+DROP TABLE IF EXISTS `street`;
+CREATE TABLE IF NOT EXISTS `street`
+(
+    `id`          int(11)     NOT NULL AUTO_INCREMENT,
+    `name`        varchar(31) NOT NULL,
+    `township_id` int(11)     NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -270,12 +301,13 @@ CREATE TABLE `specification`
 -- Table structure for table `township`
 --
 
-CREATE TABLE `township`
+DROP TABLE IF EXISTS `township`;
+CREATE TABLE IF NOT EXISTS `township`
 (
-    `id`          int(11)     NOT NULL,
-    `name`        varchar(63) NOT NULL,
-    `postcode`    varchar(7)  NOT NULL,
-    `province_id` int(11)     NOT NULL
+    `id`         int(11)    NOT NULL AUTO_INCREMENT,
+    `postcode`   varchar(7) NOT NULL,
+    `country_id` int(11)    NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
@@ -285,214 +317,16 @@ CREATE TABLE `township`
 -- Table structure for table `visited`
 --
 
-CREATE TABLE `visited`
+DROP TABLE IF EXISTS `visited`;
+CREATE TABLE IF NOT EXISTS `visited`
 (
-    `id`          int(11)   NOT NULL,
+    `id`          int(11)   NOT NULL AUTO_INCREMENT,
     `date`        timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
     `customer_id` int(11)   NOT NULL,
-    `article_id`  int(11)   NOT NULL
+    `article_id`  int(11)   NOT NULL,
+    PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `address`
---
-ALTER TABLE `address`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `article`
---
-ALTER TABLE `article`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `articleimage`
---
-ALTER TABLE `articleimage`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `articlespecification`
---
-ALTER TABLE `articlespecification`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `brand`
---
-ALTER TABLE `brand`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `country`
---
-ALTER TABLE `country`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `employee`
---
-ALTER TABLE `employee`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `order`
---
-ALTER TABLE `order`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `orderarticle`
---
-ALTER TABLE `orderarticle`
-    ADD PRIMARY KEY (`order_id`);
-
---
--- Indexes for table `province`
---
-ALTER TABLE `province`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `shoppingcart`
---
-ALTER TABLE `shoppingcart`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `specification`
---
-ALTER TABLE `specification`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `township`
---
-ALTER TABLE `township`
-    ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `visited`
---
-ALTER TABLE `visited`
-    ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `address`
---
-ALTER TABLE `address`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `article`
---
-ALTER TABLE `article`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `articleimage`
---
-ALTER TABLE `articleimage`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `articlespecification`
---
-ALTER TABLE `articlespecification`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `brand`
---
-ALTER TABLE `brand`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `country`
---
-ALTER TABLE `country`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `employee`
---
-ALTER TABLE `employee`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `order`
---
-ALTER TABLE `order`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `orderarticle`
---
-ALTER TABLE `orderarticle`
-    MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `province`
---
-ALTER TABLE `province`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `shoppingcart`
---
-ALTER TABLE `shoppingcart`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `specification`
---
-ALTER TABLE `specification`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `township`
---
-ALTER TABLE `township`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `visited`
---
-ALTER TABLE `visited`
-    MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
