@@ -75,7 +75,7 @@
         //street
         $query = $con->prepare(file_get_contents("../../sql/address/street/select.sql"));
         $name = "%$street%";
-        $query->bind_param('si', $name, $township_id);
+        $query->bind_param('si', $street, $township_id);
         $query->execute();
         $res = $query->get_result()->fetch_assoc();
         $query->close();
@@ -135,12 +135,13 @@
         ini_set("SMTP", "smtp.eu.mailgun.org");
         ini_set("smtp_port", 587);
 
-        $header = "From: no-reply@mail.gigacam.be\r\nContent-type:text/html;charset=UTF-8\r\n";
+        $header = "From:GigaCam <no-reply@mail.gigacam.be>\r\nContent-type:text/html;charset=UTF-8\r\n";
         $link = "http://{$_SERVER['SERVER_NAME']}/user/activate?code=$registration_code";
         $executed = mail(
                 $email,
                 "Registratie gigacam.be",
-                "Beste <i>$firstname $lastname</i><br>gelieve deze email te valideren via onderstaande link:\n\t<a href='$link'>$link</a>",
+//                "Beste <i>$firstname $lastname</i><br>gelieve deze email te valideren via onderstaande link:\n\t<a href='$link'>$link</a>",
+                str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents("../../resources/mail/activate/nl.html"))),
                 $header
         );
 
@@ -215,8 +216,8 @@
                 <table>
                     <tr>
                         <td><label class="required" for="country">Land</label></td>
-                        <td><input required type="text" name="country" id="country" value="<?= $country ?>">
-                            <input type="hidden" name="country_id" id="country_id" autocomplete="no" value="<?= $country_id ?>></td>
+                        <td><input required type="text" name="country" id="country" value="<?= $country_id ? $country : "" ?>">
+                            <input type="hidden" name="country_id" id="country_id" autocomplete="no" value="<?= $country_id ?>"></td>
                     </tr>
                     <tr>
                         <td colspan=" 2">

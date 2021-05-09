@@ -47,7 +47,7 @@ const addCountriesDynamic = async () => {
 
 countryInput.addEventListener("input", addCountriesDynamic);
 countryInput.addEventListener("focusin", addCountriesDynamic);
-document.querySelector<HTMLFormElement>("main > form").addEventListener("submit", addCountriesDynamic);
+//document.querySelector<HTMLFormElement>("main > form").addEventListener("submit", addCountriesDynamic);
 
 window.addEventListener("keydown", e => {
     if (e.target != countryInput)
