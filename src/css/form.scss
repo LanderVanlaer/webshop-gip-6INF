@@ -1,6 +1,10 @@
 form {
     margin: 10px;
 
+    &.margin {
+        margin: 10px 50px;
+    }
+
     div.message {
         font-size: 2rem;
         color: #752525;
@@ -29,6 +33,18 @@ form {
         th {
             font-size: 2.2rem;
             text-align: center;
+        }
+
+        td {
+            padding: 2px;
+        }
+
+        input {
+            width: 30rem;
+
+            &[type="number"] {
+                width: 15rem;
+            }
         }
     }
 

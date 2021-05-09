@@ -8,8 +8,10 @@
         const file_not_allowed = 3;
         const file_too_large = 4;
         const password_not_match = 6;
-        const h_captscha = 7;
+        const h_captcha = 7;
         const login_fail = 8;
+        const email_not_valid = 9;
+        const duplicate_customer = 10;
 
         public static final function print_message($str) {
             echo "<div class='message'>$str</div>";
@@ -34,11 +36,17 @@
                     case Error::password_not_match:
                         echo "De 2 wachtwoorden zijn niet gelijk aan elkaar";
                         break;
-                    case Error::h_captscha:
+                    case Error::h_captcha:
                         echo "Gelieve de hCaptcha in te vullen";
                         break;
                     case Error::login_fail:
                         echo "Wachtwoord of username fout";
+                        break;
+                    case Error::email_not_valid:
+                        echo "Het gegeven emailadres is niet geldig";
+                        break;
+                    case Error::duplicate_customer:
+                        echo "Er bestaat al een account met deze email";
                         break;
                     default:
                         if ($executed) {
