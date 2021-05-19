@@ -128,4 +128,40 @@ main {
             }
         }
     }
+
+    .specifications {
+        display: block;
+        margin: 10rem 10% 0 10%;
+
+        table, tbody {
+            width: 100%;
+            border-spacing: 0;
+            border-collapse: collapse;
+            margin: 20px 0;
+
+            caption {
+                font-size: 3rem;
+            }
+
+            tr {
+                &:nth-child(2n) {
+                    background-color: #d4d4d4;
+
+                    &:hover {
+
+                    }
+                }
+
+                td {
+                    padding: 2.5px 5px;
+                    font-size: 1.5rem;
+                    width: 40%;
+
+                    &:nth-child(2) {
+                        width: 60%;
+                    }
+                }
+            }
+        }
+    }
 }
