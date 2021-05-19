@@ -12,6 +12,8 @@
         const login_fail = 8;
         const email_not_valid = 9;
         const duplicate_customer = 10;
+        const password_not_possible = 11;
+        const internal = 12;
 
         public static final function print_message($str) {
             echo "<div class='message'>$str</div>";
@@ -47,6 +49,12 @@
                         break;
                     case Error::duplicate_customer:
                         echo "Er bestaat al een account met deze email";
+                        break;
+                    case Error::password_not_possible:
+                        echo "Wachtwoord moet uit minstens 1 kleine letter, 1 hoofdletter, 1 cijfer en minimum 8 karakters bestaan en maximaal uit 32";
+                        break;
+                    case Error::internal:
+                        echo "Internal Error, please contact the customer service";
                         break;
                     default:
                         if ($executed) {
