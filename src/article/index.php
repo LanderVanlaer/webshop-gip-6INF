@@ -93,24 +93,18 @@
         </div>
         <div class="product-top">
             <div class="images">
-                <ul class="big-images">
-                    <?php
-                        foreach ($product["img"] as $i => $src) {
-                            if ($i == 0)
-                                echo "<li> <img class='active' src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
-                            else
-                                echo "<li> <img src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
-                        }
-                    ?>
-                </ul>
+                <div id="big-image" style='background-image: url("<?= $product['img'][0] ?>")'></div>
                 <div class="images-thumbnails">
                     <ul>
                         <?php
                             foreach ($product["img"] as $i => $src) {
-                                if ($i == 0)
-                                    echo "<li class='active'> <img src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
-                                else
-                                    echo "<li> <img src=\"$src\" alt=\"{$product["name"]} $i\"> </li>";
+                                if ($i == 0) {
+                                    /** @noinspection CssUnknownTarget */
+                                    echo "<li  class='active' style='background-image: url(\"$src\")'></li>";
+                                } else {
+                                    /** @noinspection CssUnknownTarget */
+                                    echo "<li style='background-image: url(\"$src\")'></li>";
+                                }
                             }
                         ?>
                     </ul>
