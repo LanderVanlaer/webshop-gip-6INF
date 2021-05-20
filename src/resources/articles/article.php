@@ -1,10 +1,11 @@
 <?php global $product; ?>
 <article class="article">
     <a href="<?php echo $product["link"] ?>">
-        <img class="thumbnail" src="<?php echo $product["src"] ?>" alt="<?php echo $product["name"] ?>">
+        <div class="brand bg-image thumbnail" style="background-image: url('/images/articles/<?= $product["src"] ?>')"></div>
         <div>
-            <h4 class="product-name"><?php echo $product["name"] ?></h4>
-            <img class="brand" src="<?php echo $product["brand"]["src"] ?>" alt="<?php echo $product["brand"]["name"] ?>">
+            <h4 class="product-name"><?= $product["name"] ?></h4>
+            <div class="brand bg-image" style="background-image: url('/images/brands/<?= $product["brand"]["src"] ?>')">
+            </div>
             <div class="star-rating">
                 <div class="stars">
                     <?php
@@ -17,9 +18,9 @@
                 </div>
                 <h5 class="amount-of-reviews"><?php echo $product["amountOfReviews"] == 1 ? "{$product["amountOfReviews"]} review" : "{$product["amountOfReviews"]} reviews"; ?></h5>
             </div>
-            <div class="description"><?php echo $product["description"] ?></div>
+            <div class="description"><?= substr($product["description"], 0, 150) ?>...</div>
             <div class="bottom">
-                <h3 class="price">&euro; <?php echo $product["price"] ?></h3>
+                <h3 class="price">&euro; <?= $product["price"] ?></h3>
                 <div class="basket">
                     <img src="/images/Icon_basket-gradient.svg" alt="Basket">
                 </div>

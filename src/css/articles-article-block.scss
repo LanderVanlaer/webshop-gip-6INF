@@ -3,10 +3,10 @@ article {
     display: inline-block;
     width: 280px;
     height: 400px;
-    margin: 0 10rem 5rem 0;
+    margin: 0 7rem 5rem 0;
     border-radius: 15px;
     padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.01);
+    background-color: rgba(0, 0, 0, 0.03);
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.03);
@@ -19,9 +19,11 @@ article {
     a {
         text-decoration: none;
 
-        img.thumbnail {
+        .thumbnail {
+            background-color: white;
             display: block;
             width: 256px;
+            height: 129px;
             margin: 0 auto;
         }
 
@@ -34,7 +36,7 @@ article {
                 max-width: calc(100% - 70px);
             }
 
-            img.brand {
+            .brand {
                 float: right;
                 height: 40px;
                 width: 70px;

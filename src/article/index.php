@@ -28,7 +28,7 @@
     $product['price'] = $row['price'];
     $product['link'] = "/article/$article_id]/{$product['name']}";
     $product['brand'] = array("name" => $row['brand_name'], "src" => "/images/brands/{$row['logo']}");
-    $product['description'] = $row['description' . (!empty($_SESSION['lang']) ?: 'e')];
+    $product['description'] = $row['description' . language()];
 
     $product['stars'] = 5; //TODO product add stars
     $product['amountOfReviews'] = 0; //TODO revieuws
@@ -58,12 +58,12 @@
         if ($last_cat_id != $row['category_id']) {
             $last_cat_id = $row['category_id'];
             $product['category'][] = [
-                    'name' => $row["category_name_" . (!empty($_SESSION['lang']) ?: 'e')],
+                    'name' => $row["category_name_" . language()],
                     'specs' => []];
         }
         $product['category'][array_key_last($product['category'])]['specs'][] = array(
                 'value' => $row['value'],
-                'key' => $row['specification_name_' . (!empty($_SESSION['lang']) ?: 'e')]);
+                'key' => $row['specification_name_' . language()]);
     }
     $query->close();
     $con->close();
@@ -93,17 +93,17 @@
         </div>
         <div class="product-top">
             <div class="images">
-                <div id="big-image" style='background-image: url("<?= $product['img'][0] ?>")'></div>
+                <div id="big-image" class="bg-image" style='background-image: url("<?= $product['img'][0] ?>")'></div>
                 <div class="images-thumbnails">
                     <ul>
                         <?php
                             foreach ($product["img"] as $i => $src) {
                                 if ($i == 0) {
                                     /** @noinspection CssUnknownTarget */
-                                    echo "<li  class='active' style='background-image: url(\"$src\")'></li>";
+                                    echo "<li  class='active bg-image' style='background-image: url(\"$src\")'></li>";
                                 } else {
                                     /** @noinspection CssUnknownTarget */
-                                    echo "<li style='background-image: url(\"$src\")'></li>";
+                                    echo "<li class=\"bg-image\" style='background-image: url(\"$src\")'></li>";
                                 }
                             }
                         ?>

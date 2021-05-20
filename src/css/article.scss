@@ -42,9 +42,6 @@ main {
                 display: block;
                 width: 100%;
                 aspect-ratio: 16 / 9;
-                background-position: center;
-                background-size: contain;
-                background-repeat: no-repeat;
             }
 
             .images-thumbnails {
@@ -60,10 +57,6 @@ main {
                         border-radius: 5px;
                         width: 100px;
                         aspect-ratio: 16 / 9;
-
-                        background-position: center;
-                        background-size: contain;
-                        background-repeat: no-repeat;
 
                         &:hover {
                             border: 2px solid #525252;

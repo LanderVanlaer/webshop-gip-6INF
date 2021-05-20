@@ -147,5 +147,14 @@ div.split {
     }
 }
 
+.bg-image {
+    display: inline-block;
+    min-width: 5rem;
+    min-height: 4rem;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 @import 'header';
 @import 'footer';

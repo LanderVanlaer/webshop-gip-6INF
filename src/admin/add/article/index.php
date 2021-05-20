@@ -173,15 +173,15 @@
                 <table>
                     <tr>
                         <td><label for="descriptionD">Nederlands</label></td>
-                        <td colspan="3"><textarea name="descriptionD" id="descriptionD" cols="50" rows="7"></textarea></td>
+                        <td colspan="3"><textarea name="descriptionD" id="descriptionD" cols="50" rows="7" maxlength="1023"></textarea></td>
                     </tr>
                     <tr>
                         <td><label for="descriptionF">Frans</label></td>
-                        <td colspan="3"><textarea name="descriptionF" id="descriptionF" cols="50" rows="7"></textarea></td>
+                        <td colspan="3"><textarea name="descriptionF" id="descriptionF" cols="50" rows="7" maxlength="1023"></textarea></td>
                     </tr>
                     <tr>
                         <td><label for="descriptionE">Engels</label></td>
-                        <td colspan="3"><textarea name="descriptionE" id="descriptionE" cols="50" rows="7"></textarea></td>
+                        <td colspan="3"><textarea name="descriptionE" id="descriptionE" cols="50" rows="7" maxlength="1023"></textarea></td>
                     </tr>
                 </table>
             </fieldset>

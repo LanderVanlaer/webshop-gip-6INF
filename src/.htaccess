@@ -6,6 +6,9 @@ RewriteEngine on
 RewriteRule ^article/([0-9]+)/([^/]+)/?$ article/index.php?id=$1&name=$2 [NC,L]
 RewriteRule ^article/([0-9]+)/?$ article/index.php?id=$1 [NC,L]
 
+RewriteRule ^articles/([0-9]+)/([^/]+)/?$ articles/index.php?id=$1&name=$2 [NC,L]
+RewriteRule ^articles/([0-9]+)/?$ articles/index.php?id=$1 [NC,L]
+
 # Als er een error 404 is, redirect dan naar /404.html
 ErrorDocument 404 /404.html
 # FORBIDDEN

@@ -43,7 +43,7 @@ inputSearch.addEventListener('input', async () => {
         data.categories.forEach((category: ICategorySearch) => {
             const li: HTMLLIElement = document.createElement<'li'>('li');
             //TODO LANGUAGE SEARCH
-            li.innerHTML = `<a href="/articles/category=${category.id}"><div>${bold(category.nameD)}</div><div></div></a>`;
+            li.innerHTML = `<a href="/articles/${category.id}"><div>${bold(category.nameD)}</div><div></div></a>`;
             ulSearch.appendChild<HTMLLIElement>(li);
         });
 

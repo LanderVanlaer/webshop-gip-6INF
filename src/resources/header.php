@@ -9,7 +9,7 @@
             </li>
             <li id="search">
                 <div>
-                    <input type="search" name="search-bar" id="search-bar" placeholder="Search">
+                    <input autocomplete="off" type="search" name="search-bar" id="search-bar" placeholder="Search">
                     <ul>
                     </ul>
                 </div>

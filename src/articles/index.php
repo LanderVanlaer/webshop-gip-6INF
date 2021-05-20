@@ -1,3 +1,39 @@
+<?php
+    include "../includes/basicFunctions.inc.php";
+
+    $category_id = $_GET['id'];
+    $category_name = $_GET['name'] ?? '';
+    
+    if (empty($category_id)) redirect("/");
+
+    include "../includes/connection.inc.php";
+
+    $query = $con->prepare(file_get_contents("../sql/articles/articles.category.select.sql"));
+    $query->bind_param('i', $category_id);
+    $query->execute();
+    $res = $query->get_result();
+
+    $products = [];
+
+    while ($row = $res->fetch_assoc()) {
+        $products[] = [
+                "name" => $row['name'],
+                "brand" => [
+                        "name" => $row['brand_name'],
+                        "src" => $row['brand_logo']
+                ],
+                "src" => $row['path'],
+                "description" => $row['description' . language(true)],
+                "stars" => 5,
+                "amountOfReviews" => 15,
+                "price" => $row['price'],
+                "link" => "/article/" . $row['id']
+        ];
+    };
+
+    $query->close();
+    $con->close();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,79 +87,6 @@
         </aside>
         <section>
             <?php
-                $products = array(
-                        array(
-                                "name" => "DC-FZ1000 II",
-                                "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
-                                "src" => "/images/products/01_FZ1000M2_thumbnail.png",
-                                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
-                                "stars" => 3,
-                                "amountOfReviews" => 1,
-                                "price" => 1599.99,
-                                "link" => "/article/1/DC-FZ1000-II"
-                        ),
-                        array(
-                                "name" => "LUMIX DC-G9 Systeemcamera",
-                                "brand" => array("name" => "Panasonic", "src" => "/images/brands/panasonic.svg"),
-                                "src" => "/images/products/01_171121.png",
-                                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
-                                "stars" => 5,
-                                "amountOfReviews" => 100,
-                                "price" => 1599.99,
-                                "link" => "/article/2/LUMIX-DC-G9-Systeemcamera"
-                        ),
-                        array(
-                                "name" => "DC-FZ1000 II",
-                                "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
-                                "src" => "/images/products/01_FZ1000M2_thumbnail.png",
-                                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ...",
-                                "stars" => 1,
-                                "amountOfReviews" => 100,
-                                "price" => 1599.99,
-                                "link" => "/article/3/DC-FZ1000-II"
-                        ),
-                        array(
-                                "name" => "DC-FZ1000 II",
-                                "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
-                                "src" => "/images/products/01_FZ1000M2_thumbnail.png",
-                                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
-                                "stars" => 0,
-                                "amountOfReviews" => 100,
-                                "price" => 1599.99,
-                                "link" => "/article/4/DC-FZ1000-II"
-                        ),
-                        array(
-                                "name" => "DC-FZ1000 II",
-                                "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
-                                "src" => "/images/products/01_FZ1000M2_thumbnail.png",
-                                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
-                                "stars" => 3,
-                                "amountOfReviews" => 100,
-                                "price" => 1599.99,
-                                "link" => "/article/5/DC-FZ1000-II"
-                        ),
-                        array(
-                                "name" => "DC-FZ1000 II",
-                                "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
-                                "src" => "/images/products/02_FZ1000M2.png",
-                                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
-                                "stars" => 3,
-                                "amountOfReviews" => 100,
-                                "price" => 1000,
-                                "link" => "/article/6/DC-FZ1000-II"
-                        ),
-                        array(
-                                "name" => "DC-FZ1000 II",
-                                "brand" => array("name" => "LUMIX", "src" => "/images/brands/panasonic.svg"),
-                                "src" => "/images/products/03_FZ1000M2.png",
-                                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,  quis ...",
-                                "stars" => 3,
-                                "amountOfReviews" => 100,
-                                "price" => 1599.99,
-                                "link" => "/article/7/DC-FZ1000-II"
-                        ),
-                );
-
                 foreach ($products as $product) {
                     include "../resources/articles/article.php";
                 }

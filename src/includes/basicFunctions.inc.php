@@ -23,7 +23,7 @@
 
         foreach ($array as $key => $value) {
             if (preg_match($regex, $key))
-                $return[$key] = $value;
+                $return[$key] = var_validate($value);
         }
 
         return $return;
@@ -40,4 +40,17 @@
      */
     function str_compare_GET(string $str1, string $str2): bool {
         return str_replace("+", " ", $str1) == str_replace("+", " ", $str2);
+    }
+
+    /**
+     * Geeft de letter van de gekozen taal terug
+     *
+     * @param bool $capital Of de letter een hoofdletter moet zijn
+     * @return string Engels = e/E;<br>Frans = f/F;<br>Nederlands = d/D
+     */
+    function language(bool $capital = false): string {
+        if (empty($_COOKIE['lang']) || !in_array($_COOKIE['lang'], ['e', 'f', 'd']))
+            setcookie('lang', 'e', time() + 3600 * 24 * 365);
+
+        return $capital ? strtoupper($_COOKIE['lang']) : $_COOKIE['lang'];
     }
