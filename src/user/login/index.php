@@ -2,7 +2,8 @@
     include_once "../../includes/Error.php";
     
     use includes\Error as Error;
-    
+
+    include_once "../../includes/Mail.php";
     include "../../includes/validateFunctions.inc.php";
     include "../../includes/basicFunctions.inc.php";
     include "../../includes/h_captcha.inc.php";
@@ -13,6 +14,7 @@
     if (isLoggedIn()) redirect("/user");
 
     $error = 0;
+    $resend_mail = false;
     if (!empty($_POST)) {
         $responseData = h_captcha_verify($_POST['h-captcha-response']);
 
@@ -36,19 +38,36 @@
 
         $res = $query->get_result();
         $row = $res->fetch_assoc();
-        
+        $query->close();
+
         if (!$row) {
             $error = Error::login_fail;
             $con->close();
             goto end;
         }
-        $con->close();
-        
+
         if (!password_verify($password, $row["password"])) {
+            $con->close();
             $error = Error::login_fail;
             goto end;
         }
 
+        if ($row['active'] == 0) {
+            $resend_mail = true;
+            $registration_code = $row['registration_code'];
+
+            if (empty($registration_code)) {
+                $registration_code = uniqid();
+                $query = $con->prepare("UPDATE customer SET registration_code = ? WHERE id = ?");
+                $query->bind_param("si", $registration_code, $row['id']);
+                $query->execute();
+            }
+            Mail\mail_send_activate($row['email'], $row['firstname'], $row['lastname'], $registration_code);
+            $con->close();
+            goto end;
+        }
+
+        $con->close();
         $_SESSION["user"] = $row;
         redirect("/user");
         
@@ -74,7 +93,11 @@
     <main>
         <h1>Admin login</h1>
         <form name="login" action="#" method="post">
-            <?php Error::print_admin_message($error); ?>
+            <?php Error::print_admin_message($error);
+                if ($resend_mail) {
+                    Error::print_message("Gelieve uw mailadres te verifiëren, er is zojuist een nieuwe mail verstuurd naar {$row["email"]}");
+                }
+            ?>
             <table>
                 <tr>
                     <td><label for="username">Username</label></td>

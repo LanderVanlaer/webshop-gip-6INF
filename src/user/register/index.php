@@ -1,9 +1,10 @@
 <?php
     //    https://www.php.net/manual/en/ref.mail.php#77499
     include_once "../../includes/Error.php";
-    
+
     use includes\Error as Error;
     
+    include_once "../../includes/Mail.php";
     include "../../includes/validateFunctions.inc.php";
     include "../../includes/basicFunctions.inc.php";
     include "../../includes/h_captcha.inc.php";
@@ -132,18 +133,7 @@
         $query->close();
 
         //send_mail
-        ini_set("SMTP", "smtp.eu.mailgun.org");
-        ini_set("smtp_port", 587);
-
-        $header = "From:GigaCam <no-reply@mail.gigacam.be>\r\nContent-type:text/html;charset=UTF-8\r\n";
-        $link = "http://{$_SERVER['SERVER_NAME']}/user/activate?code=$registration_code";
-        $executed = mail(
-                $email,
-                "Registratie gigacam.be",
-//                "Beste <i>$firstname $lastname</i><br>gelieve deze email te valideren via onderstaande link:\n\t<a href='$link'>$link</a>",
-                str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents("../../resources/mail/activate/nl.html"))),
-                $header
-        );
+        $executed = Mail\mail_send_activate($email, $firstname, $lastname, $registration_code);
 
         $con->close();
     }
