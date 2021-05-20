@@ -31,7 +31,7 @@
             goto end;
         }
 
-        if (is_one_empty($email, $firstname, $lastname, $password, $passwordConfirm, $country_id, $township, $street, $streetNumber)) {
+        if (is_one_empty($email, $firstname, $lastname, $password, $passwordConfirm, $country_id, $township, $street, $streetNumber) || !is_numeric($streetNumber)) {
             $error = Error::empty_value;
             goto end;
         }

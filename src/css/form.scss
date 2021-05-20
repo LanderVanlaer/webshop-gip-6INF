@@ -1,5 +1,10 @@
 form {
     margin: 10px;
+    font-size: 2.5rem;
+
+    input {
+        font-size: 1.5rem;
+    }
 
     &.margin {
         margin: 10px 50px;
@@ -37,13 +42,13 @@ form {
 
         td {
             padding: 2px;
-        }
 
-        input {
-            width: 30rem;
+            input {
+                width: 30rem;
 
-            &[type="number"] {
-                width: 15rem;
+                &[type="number"] {
+                    width: 15rem;
+                }
             }
         }
     }
