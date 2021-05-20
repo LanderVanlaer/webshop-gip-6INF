@@ -16,6 +16,11 @@
     <title>Document</title>
     <?php include "../resources/head.html" ?>
     <link rel="stylesheet" href="/css/form.css">
+    <style>
+        .user-welcome-message {
+            margin: 2rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -24,6 +29,9 @@
         <h1>Profiel</h1>
         <?php if ($logged_in): ?>
             <a class="btn-blue" href="logout">Afmelden</a>
+            <div class="user-welcome-message">
+                <h3>Hallo <?= $_SESSION['user']['firstname'] ?></h3>
+            </div>
             <form action="/user/changePassword/" method="POST">
                 <?php if (isset($_GET['error'])) Error::print_admin_message($_GET['error']); ?>
                 <fieldset>

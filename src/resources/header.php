@@ -15,7 +15,7 @@
                 </div>
             </li>
             <li id="user">
-                <a href="#">
+                <a href="/user">
                     <img src="/images/Icon_user-gradient.svg" alt="user">
                 </a>
             </li>
