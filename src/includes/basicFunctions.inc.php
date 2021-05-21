@@ -42,6 +42,8 @@
         return str_replace("+", " ", $str1) == str_replace("+", " ", $str2);
     }
 
+    const DEFAULT_LANGUAGE = 'e';
+    const LANGUAGES = ['e', 'f', 'd'];
     /**
      * Geeft de letter van de gekozen taal terug
      *
@@ -49,8 +51,10 @@
      * @return string Engels = e/E;<br>Frans = f/F;<br>Nederlands = d/D
      */
     function language(bool $capital = false): string {
-        if (empty($_COOKIE['lang']) || !in_array($_COOKIE['lang'], ['e', 'f', 'd']))
-            setcookie('lang', 'e', time() + 3600 * 24 * 365);
+        if (empty($_COOKIE['lang']) || !in_array($_COOKIE['lang'], LANGUAGES)) {
+            setcookie('lang', DEFAULT_LANGUAGE, time() + 3600 * 24 * 365);
+            return $capital ? strtoupper(DEFAULT_LANGUAGE) : DEFAULT_LANGUAGE;
+        }
 
         return $capital ? strtoupper($_COOKIE['lang']) : $_COOKIE['lang'];
     }
