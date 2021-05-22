@@ -115,6 +115,8 @@
         $executed = true;
 
         foreach ($specs as $specKey => $specValue) {
+            $specValue = $specValue ?: "NO";
+
             preg_match('/^specification_(\d+)$/i', $specKey, $match);
             $specId = $match[1];
             $query->bind_param('isi', $last_id, $specValue, $specId);

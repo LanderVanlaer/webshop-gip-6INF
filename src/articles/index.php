@@ -106,7 +106,9 @@
                                                     <label>
                                                         <input type="checkbox" name="<?= urlencode("{$specification["id"]}_$value") ?>">
                                                         <span class="checkbox-custom"></span>
-                                                        <?= $value ?>
+                                                        <?php
+                                                            echo yes_no_to_unicode($value);
+                                                        ?>
                                                     </label>
                                                 </li>
                                                 <?php

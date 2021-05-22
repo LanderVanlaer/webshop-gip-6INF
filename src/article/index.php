@@ -138,7 +138,7 @@
                             <?php foreach ($category['specs'] as $spec) { ?>
                                 <tr>
                                     <td><?= $spec['key'] ?></td>
-                                    <td><?= $spec['value'] ?></td>
+                                    <td><?= yes_no_to_unicode($spec['value']) ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>

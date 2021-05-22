@@ -58,3 +58,15 @@
 
         return $capital ? strtoupper($_COOKIE['lang']) : $_COOKIE['lang'];
     }
+
+    /**
+     * Returnt de value, maar als het `YES` of `NO` is, dan de bijhorende unicode
+     *
+     * @param $value string De value die moet worden nagekeken naar `YES`/`NO`
+     * @return string $value/`YES`/`NO`
+     */
+    function yes_no_to_unicode(string $value): string {
+        if (!strcmp($value, "YES")) return "&#10003;";
+        if (!strcmp($value, "NO")) return ("&#10005;");
+        return ($value);
+    }
