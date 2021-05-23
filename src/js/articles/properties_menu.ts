@@ -8,6 +8,8 @@ const getUrlSearchParams: () => { [key: number]: string[] } = () => {
     for (const param of urlSearchParams.keys()) {
         let [keyString, value] = param.split("_");
         const key: number = Number(keyString);
+
+        value = decodeURIComponent(value);
         value = value.replace(/\+/gi, ' ');
 
         if (!params[Number(key)])
