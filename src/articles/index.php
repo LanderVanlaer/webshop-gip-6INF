@@ -12,10 +12,24 @@
     $query->bind_param('i', $category_id);
     $query->execute();
     $res = $query->get_result();
-    
+
     $products = [];
-    
+
+
+    $query_product_specification = $con->prepare(file_get_contents("../sql/articles/article_specifications.article-category.select.sql"));
+    $product_id = 0;
+    $query_product_specification->bind_param('ii', $product_id, $category_id);
+
     while ($row = $res->fetch_assoc()) {
+        $product_specifications = [];
+
+        $product_id = $row['id'];
+        $query_product_specification->execute();
+        $product_spec_res = $query_product_specification->get_result();
+        while ($product_spec = $product_spec_res->fetch_assoc()) {
+            $product_specifications[$product_spec['specification_id']] = $product_spec['value'];
+        }
+
         $products[] = [
                 "name" => $row['name'],
                 "brand" => [
@@ -27,7 +41,8 @@
                 "stars" => 5,
                 "amountOfReviews" => 15,
                 "price" => $row['price'],
-                "link" => "/article/" . $row['id']
+                "link" => "/article/" . $row['id'],
+                'specifications' => $product_specifications
         ];
     };
     
@@ -37,7 +52,7 @@
     $query->bind_param('i', $category_id);
     $query->execute();
     $res = $query->get_result();
-    
+
     $specifications = [];
     $category = [];
     
@@ -54,14 +69,14 @@
                 redirect("/articles/$category_id/" . urlencode($category['name']));
             }
         }
-        
+
         if (empty($specifications) || $specifications[array_key_last($specifications)]['id'] != $row['specification_id'])
             $specifications[] = [
                     'id' => $row['specification_id'],
                     'name' => $row['s_name' . language(true)],
                     'values' => []
             ];
-        
+
         $specifications[array_key_last($specifications)]["values"][] = $row['value'];
     };
     

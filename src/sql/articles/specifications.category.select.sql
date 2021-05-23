@@ -9,5 +9,7 @@ SELECT DISTINCT a.value,
 FROM category c
          INNER JOIN specification s on c.id = s.category_id
          INNER JOIN articlespecification a on s.id = a.specification_id
+         INNER JOIN article a2 on a.article_id = a2.id
 WHERE category_id = ?
+  AND a2.visible
 ORDER BY specification_id;

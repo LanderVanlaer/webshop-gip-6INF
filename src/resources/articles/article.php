@@ -1,5 +1,5 @@
 <?php global $product; ?>
-<article class="article">
+<article class="article" data-specifications='<?= str_replace("'", '"', json_encode($product['specifications'])); ?>'>
     <a href="<?php echo $product["link"] ?>">
         <div class="brand bg-image thumbnail" style="background-image: url('/images/articles/<?= $product["src"] ?>')"></div>
         <div>
