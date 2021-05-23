@@ -52,7 +52,7 @@
      */
     function language(bool $capital = false): string {
         if (empty($_COOKIE['lang']) || !in_array($_COOKIE['lang'], LANGUAGES)) {
-            setcookie('lang', DEFAULT_LANGUAGE, time() + 3600 * 24 * 365);
+            setcookie('lang', DEFAULT_LANGUAGE, time() + 3600 * 24 * 7, "/");
             return $capital ? strtoupper(DEFAULT_LANGUAGE) : DEFAULT_LANGUAGE;
         }
 
