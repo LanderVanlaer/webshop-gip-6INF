@@ -91,7 +91,7 @@
 <body>
     <?php include "../../resources/header.php"; ?>
     <main>
-        <h1>Admin login</h1>
+        <h1>Customer login</h1>
         <form name="login" action="#" method="post">
             <?php Error::print_admin_message($error);
                 if ($resend_mail) {
