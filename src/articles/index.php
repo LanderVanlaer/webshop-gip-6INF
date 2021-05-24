@@ -32,6 +32,7 @@
 
         $products[] = [
                 "name" => $row['name'],
+                "id" => $row['id'],
                 "brand" => [
                         "name" => $row['brand_name'],
                         "src" => $row['brand_logo']

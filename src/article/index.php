@@ -3,40 +3,41 @@
     include "../includes/connection.inc.php";
     include "../includes/validateFunctions.inc.php";
     include "../includes/basicFunctions.inc.php";
-
+    
     $article_id = var_validate($_GET["id"]);
     $article_name = $_GET["name"] ?? '';
-
+    
     if (empty($article_id))
         redirect('/articles');
-
+    
     $product = array();
-
-
+    
+    
     $query = $con->prepare(file_get_contents("../sql/article/article.select.sql"));
     $query->bind_param('i', $article_id);
     $query->execute();
     $res = $query->get_result();
-
+    
     $row = $res->fetch_assoc();
     $query->close();
-
+    
     if (empty($row))
         redirect('/articles');
-
+    
     $product['name'] = $row['name'];
+    $product['id'] = $article_id;
     $product['price'] = $row['price'];
     $product['link'] = "/article/$article_id]/{$product['name']}";
     $product['brand'] = array("name" => $row['brand_name'], "src" => "/images/brands/{$row['logo']}");
     $product['description'] = $row['description' . language()];
-
+    
     $product['stars'] = 5; //TODO product add stars
     $product['amountOfReviews'] = 0; //TODO revieuws
-
+    
     $product['img'] = array();
     if (!str_compare_GET($article_name, $product['name']))
         redirect("/article/$article_id/" . urlencode($product['name']));
-
+    
     $query = $con->prepare(file_get_contents("../sql/article/articleImage.select.sql"));
     $query->bind_param('i', $article_id);
     $query->execute();
@@ -45,10 +46,10 @@
         $product['img'][] = "/images/articles/{$row['path']}";
     }
     $query->close();
-
-
+    
+    
     $product['category'] = array();
-
+    
     $query = $con->prepare(file_get_contents("../sql/article/articleSpecification.select.sql"));
     $query->bind_param('i', $article_id);
     $query->execute();
@@ -123,9 +124,16 @@
                     </div>
                 </div>
                 <div class="add-to-shopping-list">
-                    <button class="btn-blue">
-                        <img src="/images/Icon_basket-white.svg" alt="like">
-                    </button>
+                    <form action="/user/shopping-list/add">
+                        <input type="hidden" name="id" value="<?= $product['id'] ?>">
+                        <label>
+                            Hoeveelheid:
+                            <input type="number" name="amount" min="1" max="99" size="2" value="1">
+                        </label>
+                        <button type="submit" class="btn-blue">
+                            <img src="/images/Icon_basket-white.svg" alt="like">
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

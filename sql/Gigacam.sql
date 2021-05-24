@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2021 at 02:24 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.3
+-- Generation Time: May 24, 2021 at 12:54 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -233,15 +233,15 @@ CREATE TABLE IF NOT EXISTS `orderarticle`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `shoppingcart`
+-- Table structure for table `province`
 --
 
-DROP TABLE IF EXISTS `shoppingcart`;
-CREATE TABLE IF NOT EXISTS `shoppingcart`
+DROP TABLE IF EXISTS `province`;
+CREATE TABLE IF NOT EXISTS `province`
 (
-    `id`           int(11)   NOT NULL AUTO_INCREMENT,
-    `customers_id` int(11)   NOT NULL,
-    `date`         timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+    `id`         int(11)     NOT NULL AUTO_INCREMENT,
+    `name`       varchar(31) NOT NULL,
+    `country_id` int(11)     NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
@@ -255,9 +255,12 @@ CREATE TABLE IF NOT EXISTS `shoppingcart`
 DROP TABLE IF EXISTS `shoppingcartarticle`;
 CREATE TABLE IF NOT EXISTS `shoppingcartarticle`
 (
-    `shoppingcart_id` int(11) NOT NULL,
-    `article_id`      int(11) NOT NULL,
-    `amount`          int(2)  NOT NULL
+    `shoppingcartarticle_id` int(11)   NOT NULL AUTO_INCREMENT,
+    `customer_id`            int(11)   NOT NULL,
+    `article_id`             int(11)   NOT NULL,
+    `amount`                 int(2)    NOT NULL,
+    `date`                   timestamp NOT NULL DEFAULT current_timestamp(),
+    PRIMARY KEY (`shoppingcartarticle_id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 

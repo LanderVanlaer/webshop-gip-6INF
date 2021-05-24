@@ -113,8 +113,20 @@ main {
                 margin-top: 10px;
                 text-align: right;
 
-                button {
-                    width: 75%;
+                form {
+                    label {
+                        display: inline-block;
+                        font-size: 2rem;
+
+                        input {
+                            font-size: 2rem;
+                            width: 25%;
+                        }
+                    }
+
+                    button {
+                        width: 50%;
+                    }
                 }
             }
         }
