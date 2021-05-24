@@ -6,8 +6,7 @@
      * @param string $params De GET paramaters
      */
     function redirect(string $url, string $params = '') {
-        if (empty($params))
-            header("Location: $url" . (!empty($params) ? '?' . urlencode($params) : ''));
+        header("Location: $url" . (!empty($params) ? '?' . urlencode($params) : ''));
         die();
     }
 
