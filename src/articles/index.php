@@ -15,13 +15,20 @@
 
     $products = [];
 
+    $brands = [];
 
     $query_product_specification = $con->prepare(file_get_contents("../sql/articles/article_specifications.article-category.select.sql"));
     $product_id = 0;
     $query_product_specification->bind_param('ii', $product_id, $category_id);
 
     while ($row = $res->fetch_assoc()) {
-        $product_specifications = [];
+        if (!in_array($row['brand_name'], $brands)) {
+            $brands[] = $row['brand_name'];
+        }
+
+        $product_specifications = [
+                -1 => $row['brand_name']
+        ];
 
         $product_id = $row['id'];
         $query_product_specification->execute();
@@ -45,8 +52,10 @@
                 "link" => "/article/" . $row['id'],
                 'specifications' => $product_specifications
         ];
-    };
-    
+    }
+
+    sort($brands);
+
     $query->close();
     
     $query = $con->prepare(file_get_contents("../sql/articles/specifications.category.select.sql"));
@@ -79,7 +88,7 @@
             ];
 
         $specifications[array_key_last($specifications)]["values"][] = $row['value'];
-    };
+    }
     
     $query->close();
     $con->close();
@@ -108,6 +117,26 @@
         <aside>
             <form name="properties" method="GET">
                 <ul>
+                    <!-- BRAND-->
+                    <li>
+                        <fieldset name="brand">
+                            <legend>Merk</legend>
+                            <ul>
+                                <?php foreach ($brands as $brand) {
+                                    ?>
+                                    <li>
+                                        <label>
+                                            <input type="checkbox" name="<?= urlencode("-1_$brand") ?> ">
+                                            <span class="checkbox-custom"></span>
+                                            <?= $brand ?>
+                                        </label>
+                                    </li>
+                                    <?php
+                                } ?>
+                            </ul>
+                        </fieldset>
+                    </li>
+
                     <?php
                         foreach ($specifications as $specification) {
                             ?>

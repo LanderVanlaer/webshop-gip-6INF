@@ -6,7 +6,7 @@ const getUrlSearchParams: () => { [key: number]: string[] } = () => {
     const params: { [key: number]: string[] } = {};
 
     for (const param of urlSearchParams.keys()) {
-        let [keyString, value] = param.split("_");
+        let [keyString, value] = param.trim().split("_");
         const key: number = Number(keyString);
 
         value = decodeURIComponent(value);
