@@ -97,6 +97,16 @@ input {
     }
 }
 
+.divide {
+    font-size: 0;
+
+    > * {
+        vertical-align: top;
+        display: inline-block;
+        font-size: initial;
+    }
+}
+
 .btn-blue {
     background-color: #09BDEA;
     border: none;

@@ -25,4 +25,7 @@
     $query->bind_param("iii", $_SESSION['user']['id'], $article_id, $article_amount);
     $query->execute();
 
+    $query->close();
+    $con->close();
+
     redirect($_SERVER['HTTP_REFERER'] ?: '/user/shopping-list');

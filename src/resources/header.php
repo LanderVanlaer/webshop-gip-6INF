@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li id="basket">
-                <a href="#">
+                <a href="/user/shopping-list">
                     <img src="/images/Icon_basket-gradient.svg" alt="basket">
                 </a>
             </li>
