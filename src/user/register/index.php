@@ -8,7 +8,8 @@
     include "../../includes/validateFunctions.inc.php";
     include "../../includes/basicFunctions.inc.php";
     include "../../includes/h_captcha.inc.php";
-    
+    include "../../includes/database/add.inc.php";
+
     $error = $executed = $succes = $last_id = 0;
     $passwordFail = array();
     $email = $firstname = $lastname = $password = $passwordConfirm = $country = $country_id = $township = $street = $streetNumber = "";
@@ -56,58 +57,7 @@
         //Address
         include "../../includes/connection.inc.php";
 
-        //township
-        $query = $con->prepare(file_get_contents("../../sql/address/township/select.sql"));
-        $query->bind_param('si', $township, $country_id);
-        $query->execute();
-        $res = $query->get_result()->fetch_assoc();
-        $query->close();
-
-        if ($res) {
-            $township_id = $res['id'];
-        } else {
-            $query = $con->prepare(file_get_contents("../../sql/address/township/insert.sql"));
-            $query->bind_param('si', $township, $country_id);
-            $query->execute();
-            $township_id = $query->insert_id;
-            $query->close();
-        }
-
-        //street
-        $query = $con->prepare(file_get_contents("../../sql/address/street/select.sql"));
-        $name = "%$street%";
-        $query->bind_param('si', $street, $township_id);
-        $query->execute();
-        $res = $query->get_result()->fetch_assoc();
-        $query->close();
-
-        if ($res) {
-            $street_id = $res['id'];
-        } else {
-            $query = $con->prepare(file_get_contents("../../sql/address/street/insert.sql"));
-            $query->bind_param('si', $street, $township_id);
-            $query->execute();
-            $street_id = $query->insert_id;
-            $query->close();
-        }
-
-        //address
-        $query = $con->prepare(file_get_contents("../../sql/address/address/select.sql"));
-        $query->bind_param('ii', $streetNumber, $street_id);
-        $query->execute();
-        $res = $query->get_result()->fetch_assoc();
-        $query->close();
-
-        if ($res) {
-            $address_id = $res['id'];
-        } else {
-            $query = $con->prepare(file_get_contents("../../sql/address/address/insert.sql"));
-            $query->bind_param('ii', $streetNumber, $street_id);
-            $query->execute();
-            $address_id = $query->insert_id;
-            $query->close();
-        }
-
+        $address_id = db_add_address($con, $country_id, $township, $street, $streetNumber);
 
         //CUSTOMER
         //duplicate
@@ -206,7 +156,7 @@
                 <table>
                     <tr>
                         <td><label class="required" for="country">Land</label></td>
-                        <td><input required type="text" name="country" id="country" value="<?= $country_id ? $country : "" ?>">
+                        <td><input required type="text" name="country" id="country" autocomplete="no" value="<?= $country_id ? $country : "" ?>">
                             <input type="hidden" name="country_id" id="country_id" autocomplete="no" value="<?= $country_id ?>"></td>
                     </tr>
                     <tr>
