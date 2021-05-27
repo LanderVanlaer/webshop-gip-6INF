@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2021 at 12:54 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: May 27, 2021 at 08:16 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -223,10 +223,9 @@ CREATE TABLE IF NOT EXISTS `order`
 DROP TABLE IF EXISTS `orderarticle`;
 CREATE TABLE IF NOT EXISTS `orderarticle`
 (
-    `order_id`   int(11) NOT NULL AUTO_INCREMENT,
+    `order_id`   int(11) NOT NULL,
     `article_id` int(11) NOT NULL,
-    `amount`     int(2)  NOT NULL,
-    PRIMARY KEY (`order_id`)
+    `amount`     int(2)  NOT NULL
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
 
