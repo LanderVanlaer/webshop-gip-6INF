@@ -17,6 +17,9 @@
             <li id="add">
                 <a class="btn-blue" href="/admin/add">Add</a>
             </li>
+            <li id="update">
+                <a class="btn-blue" href="/admin/update">Update</a>
+            </li>
         </ul>
     </nav>
 </header>
