@@ -14,6 +14,9 @@
         const duplicate_customer = 10;
         const password_not_possible = 11;
         const internal = 12;
+        const customer_not_found_by_email = 13;
+        const customer_not_active = 14;
+        const bad_request = 15; //400
 
         public static final function print_message($str) {
             echo "<div class='message'>$str</div>";
@@ -53,8 +56,17 @@
                     case Error::password_not_possible:
                         echo "Wachtwoord moet uit minstens 1 kleine letter, 1 hoofdletter, 1 cijfer en minimum 8 karakters bestaan en maximaal uit 32";
                         break;
+                    case Error::customer_not_found_by_email:
+                        echo "Er bestaat geen gebruiker met deze email";
+                        break;
+                    case Error::customer_not_active:
+                        echo "Gelieve uw mailadres te verifiëren";
+                        break;
+                    case Error::bad_request:
+                        echo "Er is iets fout gelopen bij de aanvraag, gelieve later terug opnieuw te proberen";
+                        break;
                     case Error::internal:
-                        echo "Internal Error, please contact the customer service";
+                        echo "Internal Error, please contact the customer service or try again later";
                         break;
                     default:
                         if ($executed) {

@@ -54,6 +54,7 @@
 
         if ($row['active'] == 0) {
             $resend_mail = true;
+            $error = Error::customer_not_active;
             $registration_code = $row['registration_code'];
 
             if (empty($registration_code)) {
@@ -82,7 +83,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/admin/admin.css">
     <link rel="stylesheet" href="/css/form.css">
     <?php include "../../resources/head.html"; ?>
     <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
@@ -95,10 +95,10 @@
         <form name="login" action="#" method="post">
             <?php Error::print_admin_message($error);
                 if ($resend_mail) {
-                    Error::print_message("Gelieve uw mailadres te verifiëren, er is zojuist een nieuwe mail verstuurd naar {$row["email"]}");
+                    Error::print_message("er is zojuist een nieuwe mail verstuurd naar {$row["email"]}");
                 }
             ?>
-            <table>
+            <table class="margin-center">
                 <tr>
                     <td><label for="username">Username</label></td>
                     <td><input type="text" name="username" id="username"></td>
@@ -119,6 +119,9 @@
                 </tr>
             </table>
         </form>
+        <div class="center">
+            <a class="btn-blue" href="forgot-password">Wachtwoord vergeten</a>
+        </div>
     </main>
     <?php include "../../resources/footer.php"; ?>
 </body>

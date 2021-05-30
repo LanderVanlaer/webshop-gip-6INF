@@ -1,9 +1,9 @@
 form {
     margin: 10px;
-    font-size: 2.5rem;
+    font-size: 3rem;
 
     input {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     &.margin {
@@ -35,22 +35,32 @@ form {
     table {
         border-collapse: collapse;
 
-        th {
-            font-size: 2.2rem;
-            text-align: center;
-        }
+        tr {
+            th {
+                font-size: 2.2rem;
+                text-align: center;
+            }
 
-        td {
-            padding: 2px;
+            td {
+                padding: 10px;
 
-            input {
-                width: 30rem;
+                &[colspan="2"] {
+                    text-align: center;
+                }
 
-                &[type="number"] {
-                    width: 15rem;
+                input {
+                    width: 30rem;
+
+                    &[type="number"] {
+                        width: 15rem;
+                    }
                 }
             }
         }
+    }
+
+    button.btn-blue, input.btn-blue {
+        font-size: 3rem;
     }
 
     label {

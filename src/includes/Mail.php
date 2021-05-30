@@ -18,3 +18,18 @@
             $header
         );
     }
+
+
+    function mail_send_password_recovery($to_email, $firstname, $lastname, $registration_code) {
+        ini_set("SMTP", "smtp.eu.mailgun.org");
+        ini_set("smtp_port", 587);
+
+        $header = "From:GigaCam <no-reply@mail.gigacam.be>\r\nContent-type:text/html;charset=UTF-8\r\n";
+        $link = "http://{$_SERVER['SERVER_NAME']}/user/login/forgot-password/reset?code=$registration_code";
+        return mail(
+            $to_email,
+            "Wachtwoord herstellen",
+            str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents(__DIR__ . "/../resources/mail/password-reset/nl.html"))),
+            $header
+        );
+    }
