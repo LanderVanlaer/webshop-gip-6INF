@@ -1,0 +1,45 @@
+.user-welcome-message {
+    margin: 2rem;
+}
+
+main section.history {
+    display: block;
+    border-top: 1px solid rgba(0, 0, 0, 0.41);
+    padding: 2rem 1rem;
+
+    h2 {
+        margin-bottom: 2rem;
+    }
+
+    div.split article {
+        width: 15%;
+        aspect-ratio: 2 / 1;
+
+        a {
+            display: block;
+
+            margin-left: 2rem;
+            border-radius: 5px;
+            padding: 1rem;
+            height: 5rem + 2rem * 4 + 1rem * 2;
+
+            border: 1px solid rgba(0, 0, 0, 0.41);
+            text-decoration: none;
+
+            &:hover {
+                border: 1px solid rgba(0, 0, 0, 1);
+            }
+
+            img.product-name-logo {
+                display: block;
+                max-height: 5rem;
+                max-width: 100%;
+            }
+
+            span.product-name {
+                display: block;
+                font-size: 2rem;
+            }
+        }
+    }
+}

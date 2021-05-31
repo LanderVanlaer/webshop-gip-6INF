@@ -1,11 +1,32 @@
 <?php
     include_once "../includes/Error.php";
-
+    
     use includes\Error as Error;
-
+    
     include "../includes/user/userFunctions.inc.php";
     session_start();
     $logged_in = isLoggedIn();
+
+    $historyArticles = [];
+
+    if (isLoggedIn()) {
+        include "../includes/connection.inc.php";
+        $query = $con->prepare(file_get_contents("../sql/customer/visited.customer.select.sql"));
+        $user_id = $_SESSION['user']['id'];
+        $query->bind_param('i', $user_id);
+        $query->execute();
+
+        $res = $query->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $historyArticles[] = [
+                    'id' => $row['article_id'],
+                    'name' => $row['article_name'],
+                    'path' => $row['img_path']
+            ];
+        }
+        $query->close();
+        $con->close();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -16,11 +37,7 @@
     <title>Document</title>
     <?php include "../resources/head.html" ?>
     <link rel="stylesheet" href="/css/form.css">
-    <style>
-        .user-welcome-message {
-            margin: 2rem;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/user/style.css">
 </head>
 
 <body>
@@ -57,6 +74,19 @@
             <a class="btn-blue" href="register">Registreren</a>
             <a class="btn-blue" href="login">Aanmelden</a>
         <?php endif; ?>
+        <section class="history">
+            <h2>History</h2>
+            <div class="split">
+                <?php foreach ($historyArticles as $article) : ?>
+                    <article>
+                        <a href="/article/<?= $article['id'] ?>">
+                            <img class="product-name-logo margin-center" src="/images/articles/<?= $article['path'] ?>" alt="">
+                            <span class="product-name"><?= $article['name'] ?></span>
+                        </a>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </section>
     </main>
     <?php include "../resources/footer.php" ?>
 </body>

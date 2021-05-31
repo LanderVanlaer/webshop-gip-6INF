@@ -1,18 +1,20 @@
 <?php
     session_start();
-    include "../includes/connection.inc.php";
     include "../includes/validateFunctions.inc.php";
     include "../includes/basicFunctions.inc.php";
-    
+    include "../includes/user/userFunctions.inc.php";
+
     $article_id = var_validate($_GET["id"]);
     $article_name = $_GET["name"] ?? '';
     
     if (empty($article_id))
         redirect('/articles');
-    
+
+
+    include "../includes/connection.inc.php";
+
     $product = array();
-    
-    
+
     $query = $con->prepare(file_get_contents("../sql/article/article.select.sql"));
     $query->bind_param('i', $article_id);
     $query->execute();
@@ -66,6 +68,14 @@
                 'value' => $row['value'],
                 'key' => $row['specification_name_' . language()]);
     }
+
+    if (isLoggedIn()) {
+        $query = $con->prepare("INSERT INTO visited(customer_id, article_id) VALUES (?, ?)");
+        $user_id = $_SESSION['user']['id'];
+        $query->bind_param('ii', $user_id, $article_id);
+        $query->execute();
+    }
+
     $query->close();
     $con->close();
 ?>
