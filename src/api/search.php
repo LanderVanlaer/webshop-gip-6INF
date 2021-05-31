@@ -38,8 +38,10 @@
             if ($res->num_rows > 0)
                 $articles = $res->fetch_all(MYSQLI_ASSOC);
 
-            $data['articles'] = $articles;
+            $query->close();
+            $con->close();
 
+            $data['articles'] = $articles;
 
             echo json_encode($data);
         } else {
