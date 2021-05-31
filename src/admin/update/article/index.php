@@ -248,11 +248,11 @@
                     <tbody>
                         <?php foreach ($article['specifications'] as $specification): ?>
                             <tr>
-                                <td><label for="specification<?= $specification['articlespecification_id'] ?>"><?= $specification['nameD'] ?></label></td>
-                                <td><label for="specification<?= $specification['articlespecification_id'] ?>"><?= $specification['nameE'] ?></label></td>
-                                <td><label for="specification<?= $specification['articlespecification_id'] ?>"><?= $specification['nameF'] ?></label></td>
-                                <td><input type="text" name="specification<?= $specification['articlespecification_id'] ?>"
-                                           id="specification<?= $specification['articlespecification_id'] ?>" value="<?= $specification['value'] ?>"></td>
+                                <td><label for="specifications[<?= $specification['articlespecification_id'] ?>]"><?= $specification['nameD'] ?></label></td>
+                                <td><label for="specifications[<?= $specification['articlespecification_id'] ?>]"><?= $specification['nameE'] ?></label></td>
+                                <td><label for="specifications[<?= $specification['articlespecification_id'] ?>]"><?= $specification['nameF'] ?></label></td>
+                                <td><input type="text" name="specifications[<?= $specification['articlespecification_id'] ?>]"
+                                           id="specifications[<?= $specification['articlespecification_id'] ?>]" value="<?= $specification['value'] ?>"></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
