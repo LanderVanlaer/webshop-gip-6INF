@@ -17,6 +17,7 @@
         const customer_not_found_by_email = 13;
         const customer_not_active = 14;
         const bad_request = 15; //400
+        const not_modified = 16; //304
 
         public static final function print_message($str) {
             echo "<div class='message'>$str</div>";
@@ -67,6 +68,9 @@
                         break;
                     case Error::internal:
                         echo "Internal Error, please contact the customer service or try again later";
+                        break;
+                    case Error::not_modified:
+                        echo "Niet gewijzigd";
                         break;
                     default:
                         if ($executed) {

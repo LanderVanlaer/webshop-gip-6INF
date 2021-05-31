@@ -1,7 +1,12 @@
 <?php
+    include_once "../../../includes/Error.php";
+
+    use includes\Error as Error;
+
     include "../../../includes/admin/admin.inc.php";
     include "../../../includes/validateFunctions.inc.php";
-    
+
+    $error = empty($_GET['err']) ? 0 : $_GET['err'];
     $id = empty($_GET['article-id']) ? "" : var_validate($_GET['article-id']);
     $article = [];
     
@@ -122,6 +127,7 @@
     <main>
         <h1>Update Article</h1>
         <form action="#" method="get">
+            <?php Error::print_admin_message($error); ?>
             <fieldset>
                 <table class="margin-center">
                     <tr>
@@ -149,7 +155,7 @@
                             </tr>
                             <tr>
                                 <td><label for="price">Prijs:</label></td>
-                                <td><input type="number" min="1" name="price" id="price" required value="<?= $article['price'] ?>"></td>
+                                <td><input type="number" step=".01" min="1" name="price" id="price" required value="<?= $article['price'] ?>"></td>
                             </tr>
                             <tr>
                                 <td><label for="descriptionD">Beschrijving Nederlands:</label></td>
