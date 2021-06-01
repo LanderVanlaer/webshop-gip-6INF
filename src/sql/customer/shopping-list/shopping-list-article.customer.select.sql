@@ -1,6 +1,8 @@
 SELECT shoppingcartarticle_id         AS shoppingcartarticle_id,
        customer_id                    AS customer_id,
        SUM(amount)                    AS amount,
+       a.price                        AS price,
+       a.price * amount               AS price_total,
        shoppingcartarticle.article_id AS article_id,
        path                           AS image_path,
        a.name                         AS article_name

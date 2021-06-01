@@ -23,6 +23,8 @@
                 'article_id' => $row['article_id'],
                 'image_path' => $row['image_path'],
                 'name' => $row['article_name'],
+                'price' => $row['price'],
+                'price_total' => $row['price_total'],
         ];
     }
     $query->close();
@@ -49,30 +51,47 @@
                     <p>Er zitten geen artikelen in uw winkelmand</p>
                 </section>
             <?php else: ?>
-                <section id="shoppinglist-items">
-                    <?php foreach ($shopping_items as $item) { ?>
-                        <article class="divide">
-                            <div class="left">
-                                <a href="/article/<?= $item['article_id'] ?>" class="bg-image" style="background-image: url('/images/articles/<?= $item['image_path'] ?>')"></a>
-                                <h3><?= $item['name'] ?></h3>
-                            </div>
-                            <div class="right">
-                                <form action="/user/shopping-list/update" method="get">
-                                    <label>
-                                        Hoeveelheid:
-                                        <input type="number" name="amount" min="1" max="99" size="2" value="<?= $item['amount'] ?>">
-                                    </label>
-                                    <input type="hidden" name="id" value="<?= $item['article_id'] ?>">
-                                    <button type="submit" class="btn-blue">Verander</button>
-                                </form>
-                                <a class="btn-blue" href="/user/shopping-list/delete?id=<?= $item['article_id'] ?>"><img src="/images/Icon_trash.svg" alt="trash can"></a>
-                            </div>
-                        </article>
-                        <?php
-                    }
-                    ?>
-                </section>
+                <div>
+                    <table id="shoppinglist-items">
+                        <thead>
+                            <tr>
+                                <th class="article-img-name" colspan="2">Artikel</th>
+                                <th class="price-unit">Stukprijs</th>
+                                <th class="price-total">Prijs totaal</th>
+                                <th class="amount">Aantal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($shopping_items as $item): ?>
+                                <tr>
+                                    <td class="article-img center">
+                                        <a href="/article/<?= $item['article_id'] ?>" class="bg-image"
+                                           style="background-image: url('/images/articles/<?= $item['image_path'] ?>')"></a>
+                                    </td>
+                                    <td class="name"><span><?= $item['name'] ?></span></td>
+                                    <td class="price-unit center">&euro;&nbsp;<?= $item['price'] ?></td>
+                                    <td class="price-total center">&euro;&nbsp;<?= $item['price_total'] ?></td>
+                                    <td class="amount">
+                                        <form action="/user/shopping-list/update" method="get">
+                                            <label>
+                                                Hoeveelheid:
+                                                <input type="number" name="amount" min="1" max="99" size="2" value="<?= $item['amount'] ?>">
+                                            </label>
+                                            <input type="hidden" name="id" value="<?= $item['article_id'] ?>">
+                                            <button type="submit" class="btn-blue">Verander</button>
+                                            <a class="btn-blue" href="/user/shopping-list/delete?id=<?= $item['article_id'] ?>"><img src="/images/Icon_trash.svg"
+                                                                                                                                     alt="trash can"></a>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
                 <aside>
+                    <div class="price-total">
+                        Totaal: <span class="price">&euro;&nbsp;<?= array_sum(array_map('intval', array_column($shopping_items, 'price_total'))) ?></span>
+                    </div>
                     <a href="/user/order" class="btn-blue">Bestellen</a>
                 </aside>
             <?php endif; ?>

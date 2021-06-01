@@ -1,52 +1,69 @@
 main {
     .divide {
-
-        #shoppinglist-items {
+        > div {
             width: 75%;
 
-            > article {
-                display: block;
-                border-bottom: 1px solid black;
-                margin: 1.5rem 0;
-                padding: 1rem 0 1rem 1rem;
+            table#shoppinglist-items {
+                border-collapse: collapse;
+                width: 100%;
 
                 * {
                     vertical-align: middle;
                 }
 
+                tr {
+                    width: 100%;
+                }
 
-                > div.left {
-                    width: 70%;
-                    vertical-align: middle;
+                thead {
+                    tr {
+                        th {
+                            font-size: 1.5rem;
 
-                    > * {
-                        display: inline-block;
-                        vertical-align: middle;
-                    }
+                            &.article-img-name {
+                                width: 50%;
+                            }
 
-                    a {
-                        width: 3rem;
-                        aspect-ratio: 16 / 9;
+                            &.price-unit, &.price-total {
+                                width: 10rem;
+                            }
+
+                            &.amount {
+                                width: calc(50% - 14rem);
+                            }
+                        }
                     }
                 }
 
-                > div.right {
-                    width: 30%;
-                    text-align: right;
+                tbody {
+                    tr {
+                        td {
+                            border-bottom: 1px solid black;
+                            padding: 1.2rem 0;
 
-                    form {
-                        display: inline-block;
-                    }
+                            &.article-img {
+                                width: 10%;
+                            }
 
-                    a {
-                        display: inline-block;
-                        padding: .7rem;
+                            &.name {
+                                width: 40%;
 
-                        img {
-                            width: 1.9rem;
+                                span {
+                                    width: 100%;
+                                    height: 100%;
+                                    max-width: 27vw;
+                                    display: block;
+                                    text-overflow: ellipsis;
+                                    overflow: hidden;
+                                    white-space: nowrap;
+                                }
+                            }
+
+                            &.amount {
+                                text-align: right;
+                            }
                         }
                     }
-
                 }
             }
         }
@@ -54,6 +71,15 @@ main {
         aside {
             width: 25%;
             text-align: center;
+
+            div.price-total {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+
+                span.price {
+                    font-weight: bold;
+                }
+            }
         }
     }
 }

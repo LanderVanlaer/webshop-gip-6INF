@@ -13,6 +13,8 @@ main section.history {
 
     div.split article {
         width: 15%;
+        min-width: 17.5rem;
+        max-width: 30rem;
         aspect-ratio: 2 / 1;
 
         a {

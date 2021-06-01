@@ -70,23 +70,23 @@
                     <button class="btn-blue" type="submit">Verander</button>
                 </fieldset>
             </form>
+            <section class="history">
+                <h2>History</h2>
+                <div class="split">
+                    <?php foreach ($historyArticles as $article) : ?>
+                        <article>
+                            <a href="/article/<?= $article['id'] ?>">
+                                <img class="product-name-logo margin-center" src="/images/articles/<?= $article['path'] ?>" alt="">
+                                <span class="product-name"><?= $article['name'] ?></span>
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </section>
         <?php else: ?>
             <a class="btn-blue" href="register">Registreren</a>
             <a class="btn-blue" href="login">Aanmelden</a>
         <?php endif; ?>
-        <section class="history">
-            <h2>History</h2>
-            <div class="split">
-                <?php foreach ($historyArticles as $article) : ?>
-                    <article>
-                        <a href="/article/<?= $article['id'] ?>">
-                            <img class="product-name-logo margin-center" src="/images/articles/<?= $article['path'] ?>" alt="">
-                            <span class="product-name"><?= $article['name'] ?></span>
-                        </a>
-                    </article>
-                <?php endforeach; ?>
-            </div>
-        </section>
     </main>
     <?php include "../resources/footer.php" ?>
 </body>
