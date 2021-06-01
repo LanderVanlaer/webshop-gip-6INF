@@ -70,8 +70,12 @@
 
         $con->close();
         $_SESSION["user"] = $row;
-        redirect("/user");
-        
+
+        if (empty($_GET['refer']))
+            redirect("/user");
+
+        redirect(urldecode($_GET['refer']));
+
         end:
     }
 ?>

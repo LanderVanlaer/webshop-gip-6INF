@@ -8,6 +8,7 @@
     $logged_in = isLoggedIn();
 
     $historyArticles = [];
+    $likedArticles = [];
 
     if (isLoggedIn()) {
         include "../includes/connection.inc.php";
@@ -25,6 +26,21 @@
             ];
         }
         $query->close();
+
+        $query = $con->prepare(file_get_contents("../sql/customer/like.customer.select.sql"));
+        $query->bind_param('i', $user_id);
+        $query->execute();
+
+        $res = $query->get_result();
+        while ($row = $res->fetch_assoc()) {
+            $likedArticles[] = [
+                    'id' => $row['article_id'],
+                    'name' => $row['article_name'],
+                    'path' => $row['img_path']
+            ];
+        }
+        $query->close();
+
         $con->close();
     }
 ?>
@@ -70,6 +86,19 @@
                     <button class="btn-blue" type="submit">Verander</button>
                 </fieldset>
             </form>
+            <section class="liked">
+                <h2>Verlanglijstje</h2>
+                <div class="split">
+                    <?php foreach ($likedArticles as $article) : ?>
+                        <article>
+                            <a href="/article/<?= $article['id'] ?>">
+                                <img class="product-name-logo margin-center" src="/images/articles/<?= $article['path'] ?>" alt="">
+                                <span class="product-name"><?= $article['name'] ?></span>
+                            </a>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </section>
             <section class="history">
                 <h2>History</h2>
                 <div class="split">

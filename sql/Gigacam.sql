@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2021 at 08:16 PM
+-- Generation Time: Jun 01, 2021 at 02:44 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -195,6 +195,21 @@ CREATE TABLE IF NOT EXISTS `employee`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `like`
+--
+
+DROP TABLE IF EXISTS `like`;
+CREATE TABLE IF NOT EXISTS `like`
+(
+    `article_id`   int(11) NOT NULL,
+    `customers_id` int(11) NOT NULL,
+    PRIMARY KEY (`article_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8mb4;
 
 -- --------------------------------------------------------
 

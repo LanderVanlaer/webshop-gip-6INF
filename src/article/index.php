@@ -14,6 +14,7 @@
     include "../includes/connection.inc.php";
 
     $product = array();
+    $like = false;
 
     $query = $con->prepare(file_get_contents("../sql/article/article.select.sql"));
     $query->bind_param('i', $article_id);
@@ -68,15 +69,24 @@
                 'value' => $row['value'],
                 'key' => $row['specification_name_' . language()]);
     }
+    $query->close();
 
     if (isLoggedIn()) {
         $query = $con->prepare("INSERT INTO visited(customer_id, article_id) VALUES (?, ?)");
         $user_id = $_SESSION['user']['id'];
         $query->bind_param('ii', $user_id, $article_id);
         $query->execute();
+        $query->close();
+
+        $query = $con->prepare("SELECT COUNT(*) AS amount FROM `like` WHERE article_id = ? AND customers_id = ? LIMIT 1");
+        $query->bind_param('ii', $article_id, $user_id);
+        $query->execute();
+        $res = $query->get_result();
+        $row = $res->fetch_assoc();
+        $like = intval($row['amount']) > 0;
+        $query->close();
     }
 
-    $query->close();
     $con->close();
 ?>
 
@@ -127,10 +137,10 @@
                         <h1 class="price">&euro; <?= $product["price"] ?></h1>
                     </div>
                     <div>
-                        <button class="btn-blue like">
-                            <img id="btn-notliked" class="active" src="/images/Icon_love_outline.svg" alt="like">
-                            <img id="btn-liked" src="/images/Icon_love_solid.svg" alt="like">
-                        </button>
+                        <a class="btn-blue like" href="/user/like?id=<?= $product['id'] ?>">
+                            <img id="btn-notliked" <?= !$like ? 'class="active"' : "" ?> src="/images/Icon_love_outline.svg" alt="like">
+                            <img id="btn-liked" <?= $like ? 'class="active"' : "" ?>src="/images/Icon_love_solid.svg" alt="like">
+                        </a>
                     </div>
                 </div>
                 <div class="add-to-shopping-list">
