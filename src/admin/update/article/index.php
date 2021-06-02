@@ -243,6 +243,7 @@
                 </fieldset>
             </form>
             <form action="specification.php" method="post">
+                <?php include "../../../resources/admin/article-specification-instructions.html"; ?>
                 <input type="hidden" name="article-id" value="<?= $article['id'] ?>">
                 <table>
                     <tbody>

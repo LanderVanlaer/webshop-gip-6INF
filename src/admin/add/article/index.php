@@ -236,6 +236,7 @@
             </fieldset>
             <fieldset>
                 <legend>Specificaties</legend>
+                <?php include "../../../resources/admin/article-specification-instructions.html"; ?>
                 <table>
                     <thead>
                         <tr>
