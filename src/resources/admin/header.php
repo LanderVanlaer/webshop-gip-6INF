@@ -20,6 +20,9 @@
             <li id="update">
                 <a class="btn-blue" href="/admin/update">Update</a>
             </li>
+            <li id="sold">
+                <a class="btn-blue" href="/admin/sold">Sold</a>
+            </li>
         </ul>
     </nav>
 </header>
