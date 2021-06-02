@@ -6,7 +6,7 @@
     
     if (empty($category_id)) redirect("/");
     
-    include_once  "../includes/connection.inc.php";
+    include_once "../includes/connection.inc.php";
     
     $query = $con->prepare(file_get_contents("../sql/articles/articles.category.select.sql"));
     $query->bind_param('i', $category_id);
@@ -46,8 +46,6 @@
                 ],
                 "src" => $row['path'],
                 "description" => $row['description' . language(true)],
-                "stars" => 5,
-                "amountOfReviews" => 15,
                 "price" => $row['price'],
                 "link" => "/article/" . $row['id'],
                 'specifications' => $product_specifications

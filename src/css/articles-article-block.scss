@@ -44,30 +44,10 @@ article {
             width: 70px;
         }
 
-        .star-rating {
-            clear: both;
-            padding-top: .5rem;
-            height: 30px;
-
-            div.stars, h5.amount-of-reviews {
-                font-size: 1.5rem;
-                display: inline-block;
-            }
-
-            h5.amount-of-reviews {
-                margin-left: 5px;
-            }
-
-            .star {
-                display: inline-block;
-                width: 2rem;
-            }
-
-        }
-
         .description {
+            clear: both;
             text-align: justify;
-            height: 100px;
+            height: 135px;
             vertical-align: middle;
             font-size: 1.5rem;
             padding-top: 5px;
