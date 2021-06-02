@@ -2,7 +2,7 @@
     include_once "../../includes/admin/admin.inc.php";
 
     include_once "../../includes/connection.inc.php";
-    $table_result = $con->query(file_get_contents('../../sql/admin/orderarticle.select.sql'));
+    $table_result = $con->query(file_get_contents('../../sql/admin/sold/orderarticle.select.sql'));
 ?>
 <!doctype html>
 <html lang="nl">
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php include "../../resources/admin/head.php"; ?>
-    <link rel="stylesheet" href="/css/admin/table.css">
+    <link rel="stylesheet" href="/css/admin/sold/table.css">
     <title>Admin - sold</title>
 </head>
 <body>
@@ -36,13 +36,13 @@
             <tbody>
                 <?php while ($row = $table_result->fetch_assoc()): ?>
                     <tr>
-                        <td><a href="/admin/sold/order?=<?= $row['order_id'] ?>"> <?= $row['order_id'] ?></a></td>
-                        <td><a href="/admin/sold/order?=<?= $row['order_id'] ?>"> <?= $row['article_id'] ?></a></td>
-                        <td><a href="/admin/sold/order?=<?= $row['order_id'] ?>"> <?= $row['name'] ?></a></td>
-                        <td><a href="/admin/sold/order?=<?= $row['order_id'] ?>"> <?= $row['price_unit'] ?></a></td>
-                        <td><a href="/admin/sold/order?=<?= $row['order_id'] ?>"> <?= $row['amount'] ?></a></td>
-                        <td><a href="/admin/sold/order?=<?= $row['order_id'] ?>"> <?= $row['price_total'] ?></a></td>
-                        <td><a href="/admin/sold/order?=<?= $row['order_id'] ?>"> <?= $row['date'] ?></a></td>
+                        <td><a href="/admin/sold/order?id=<?= $row['order_id'] ?>"> <?= $row['order_id'] ?></a></td>
+                        <td><a href="/article/<?= $row['article_id'] ?>"> <?= $row['article_id'] ?></a></td>
+                        <td><a href="/article/<?= $row['article_id'] ?>"> <?= $row['name'] ?></a></td>
+                        <td><a href="/article/<?= $row['article_id'] ?>">&euro; <?= $row['price_unit'] ?></a></td>
+                        <td><a href="/admin/sold/order?id=<?= $row['order_id'] ?>"> <?= $row['amount'] ?></a></td>
+                        <td><a href="/admin/sold/order?id=<?= $row['order_id'] ?>">&euro; <?= $row['price_total'] ?></a></td>
+                        <td><a href="/admin/sold/order?id=<?= $row['order_id'] ?>"> <?= $row['date'] ?></a></td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>

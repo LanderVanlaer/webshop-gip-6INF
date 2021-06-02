@@ -1,0 +1,61 @@
+table {
+    width: 75%;
+    empty-cells: show;
+    border-collapse: collapse;
+    margin: 5rem auto;
+
+    * {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    caption {
+        font-size: 3rem;
+    }
+
+    td, th {
+        border: 1px solid #000000;
+        font-size: 2rem;
+
+        height: 4rem;
+        text-align: center;
+
+        &:empty {
+            min-width: 2rem;
+            min-height: 2rem;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+        }
+    }
+
+    td {
+        font-size: 1.75rem;
+    }
+
+    tr.empty {
+        td, th {
+            border: none;
+        }
+    }
+
+    td.empty, th.empty {
+        border: none;
+    }
+
+    tfoot {
+        border: 2px solid black;
+    }
+}
+
+table#articles {
+    tbody {
+        tr {
+            &:hover {
+                background-color: rgba(120, 120, 120, 0.2);
+            }
+        }
+    }
+}
