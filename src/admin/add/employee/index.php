@@ -3,8 +3,8 @@
 
     use includes\Error as Error;
 
-    include "../../../includes/admin/admin.inc.php";
-    include "../../../includes/validateFunctions.inc.php";
+    include_once "../../../includes/admin/admin.inc.php";
+    include_once "../../../includes/validateFunctions.inc.php";
 
     $error = 0;
     $passwordFail = $executed = $succes = $last_id = false;
@@ -32,7 +32,7 @@
             goto end;
         }
 
-        include "../../../includes/connection.inc.php";
+        include_once "../../../includes/connection.inc.php";
 
         //Check if not duplicate
         $query = $con->prepare("SELECT id FROM `employee` WHERE username = ? LIMIT 1");

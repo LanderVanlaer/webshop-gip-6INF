@@ -1,7 +1,7 @@
 <?php
-    include '../../../includes/api/api.inc.php';
-    include '../../../includes/admin/admin.inc.php';
-    include '../../../includes/validateFunctions.inc.php';
+    include_once '../../../includes/api/api.inc.php';
+    include_once '../../../includes/admin/admin.inc.php';
+    include_once '../../../includes/validateFunctions.inc.php';
 
     function generateCategoryObject($id, $nameD, $nameF, $nameE) {
         return array(
@@ -17,7 +17,7 @@
         $q = var_validate($_GET['q']);
 
         if (!empty($q)) {
-            include '../../../includes/connection.inc.php';
+            include_once '../../../includes/connection.inc.php';
 
             $query = $con->prepare(file_get_contents("../../../sql/api/category.sql"));
             $str = "%$q%";

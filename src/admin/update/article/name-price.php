@@ -3,8 +3,8 @@
 
     use includes\Error as Error;
 
-    include "../../../includes/admin/admin.inc.php";
-    include "../../../includes/validateFunctions.inc.php";
+    include_once "../../../includes/admin/admin.inc.php";
+    include_once "../../../includes/validateFunctions.inc.php";
 
     print_r($_POST);
 
@@ -22,7 +22,7 @@
         redirect(".?article-id=$article_id&err=" . Error::bad_request);
 
 
-    include "../../../includes/connection.inc.php";
+    include_once "../../../includes/connection.inc.php";
 
     $query = $con->prepare("UPDATE article SET name = ?, price = ?, descriptionD = ?, descriptionF = ?, descriptionE = ? WHERE id = ?");
     $query->bind_param('sdsssi', $name, $price, $descriptionD, $descriptionF, $descriptionE, $article_id);

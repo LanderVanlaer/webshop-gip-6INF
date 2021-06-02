@@ -3,10 +3,10 @@
 
     use includes\Error as Error;
 
-    include "../../includes/validateFunctions.inc.php";
-    include "../../includes/basicFunctions.inc.php";
-    include "../../includes/admin/adminFunctions.inc.php";
-    include "../../includes/h_captcha.inc.php";
+    include_once "../../includes/validateFunctions.inc.php";
+    include_once "../../includes/basicFunctions.inc.php";
+    include_once "../../includes/admin/adminFunctions.inc.php";
+    include_once "../../includes/h_captcha.inc.php";
 
     session_start();
 
@@ -29,7 +29,7 @@
             $error = Error::empty_value;
             goto end;
         }
-        include "../../includes/connection.inc.php";
+        include_once "../../includes/connection.inc.php";
 
         $query = $con->prepare("SELECT * FROM `employee` WHERE username = ? LIMIT 1");
         $query->bind_param("s", $username);

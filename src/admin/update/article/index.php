@@ -3,15 +3,15 @@
 
     use includes\Error as Error;
 
-    include "../../../includes/admin/admin.inc.php";
-    include "../../../includes/validateFunctions.inc.php";
+    include_once "../../../includes/admin/admin.inc.php";
+    include_once "../../../includes/validateFunctions.inc.php";
 
     $error = empty($_GET['err']) ? 0 : $_GET['err'];
     $id = empty($_GET['article-id']) ? "" : var_validate($_GET['article-id']);
     $article = [];
     
     if (!empty($id)) {
-        include "../../../includes/connection.inc.php";
+        include_once "../../../includes/connection.inc.php";
         $query = $con->prepare(file_get_contents("../../../sql/admin/update/article/article-brand.article.select.sql"));
         $query->bind_param("i", $id);
         $query->execute();

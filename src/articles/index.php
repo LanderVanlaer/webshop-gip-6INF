@@ -1,12 +1,12 @@
 <?php
-    include "../includes/basicFunctions.inc.php";
+    include_once "../includes/basicFunctions.inc.php";
     
     $category_id = $_GET['id'];
     $category_name = $_GET['name'] ?? '';
     
     if (empty($category_id)) redirect("/");
     
-    include "../includes/connection.inc.php";
+    include_once  "../includes/connection.inc.php";
     
     $query = $con->prepare(file_get_contents("../sql/articles/articles.category.select.sql"));
     $query->bind_param('i', $category_id);

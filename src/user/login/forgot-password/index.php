@@ -5,9 +5,9 @@
     use includes\Error as Error;
 
     include_once "../../../includes/Mail.php";
-    include "../../../includes/basicFunctions.inc.php";
-    include "../../../includes/validateFunctions.inc.php";
-    include "../../../includes/user/userFunctions.inc.php";
+    include_once "../../../includes/basicFunctions.inc.php";
+    include_once "../../../includes/validateFunctions.inc.php";
+    include_once "../../../includes/user/userFunctions.inc.php";
     
     if (isLoggedIn())
         redirect("/user");
@@ -28,8 +28,8 @@
             $error = Error::email_not_valid;
             goto end;
         }
-        
-        include "../../../includes/connection.inc.php";
+
+        include_once "../../../includes/connection.inc.php";
         $query = $con->prepare("SELECT id, registration_code, firstname, lastname, active FROM customer WHERE email = ? LIMIT 1");
         $query->bind_param("s", $email);
         $query->execute();

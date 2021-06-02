@@ -4,9 +4,9 @@
 
     use includes\Error as Error;
 
-    include "../../includes/user/userFunctions.inc.php";
-    include "../../includes/basicFunctions.inc.php";
-    include "../../includes/validateFunctions.inc.php";
+    include_once "../../includes/user/userFunctions.inc.php";
+    include_once "../../includes/basicFunctions.inc.php";
+    include_once "../../includes/validateFunctions.inc.php";
 
     if (empty($_POST) || !isLoggedIn())
         redirect("/user/login");
@@ -25,7 +25,7 @@
         die();
     }
 
-    include "../../includes/connection.inc.php";
+    include_once "../../includes/connection.inc.php";
 
     $query = $con->prepare("SELECT * FROM `customer` WHERE id = ? LIMIT 1");
     $query->bind_param("i", $_SESSION['user']['id']);

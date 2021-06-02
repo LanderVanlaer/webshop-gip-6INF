@@ -1,15 +1,15 @@
 <?php
     session_start();
     
-    include "../../includes/basicFunctions.inc.php";
-    include "../../includes/user/userFunctions.inc.php";
+    include_once "../../includes/basicFunctions.inc.php";
+    include_once "../../includes/user/userFunctions.inc.php";
     
     if (!isLoggedIn())
         redirect('/user/login');
     
     $shopping_items = [];
     
-    include "../../includes/connection.inc.php";
+    include_once "../../includes/connection.inc.php";
     $query = $con->prepare(file_get_contents("../../sql/customer/shopping-list/shopping-list-article.customer.select.sql"));
     $query->bind_param('i', $_SESSION['user']['id']);
     $query->execute();

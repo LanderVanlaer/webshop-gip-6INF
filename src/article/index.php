@@ -1,8 +1,8 @@
 <?php
     session_start();
-    include "../includes/validateFunctions.inc.php";
-    include "../includes/basicFunctions.inc.php";
-    include "../includes/user/userFunctions.inc.php";
+    include_once "../includes/validateFunctions.inc.php";
+    include_once "../includes/basicFunctions.inc.php";
+    include_once "../includes/user/userFunctions.inc.php";
 
     $article_id = var_validate($_GET["id"]);
     $article_name = $_GET["name"] ?? '';
@@ -11,7 +11,7 @@
         redirect('/articles');
 
 
-    include "../includes/connection.inc.php";
+    include_once "../includes/connection.inc.php";
 
     $product = array();
     $like = false;

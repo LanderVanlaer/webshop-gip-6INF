@@ -1,13 +1,13 @@
 <?php
-    include "../../includes/basicFunctions.inc.php";
-    include "../../includes/validateFunctions.inc.php";
+    include_once "../../includes/basicFunctions.inc.php";
+    include_once "../../includes/validateFunctions.inc.php";
 
     if (empty($_GET["code"]))
         goto end;
 
     $code = var_validate($_GET["code"]);
 
-    include "../../includes/connection.inc.php";
+    include_once "../../includes/connection.inc.php";
 
     $query = $con->prepare("UPDATE customer SET active = 1, registration_code = '' WHERE registration_code = ? LIMIT 1;");
     $query->bind_param("s", $code);

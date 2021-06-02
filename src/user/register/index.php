@@ -5,10 +5,10 @@
     use includes\Error as Error;
     
     include_once "../../includes/Mail.php";
-    include "../../includes/validateFunctions.inc.php";
-    include "../../includes/basicFunctions.inc.php";
-    include "../../includes/h_captcha.inc.php";
-    include "../../includes/database/add.inc.php";
+    include_once "../../includes/validateFunctions.inc.php";
+    include_once "../../includes/basicFunctions.inc.php";
+    include_once "../../includes/h_captcha.inc.php";
+    include_once "../../includes/database/add.inc.php";
 
     $error = $executed = $succes = $last_id = 0;
     $passwordFail = array();
@@ -55,7 +55,7 @@
         $succes = true;
 
         //Address
-        include "../../includes/connection.inc.php";
+        include_once "../../includes/connection.inc.php";
 
         $address_id = db_add_address($con, $country_id, $township, $street, $streetNumber);
 

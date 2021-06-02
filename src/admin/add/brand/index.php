@@ -3,9 +3,9 @@
 
     use includes\Error as Error;
 
-    include "../../../includes/admin/admin.inc.php";
-    include "../../../includes/validateFunctions.inc.php";
-    include "../../../includes/fileFuncties.inc.php";
+    include_once "../../../includes/admin/admin.inc.php";
+    include_once "../../../includes/validateFunctions.inc.php";
+    include_once "../../../includes/fileFuncties.inc.php";
 
     $error = 0;
     $executed = $succes = $last_id = false;
@@ -29,7 +29,7 @@
             goto end;
         }
 
-        include "../../../includes/connection.inc.php";
+        include_once "../../../includes/connection.inc.php";
 
         //Check if not duplicate
         $query = $con->prepare("SELECT id FROM `brand` WHERE name = ? LIMIT 1");

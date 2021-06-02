@@ -5,9 +5,9 @@
     use includes\Error as Error;
     
     include_once "../../../../includes/Mail.php";
-    include "../../../../includes/basicFunctions.inc.php";
-    include "../../../../includes/validateFunctions.inc.php";
-    include "../../../../includes/user/userFunctions.inc.php";
+    include_once "../../../../includes/basicFunctions.inc.php";
+    include_once "../../../../includes/validateFunctions.inc.php";
+    include_once "../../../../includes/user/userFunctions.inc.php";
     
     $error = 0;
     $passwordFail = [];
@@ -40,7 +40,7 @@
 
         $password_hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        include "../../../../includes/connection.inc.php";
+        include_once "../../../../includes/connection.inc.php";
         $query = $con->prepare("UPDATE customer SET registration_code = null, password= ? WHERE registration_code = ? LIMIT 1;");
         $query->bind_param("ss", $password_hashed, $code);
         $query->execute();

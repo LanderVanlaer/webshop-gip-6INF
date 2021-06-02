@@ -4,10 +4,10 @@
     
     use includes\Error as Error;
     
-    include "../../includes/user/userFunctions.inc.php";
-    include "../../includes/basicFunctions.inc.php";
-    include "../../includes/validateFunctions.inc.php";
-    include "../../includes/database/add.inc.php";
+    include_once "../../includes/user/userFunctions.inc.php";
+    include_once "../../includes/basicFunctions.inc.php";
+    include_once "../../includes/validateFunctions.inc.php";
+    include_once "../../includes/database/add.inc.php";
 
     if (!isLoggedIn())
         redirect("/user/login");
@@ -15,7 +15,7 @@
     //get items in shoppinglist
     $shopping_items = [];
 
-    include "../../includes/connection.inc.php";
+    include_once "../../includes/connection.inc.php";
     $query = $con->prepare(file_get_contents("../../sql/customer/shopping-list/shopping-list-article.customer.select.sql"));
     $query->bind_param('i', $_SESSION['user']['id']);
     $query->execute();

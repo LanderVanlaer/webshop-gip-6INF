@@ -1,5 +1,5 @@
 <?php
-    include "../includes/admin/admin.inc.php";
+    include_once "../includes/admin/admin.inc.php";
 ?>
 <!doctype html>
 <html lang="nl">

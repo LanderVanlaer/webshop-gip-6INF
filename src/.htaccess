@@ -1,3 +1,6 @@
+#absolute path
+php_value auto_prepend_file "C:\Users\lande\Documents\git\webshop-gip-6INF\src\includes\default.inc.php"
+
 RewriteEngine on
 
 #Verandert de URL links naar de URL rechts

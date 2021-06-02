@@ -3,7 +3,7 @@
     
     use includes\Error as Error;
     
-    include "../includes/user/userFunctions.inc.php";
+    include_once "../includes/user/userFunctions.inc.php";
     session_start();
     $logged_in = isLoggedIn();
 
@@ -11,7 +11,7 @@
     $likedArticles = [];
 
     if (isLoggedIn()) {
-        include "../includes/connection.inc.php";
+        include_once "../includes/connection.inc.php";
         $query = $con->prepare(file_get_contents("../sql/customer/visited.customer.select.sql"));
         $user_id = $_SESSION['user']['id'];
         $query->bind_param('i', $user_id);

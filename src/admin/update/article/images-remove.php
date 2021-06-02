@@ -3,8 +3,8 @@
 
     use includes\Error as Error;
 
-    include "../../../includes/admin/admin.inc.php";
-    include "../../../includes/validateFunctions.inc.php";
+    include_once "../../../includes/admin/admin.inc.php";
+    include_once "../../../includes/validateFunctions.inc.php";
 
     $article_id = var_validate($_POST['article-id']);
     $images = $_POST['images'];
@@ -21,7 +21,7 @@
             redirect(".?article-id=$article_id&err=" . Error::bad_request);
     }
 
-    include "../../../includes/connection.inc.php";
+    include_once "../../../includes/connection.inc.php";
 
     $image_id = -1;
     $affected_rows = 0;

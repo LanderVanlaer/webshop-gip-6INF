@@ -1,6 +1,6 @@
 <?php
-    include '../includes/api/api.inc.php';
-    include '../includes/validateFunctions.inc.php';
+    include_once '../includes/api/api.inc.php';
+    include_once '../includes/validateFunctions.inc.php';
 
     $data = array("categories" => array(), "articles" => array());
 
@@ -9,7 +9,7 @@
 
 
         if (!empty($q)) {
-            include '../includes/connection.inc.php';
+            include_once '../includes/connection.inc.php';
 
             $str = "%$q%";
 

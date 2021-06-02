@@ -1,12 +1,12 @@
 <?php
-    include '../../../includes/api/api.inc.php';
-    include '../../../includes/validateFunctions.inc.php';
+    include_once '../../../includes/api/api.inc.php';
+    include_once '../../../includes/validateFunctions.inc.php';
 
     if (!empty($_GET)) {
         $q = var_validate($_GET['q']);
 
         if (!empty($q)) {
-            include '../../../includes/connection.inc.php';
+            include_once '../../../includes/connection.inc.php';
 
             $query = $con->prepare("SELECT `id`, `name` FROM `country` WHERE `name` LIKE ?");
             $str = "%$q%";

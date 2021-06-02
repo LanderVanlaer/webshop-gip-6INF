@@ -1,9 +1,9 @@
 <?php
     session_start();
 
-    include "../../includes/user/userFunctions.inc.php";
-    include "../../includes/validateFunctions.inc.php";
-    include "../../includes/basicFunctions.inc.php";
+    include_once "../../includes/user/userFunctions.inc.php";
+    include_once "../../includes/validateFunctions.inc.php";
+    include_once "../../includes/basicFunctions.inc.php";
 
     $article_id = empty($_GET['id']) ? -1 : var_validate($_GET['id']);
 
@@ -15,7 +15,7 @@
 
     $article_id = intval($article_id);
 
-    include "../../includes/connection.inc.php";
+    include_once "../../includes/connection.inc.php";
     $query = $con->prepare("SELECT COUNT(*) AS amount FROM `like` WHERE article_id = ? AND customers_id = ?");
     $query->bind_param('ii', $article_id, $_SESSION['user']['id']);
     $query->execute();
