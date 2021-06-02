@@ -155,6 +155,9 @@
                         </button>
                     </form>
                 </div>
+                <div class="description">
+                    <?= $product['description'] ?>
+                </div>
             </div>
         </div>
         <section class="specifications">
