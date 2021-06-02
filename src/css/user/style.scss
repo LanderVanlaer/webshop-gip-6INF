@@ -44,3 +44,34 @@ main section.history, main section.liked {
         }
     }
 }
+
+main section.orders {
+    .tables {
+        div {
+            width: 50%;
+            padding: 1.5rem;
+
+            table {
+                width: 100%;
+                font-size: 1.5rem;
+                border-collapse: collapse;
+                margin-bottom: 3rem;
+
+                tr td, tr th {
+                    border: 1px solid rgba(0, 0, 0, 0.25);
+                    padding: 1rem;
+                }
+
+                thead {
+                    font-size: 2rem;
+
+                    th {
+                    }
+                }
+
+                tbody {;
+                }
+            }
+        }
+    }
+}

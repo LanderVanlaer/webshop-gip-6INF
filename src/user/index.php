@@ -41,6 +41,33 @@
         }
         $query->close();
 
+        $orders = [];
+
+        $query = $con->prepare(file_get_contents("../sql/customer/order-orderarticle.customer.select.sql"));
+        $query->bind_param('i', $user_id);
+        $query->execute();
+
+        $res = $query->get_result();
+        while ($row = $res->fetch_assoc()) {
+            if (!count($orders) || $orders[array_key_last($orders)]['date'] != $row['date']) {
+                $orders[] = [
+                        'date' => $row['date'],
+                        'articles' => [],
+                ];
+            }
+
+            $orders[array_key_last($orders)]['articles'][] = [
+                    'id' => $row['article_id'],
+                    'name' => $row['article_name'],
+                    'amount' => $row['amount'],
+                    'price' => [
+                            'unit' => $row['price_unit'],
+                            'total' => $row['price_total'],
+                    ],
+            ];
+        }
+        $query->close();
+
         $con->close();
     }
 ?>
@@ -109,6 +136,43 @@
                                 <span class="product-name"><?= $article['name'] ?></span>
                             </a>
                         </article>
+                    <?php endforeach; ?>
+                </div>
+            </section>
+            <section class="orders">
+                <h2>Aankopen</h2>
+                <div class="tables split">
+                    <?php foreach ($orders
+
+                                   as $order) : ?>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Datum:</th>
+                                        <th colspan="4"><?= $order['date'] ?></th>
+                                    </tr>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Naam</th>
+                                        <th>Prijs</th>
+                                        <th>Aantal</th>
+                                        <th>Totaal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($order['articles'] as $article) : ?>
+                                        <tr>
+                                            <td><?= $article['id'] ?></td>
+                                            <td><?= $article['name'] ?></td>
+                                            <td>&euro;&nbsp;<?= $article['price']['unit'] ?></td>
+                                            <td>&euro;&nbsp;<?= $article['amount'] ?></td>
+                                            <td>&euro;&nbsp;<?= $article['price']['total'] ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </section>
