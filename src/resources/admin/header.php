@@ -26,6 +26,9 @@
             <li id="users">
                 <a class="btn-blue" href="/admin/users">Users</a>
             </li>
+            <li id="articles">
+                <a class="btn-blue" href="/admin/articles">Articles</a>
+            </li>
         </ul>
     </nav>
 </header>
