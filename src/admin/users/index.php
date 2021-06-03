@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php include "../../resources/admin/head.php"; ?>
     <link rel="stylesheet" href="/css/admin/table.css">
+    <title>Admin - Users</title>
     <style>
         table td a {
             padding: 1rem;

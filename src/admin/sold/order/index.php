@@ -36,7 +36,7 @@
             ];
             $first = false;
         }
-        
+
         $order['articles'][] = [
                 'id' => $row['article_id'],
                 'name' => $row['name'],
