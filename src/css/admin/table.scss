@@ -31,14 +31,6 @@ table {
 
     tbody {
         tr {
-            &:nth-child(odd) {
-                background-color: rgba(120, 120, 120, 0.08);
-            }
-
-            &:hover {
-                background-color: rgba(120, 120, 120, 0.2);
-            }
-
             td {
                 a {
                     display: block;
@@ -47,6 +39,18 @@ table {
                     padding: .5rem;
                     font-size: 1.2rem;
                     text-decoration: none;
+                }
+            }
+        }
+
+        &.color-odd-hover {
+            tr {
+                &:nth-child(odd) {
+                    background-color: rgba(120, 120, 120, 0.08);
+                }
+
+                &:hover {
+                    background-color: rgba(120, 120, 120, 0.2);
                 }
             }
         }

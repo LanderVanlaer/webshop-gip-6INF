@@ -33,14 +33,11 @@
     $product['link'] = "/article/$article_id]/{$product['name']}";
     $product['brand'] = array("name" => $row['brand_name'], "src" => "/images/brands/{$row['logo']}");
     $product['description'] = $row['description' . language()];
-    
-    $product['stars'] = 5; //TODO product add stars
-    $product['amountOfReviews'] = 0; //TODO revieuws
-    
+
     $product['img'] = array();
     if (!str_compare_GET($article_name, $product['name']))
         redirect("/article/$article_id/" . urlencode($product['name']));
-    
+
     $query = $con->prepare(file_get_contents("../sql/article/articleImage.select.sql"));
     $query->bind_param('i', $article_id);
     $query->execute();

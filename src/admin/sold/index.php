@@ -33,13 +33,13 @@
                     <th class="last-row-element">prijs</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="color-odd-hover">
                 <?php while ($row = $table_result->fetch_assoc()): ?>
                     <tr>
                         <td><a href="/admin/sold/order?id=<?= $row['order_id'] ?>"> <?= $row['order_id'] ?></a></td>
-                        <td><a href="/article/<?= $row['article_id'] ?>"> <?= $row['article_id'] ?></a></td>
-                        <td><a href="/article/<?= $row['article_id'] ?>"> <?= $row['name'] ?></a></td>
-                        <td><a href="/article/<?= $row['article_id'] ?>">&euro; <?= $row['price_unit'] ?></a></td>
+                        <td><a target="_blank" href="/article/<?= $row['article_id'] ?>"> <?= $row['article_id'] ?></a></td>
+                        <td><a target="_blank" href="/article/<?= $row['article_id'] ?>"> <?= $row['name'] ?></a></td>
+                        <td><a target="_blank" href="/article/<?= $row['article_id'] ?>">&euro; <?= $row['price_unit'] ?></a></td>
                         <td><a href="/admin/sold/order?id=<?= $row['order_id'] ?>"> <?= $row['amount'] ?></a></td>
                         <td><a href="/admin/sold/order?id=<?= $row['order_id'] ?>">&euro; <?= $row['price_total'] ?></a></td>
                         <td><a href="/admin/sold/order?id=<?= $row['order_id'] ?>"> <?= $row['date'] ?></a></td>

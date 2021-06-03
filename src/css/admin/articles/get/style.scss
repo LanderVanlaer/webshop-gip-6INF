@@ -1,0 +1,44 @@
+.tables {
+    .split {
+        div {
+            width: calc(50% - 4rem);
+
+            &:nth-child(1) {
+                margin-right: 4rem;
+            }
+        }
+    }
+
+    margin-top: 2rem;
+
+    table {
+        td, th {
+            padding: 1rem;
+            font-size: 1.5rem;
+        }
+
+        tr.color-odd {
+            &:nth-child(2n) {
+                background-color: rgba(120, 120, 120, 0.08);
+            }
+        }
+
+        tbody th {
+            text-align: right;
+
+            &.center {
+                text-align: center;
+            }
+        }
+
+        &#images {
+            td.image {
+                padding: 0;
+
+                img {
+                    max-height: 6.5rem;
+                }
+            }
+        }
+    }
+}

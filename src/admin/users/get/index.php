@@ -116,7 +116,7 @@
                         <th>Aantal</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="color-odd-hover">
                     <?php foreach ($customer['orders'] as $order): ?>
                         <tr>
                             <td><a href="/admin/sold/order?id=<?= $order['id'] ?>"><?= $order['id'] ?></a></td>

@@ -40,7 +40,7 @@
                         <th>Naam</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="color-odd-hover">
                     <?php while ($row = $table_result->fetch_assoc()): ?>
                         <tr>
                             <td><a href="get?id=<?= $row['id'] ?>"><?= $row['id'] ?></a></td>
