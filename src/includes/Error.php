@@ -75,7 +75,10 @@
                     default:
                         if ($executed) {
                             if ($succes)
-                                echo "Toegevoegd met id: $last_id";
+                                if ($last_id)
+                                    echo "Toegevoegd met id: $last_id";
+                                else
+                                    echo "Toegevoegd / aangepast";
                             else
                                 echo "Er is iets misgelopen";
                         }

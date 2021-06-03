@@ -12,7 +12,7 @@
 
     $article = array();
 
-    $query = $con->prepare(file_get_contents("../../../sql/article/article.select.sql"));
+    $query = $con->prepare(file_get_contents("../../../sql/admin/article/get/article.article.select.sql"));
     $query->bind_param('i', $article_id);
     $query->execute();
     $res = $query->get_result();

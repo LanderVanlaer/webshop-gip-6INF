@@ -9,16 +9,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php include "../../resources/admin/head.php"; ?>
     <link rel="stylesheet" href="/css/admin/add/index-nav.css">
-    <title>Admin - Add navigation</title>
+    <title>Admin - Update navigation</title>
 </head>
 <body>
     <?php include "../../resources/admin/header.php"; ?>
     <main>
+        <h1>Update</h1>
         <nav>
             <ul>
                 <li><a class="btn-blue" href="category">Categorie</a></li>
                 <li><a class="btn-blue" href="brand">Merk</a></li>
                 <li><a class="btn-blue" href="article">Article</a></li>
+                <li><a class="btn-blue" href="employee">Employe / me</a></li>
             </ul>
         </nav>
     </main>

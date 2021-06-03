@@ -136,21 +136,21 @@
                 </table>
             </fieldset>
         </form>
-        <form action="visible.php" method="post">
-            <input type="hidden" name="article-id" value="<?= $article['id'] ?>">
-            <fieldset>
-                <legend>Visible</legend>
-                <div>
-                    <label>
-                        Artikel is zichtbaar:
-                        <input type="checkbox" name="visible" id="visible" <?= $article['visible'] ? "checked" : "" ?>>
-                        <span class="checkbox-custom"></span>
-                    </label>
-                </div>
-                <button class="btn-blue" type="submit">Wijzig</button>
-            </fieldset>
-        </form>
         <?php if (!empty($article) && count($article)): ?>
+            <form action="visible.php" method="post">
+                <input type="hidden" name="article-id" value="<?= $article['id'] ?>">
+                <fieldset>
+                    <legend>Visible</legend>
+                    <div>
+                        <label>
+                            Artikel is zichtbaar:
+                            <input type="checkbox" name="visible" id="visible" <?= $article['visible'] ? "checked" : "" ?>>
+                            <span class="checkbox-custom"></span>
+                        </label>
+                    </div>
+                    <button class="btn-blue" type="submit">Wijzig</button>
+                </fieldset>
+            </form>
             <form action="name-price.php" method="post">
                 <input type="hidden" name="article-id" value="<?= $article['id'] ?>">
                 <fieldset>
