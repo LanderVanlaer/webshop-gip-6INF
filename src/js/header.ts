@@ -27,6 +27,11 @@ const fetchSearch = async (q: string): Promise<ISearch> => {
     return await res.json();
 };
 
+const getLanguage = (): string => {
+    const lReg = document.cookie.match(/lang=([dfe])/);
+    return lReg ? lReg[1] : 'e';
+};
+
 inputSearch.addEventListener('input', async () => {
         const value: string = inputSearch.value.trim();
         if (!value) {
@@ -42,8 +47,7 @@ inputSearch.addEventListener('input', async () => {
 
         data.categories.forEach((category: ICategorySearch) => {
             const li: HTMLLIElement = document.createElement<'li'>('li');
-            //TODO LANGUAGE SEARCH
-            li.innerHTML = `<a href="/articles/${category.id}"><div>${bold(category.nameD)}</div><div></div></a>`;
+            li.innerHTML = `<a href="/articles/${category.id}"><div>${bold(category[`name${getLanguage().toUpperCase()}`])}</div><div></div></a>`;
             ulSearch.appendChild<HTMLLIElement>(li);
         });
 
