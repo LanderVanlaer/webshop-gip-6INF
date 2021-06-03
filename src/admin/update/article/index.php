@@ -1,11 +1,11 @@
 <?php
     include_once "../../../includes/Error.php";
-
+    
     use includes\Error as Error;
-
+    
     include_once "../../../includes/admin/admin.inc.php";
     include_once "../../../includes/validateFunctions.inc.php";
-
+    
     $error = empty($_GET['err']) ? 0 : $_GET['err'];
     $id = empty($_GET['article-id']) ? "" : var_validate($_GET['article-id']);
     $article = [];
@@ -44,11 +44,6 @@
         $query->execute();
         $res = $query->get_result();
         
-        if ($res->num_rows <= 0) {
-            $query->close();
-            goto end;
-        }
-        
         while ($row = $res->fetch_assoc()) {
             $article['categories'][] = [
                     'id' => $row['id'],
@@ -84,7 +79,6 @@
         $query->execute();
         $res = $query->get_result();
         
-        
         while ($row = $res->fetch_assoc()) {
             $article['images'][] = [
                     'id' => $row['id'],
@@ -114,11 +108,10 @@
             max-width: 7.5rem;
             max-height: 5rem;
         }
-
+        
         #images > div {
             display: inline-block;
             width: 8rem;
-            height: 5rem;
         }
     </style>
 </head>
