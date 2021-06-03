@@ -23,6 +23,9 @@
             <li id="sold">
                 <a class="btn-blue" href="/admin/sold">Sold</a>
             </li>
+            <li id="users">
+                <a class="btn-blue" href="/admin/users">Users</a>
+            </li>
         </ul>
     </nav>
 </header>
