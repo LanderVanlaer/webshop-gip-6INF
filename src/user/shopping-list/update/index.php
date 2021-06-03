@@ -15,7 +15,7 @@
     }
 
 
-    if ($article_id == '')
+    if ($article_id == '' || $article_amount > 99)
         redirect($_SERVER['HTTP_REFERER'] ?: '/');
     if (!isLoggedIn())
         redirect('/user/login');
