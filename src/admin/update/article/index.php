@@ -26,6 +26,7 @@
         $article = [
                 'id' => $row['id'],
                 'name' => $row['name'],
+                'visible' => $row['visible'],
                 'descriptionD' => $row['descriptionD'],
                 'descriptionE' => $row['descriptionE'],
                 'descriptionF' => $row['descriptionF'],
@@ -78,7 +79,7 @@
         $query->bind_param("i", $id);
         $query->execute();
         $res = $query->get_result();
-        
+
         while ($row = $res->fetch_assoc()) {
             $article['images'][] = [
                     'id' => $row['id'],
@@ -133,6 +134,20 @@
                         </td>
                     </tr>
                 </table>
+            </fieldset>
+        </form>
+        <form action="visible.php" method="post">
+            <input type="hidden" name="article-id" value="<?= $article['id'] ?>">
+            <fieldset>
+                <legend>Visible</legend>
+                <div>
+                    <label>
+                        Artikel is zichtbaar:
+                        <input type="checkbox" name="visible" id="visible" <?= $article['visible'] ? "checked" : "" ?>>
+                        <span class="checkbox-custom"></span>
+                    </label>
+                </div>
+                <button class="btn-blue" type="submit">Wijzig</button>
             </fieldset>
         </form>
         <?php if (!empty($article) && count($article)): ?>
