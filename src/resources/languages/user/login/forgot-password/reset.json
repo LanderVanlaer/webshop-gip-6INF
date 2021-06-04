@@ -1,0 +1,20 @@
+{
+  "d": {
+    "title": "Wachtwoord herstellen",
+    "password": "Wachtwoord",
+    "password_confirm": "Wachtwoord bevestigen",
+    "change": "Verander"
+  },
+  "f": {
+    "title": "Récupération de mot de passe",
+    "password": "Mot de passe",
+    "password_confirm": "Confirmer le mot",
+    "change": "Changer"
+  },
+  "e": {
+    "title": "Password recovery",
+    "password": "Password",
+    "password_confirm": "Confirm password",
+    "change": "Change"
+  }
+}

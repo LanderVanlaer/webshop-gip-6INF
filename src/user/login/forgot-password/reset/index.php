@@ -65,7 +65,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Recovery</title>
+    <title><?= _['title'] ?></title>
     <?php include "../../../../resources/head.html" ?>
     <link rel="stylesheet" href="/css/form.css">
 </head>
@@ -73,7 +73,7 @@
 <body>
     <?php include "../../../../resources/header.php" ?>
     <main>
-        <h1>Wachtwoord herstellen</h1>
+        <h1><?= _['title'] ?></h1>
         <form action="#" method="post">
             <?php
                 Error::print_admin_message($error);
@@ -86,16 +86,16 @@
             <input type="hidden" name="code" value="<?= $code ?>">
             <table class="margin-center">
                 <tr>
-                    <td><label class="required" for="password"> Wachtwoord: </label></td>
+                    <td><label class="required" for="password"><?= _['password'] ?>: </label></td>
                     <td><input id="password" name="password" required type="password"></td>
                 </tr>
                 <tr>
-                    <td><label class="required" for="password_confirm">Wachtwoord Bevestigen: </label></td>
+                    <td><label class="required" for="password_confirm"><?= _['password_confirm'] ?>: </label></td>
                     <td><input id="password_confirm" name="password_confirm" required type="password"></td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button class="btn-blue" type="submit">Verander</button>
+                        <button class="btn-blue" type="submit"><?= _['change'] ?></button>
                     </td>
                 </tr>
             </table>
