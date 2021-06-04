@@ -1,0 +1,20 @@
+{
+  "d": {
+    "footer_privacy": "Privacy",
+    "footer_btw": "Alle prijzen zijn incl. BTW",
+    "footer_about": "Over",
+    "header_search": "Zoeken"
+  },
+  "f": {
+    "footer_privacy": "Confidentialité",
+    "footer_btw": "Tous les prix incluent la TVA",
+    "footer_about": "À propos de",
+    "header_search": "Rechercher"
+  },
+  "e": {
+    "footer_privacy": "Privacy",
+    "footer_btw": "All prices include VAT",
+    "footer_about": "About",
+    "header_search": "Search"
+  }
+}
