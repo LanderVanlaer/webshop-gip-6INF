@@ -1,0 +1,23 @@
+{
+  "d": {
+    "username": "Gebruikersnaam",
+    "password": "Wachtwoord",
+    "login": "Log in",
+    "forgot": "Wachtwoord vergeten",
+    "title": "Gebruiker inloggen"
+  },
+  "f": {
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "login": "Me connecter",
+    "forgot": "Mot de passe oublié",
+    "title": "Utilisateur en ligne"
+  },
+  "e": {
+    "username": "Username",
+    "password": "Password",
+    "login": "Login",
+    "forgot": "Forgot your password",
+    "title": "User login"
+  }
+}

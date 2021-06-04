@@ -86,7 +86,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?= _['title'] ?></title>
     <link rel="stylesheet" href="/css/form.css">
     <?php include "../../resources/head.html"; ?>
     <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
@@ -95,7 +95,7 @@
 <body>
     <?php include "../../resources/header.php"; ?>
     <main>
-        <h1>Customer login</h1>
+        <h1><?= _['title'] ?></h1>
         <form name="login" action="#" method="post">
             <?php Error::print_admin_message($error);
                 if ($resend_mail) {
@@ -104,11 +104,11 @@
             ?>
             <table class="margin-center">
                 <tr>
-                    <td><label for="username">Username</label></td>
+                    <td><label for="username"><?= _['username'] ?></label></td>
                     <td><input type="text" name="username" id="username"></td>
                 </tr>
                 <tr>
-                    <td><label for="password">Password</label></td>
+                    <td><label for="password"><?= _['password'] ?></label></td>
                     <td><input type="password" name="password" id="password"></td>
                 </tr>
                 <tr>
@@ -118,13 +118,13 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button class="btn-blue" type="submit">Login</button>
+                        <button class="btn-blue" type="submit"><?= _['login'] ?></button>
                     </td>
                 </tr>
             </table>
         </form>
         <div class="center">
-            <a class="btn-blue" href="forgot-password">Wachtwoord vergeten</a>
+            <a class="btn-blue" href="forgot-password"><?= _['forgot'] ?></a>
         </div>
     </main>
     <?php include "../../resources/footer.php"; ?>
