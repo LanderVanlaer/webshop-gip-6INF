@@ -12,7 +12,7 @@
     $executed = $succes = $last_id = false;
 
     if (!empty($_POST)) {
-        $name = var_validate($_POST["name"]);
+        $name = str_replace("/", "", var_validate($_POST["name"]));
         $brandId = var_validate($_POST["brand_id"]);
         $price = var_validate($_POST["price"]);
         
@@ -133,7 +133,8 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php include "../../../resources/admin/head.php"; ?>
     <link rel="stylesheet" href="/css/admin/add/style.css">
@@ -165,7 +166,7 @@
                                 <div class="data"></div>
                             </td>
                             <td><label class="required" for="price">Prijs</label></td>
-                            <td><input type="number" name="price" id="price"></td>
+                            <td><input type="number" name="price" step="any" id="price"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -175,15 +176,18 @@
                 <table>
                     <tr>
                         <td><label for="descriptionD">Nederlands</label></td>
-                        <td colspan="3"><textarea name="descriptionD" id="descriptionD" cols="50" rows="7" maxlength="1023"></textarea></td>
+                        <td colspan="3"><textarea name="descriptionD" id="descriptionD" cols="50" rows="7"
+                                                  maxlength="1023"></textarea></td>
                     </tr>
                     <tr>
                         <td><label for="descriptionF">Frans</label></td>
-                        <td colspan="3"><textarea name="descriptionF" id="descriptionF" cols="50" rows="7" maxlength="1023"></textarea></td>
+                        <td colspan="3"><textarea name="descriptionF" id="descriptionF" cols="50" rows="7"
+                                                  maxlength="1023"></textarea></td>
                     </tr>
                     <tr>
                         <td><label for="descriptionE">Engels</label></td>
-                        <td colspan="3"><textarea name="descriptionE" id="descriptionE" cols="50" rows="7" maxlength="1023"></textarea></td>
+                        <td colspan="3"><textarea name="descriptionE" id="descriptionE" cols="50" rows="7"
+                                                  maxlength="1023"></textarea></td>
                     </tr>
                 </table>
             </fieldset>
