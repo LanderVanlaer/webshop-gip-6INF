@@ -74,7 +74,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Recovery</title>
+    <title><?= _['title'] ?></title>
     <?php include "../../../resources/head.html" ?>
     <link rel="stylesheet" href="/css/form.css">
 </head>
@@ -82,22 +82,22 @@
 <body>
     <?php include "../../../resources/header.php" ?>
     <main>
-        <h1>Wachtwoord herstel</h1>
+        <h1><?= _['title'] ?></h1>
         <form action="#" method="post">
             <?php
                 Error::print_admin_message($error);
                 if ($reset) {
-                    Error::print_message("Er is zojuist een email verstuurd, met de mogelijkheid om uw wachtwoord te herstellen");
+                    Error::print_message(_['email_send']);
                 }
             ?>
             <table class="margin-center">
                 <tr>
-                    <td><label class="required" for="email">Email: </label></td>
+                    <td><label class="required" for="email"><?= _['email'] ?>: </label></td>
                     <td><input id="email" name="email" required type="email" value="<?= $email ?>"></td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button class="btn-blue" type="submit">Verstuur</button>
+                        <button class="btn-blue" type="submit"><?= _['send'] ?></button>
                     </td>
                 </tr>
             </table>
