@@ -7,7 +7,7 @@
         <div>
             <img src="/images/Icon_shield.svg" alt="Shield Icon">
             <a href="/privacy">Privacy</a>
-            <a href="#">Cookies</a>
+            <a href="/about">About</a>
         </div>
         |
         <div class="languages">
