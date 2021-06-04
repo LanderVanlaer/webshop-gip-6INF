@@ -6,7 +6,7 @@
     <div>
         <div>
             <img src="/images/Icon_shield.svg" alt="Shield Icon">
-            <a href="#">Privacy</a>
+            <a href="/privacy">Privacy</a>
             <a href="#">Cookies</a>
         </div>
         |
