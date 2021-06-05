@@ -1,0 +1,48 @@
+{
+  "d": {
+    "title": "Registreren",
+    "info": "Info",
+    "email": "E-mail adres",
+    "create": "Maak aan",
+    "firstname": "Voornaam",
+    "lastname": "Achternaam",
+    "password": "Wachtwoord",
+    "password_confirm": "Wachtwoord bevestigen",
+    "address": "Adres",
+    "country": "Land",
+    "postal_code": "Gemeente postcode",
+    "street": "Straat",
+    "number": "Nummer"
+  },
+  "f": {
+    "title": "S'inscrire",
+    "info": "Info",
+    "email": "Adresse mail",
+    "create": "Créer",
+    "firstname": "Prénom",
+    "lastname": "Nom de famille",
+    "password": "Mot de passe",
+    "password_confirm": "Confirmer le mot de passe",
+    "address": "Adresse",
+    "country": "Pays",
+    "postal_code": "Ville Code Postal",
+    "street": "Rue",
+    "number": "Numéro"
+  },
+  "e": {
+    "title": "Register",
+    "info": "Info",
+    "email_send": "An email has just been sent with the possibility of recovering your password",
+    "email": "Email address",
+    "create": "Create",
+    "firstname": "First name",
+    "lastname": "Last name",
+    "password": "Password",
+    "password_confirm": "Confirm password",
+    "address": "Address",
+    "country": "Country",
+    "postal_code": "City postal code",
+    "street": "Street",
+    "number": "Number"
+  }
+}

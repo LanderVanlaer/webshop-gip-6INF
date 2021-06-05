@@ -95,7 +95,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registreer</title>
+    <title><?= _['title'] ?></title>
     <link rel="stylesheet" href="/css/form.css">
     <?php include "../../resources/head.html" ?>
     <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
@@ -114,6 +114,7 @@
 <body>
     <?php include "../../resources/header.php" ?>
     <main>
+        <h1><?= _['title'] ?></h1>
         <form action="#" method="post" class="margin" autocomplete="off">
             <?php
                 Error::print_admin_message($error, $executed, $succes, $last_id);
@@ -125,37 +126,37 @@
                     Error::print_message($str);
                 } ?>
             <fieldset>
-                <legend>Werknemer</legend>
+                <legend><?= _['info'] ?></legend>
                 <table>
                     <tbody>
                         <tr>
-                            <td><label class="required" for="email">Email</label></td>
+                            <td><label class="required" for="email"><?= _['email'] ?></label></td>
                             <td><input required type="email" name="email" id="email" maxlength="127" autocomplete="no" value="<?= $email ?>"></td>
                         </tr>
                         <tr>
-                            <td><label class="required" for="firstname">Voornaam</label></td>
+                            <td><label class="required" for="firstname"><?= _['firstname'] ?></label></td>
                             <td><input required type="text" name="firstname" id="firstname" maxlength="63" autocomplete="no" value="<?= $firstname ?>"></td>
                         </tr>
                         <tr>
-                            <td><label class="required" for="lastname">Achternaam</label></td>
+                            <td><label class="required" for="lastname"><?= _['lastname'] ?></label></td>
                             <td><input required type="text" name="lastname" id="lastname" maxlength="63" autocomplete="no" value="<?= $lastname ?>"></td>
                         </tr>
                         <tr>
-                            <td><label class="required" for="password">Wachtwoord</label></td>
+                            <td><label class="required" for="password"><?= _['password'] ?></label></td>
                             <td><input required type="password" name="password" id="password" minlength="8" autocomplete="no" maxlength="32"></td>
                         </tr>
                         <tr>
-                            <td><label class="required" for="passwordConfirm">Wachtwoord bevestigen</label></td>
+                            <td><label class="required" for="passwordConfirm"><?= _['password_confirm'] ?></label></td>
                             <td><input required type="password" name="passwordConfirm" id="passwordConfirm" minlength="8" autocomplete="no" maxlength="32"></td>
                         </tr>
                     </tbody>
                 </table>
             </fieldset>
             <fieldset>
-                <legend>Adres</legend>
+                <legend><?= _['address'] ?></legend>
                 <table>
                     <tr>
-                        <td><label class="required" for="country">Land</label></td>
+                        <td><label class="required" for="country"><?= _['country'] ?></label></td>
                         <td><input required type="text" name="country" id="country" autocomplete="no" value="<?= $country_id ? $country : "" ?>">
                             <input type="hidden" name="country_id" id="country_id" autocomplete="no" value="<?= $country_id ?>"></td>
                     </tr>
@@ -167,21 +168,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><label class="required" for="township">Gemeente Postcode</label></td>
+                        <td><label class="required" for="township"><?= _['postal_code'] ?></label></td>
                         <td><input required type="text" name="township" id="township" autocomplete="no" maxlength="7" value="<?= $township ?>"></td>
                     </tr>
                     <tr>
-                        <td><label class="required" for="street">Straat</label></td>
+                        <td><label class="required" for="street"><?= _['street'] ?></label></td>
                         <td><input required type="text" name="street" id="street" autocomplete="no" value="<?= $street ?>"></td>
                     </tr>
                     <tr>
-                        <td><label class="required" for="streetNumber">Nummer</label></td>
+                        <td><label class="required" for="streetNumber"><?= _['number'] ?></label></td>
                         <td><input required type="number" min="1" name="streetNumber" id="streetNumber" autocomplete="no" value="<?= $streetNumber ?>"></td>
                     </tr>
                 </table>
             </fieldset>
             <div class="h-captcha" data-sitekey="<?= H_CAPTCHA_API_KEY ?>"></div>
-            <button class="btn-blue" type="submit">Submit</button>
+            <button class="btn-blue" type="submit"><?= _['create'] ?></button>
         </form>
     </main>
     <?php include "../../resources/footer.php" ?>
