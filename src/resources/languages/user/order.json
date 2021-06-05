@@ -1,0 +1,38 @@
+{
+  "d": {
+    "title": "Bestellen",
+    "billing_address": "Factureringsadres",
+    "country": "Land",
+    "postal_code": "Gemeente postcode",
+    "street": "Straat",
+    "number": "Nummer",
+    "delivery_address": "Leveringsadres",
+    "same_address": "Leveringsadres en factureringsadres zijn hetzelfde:",
+    "order": "Bestel",
+    "amount": "Aantal"
+  },
+  "f": {
+    "title": "Commander",
+    "billing_address": "Adresse de facturation",
+    "country": "Pays",
+    "postal_code": "Ville Code Postal",
+    "street": "Rue",
+    "number": "Numéro",
+    "delivery_address": "Adresse de livraison",
+    "same_address": "L'adresse de livraison et l'adresse de facturation sont les mêmes:",
+    "order": "Ordre",
+    "amount": "Nombre"
+  },
+  "e": {
+    "title": "Order",
+    "billing_address": "Billing Address",
+    "country": "Country",
+    "postal_code": "City postal code",
+    "street": "Street",
+    "number": "Number",
+    "delivery_address": "Delivery address",
+    "same_address": "Delivery address and billing address are the same:",
+    "order": "Order",
+    "amount": "Amount"
+  }
+}

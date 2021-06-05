@@ -115,7 +115,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bestellen</title>
+    <title><?= _['title'] ?></title>
     <?php include "../../resources/head.html" ?>
     <link rel="stylesheet" href="/css/user/order/style.css">
     <link rel="stylesheet" href="/css/form.css">
@@ -126,16 +126,16 @@
 <body>
     <?php include "../../resources/header.php" ?>
     <main>
-        <h1>Bestellen</h1>
+        <h1><?= _['title'] ?></h1>
         <div class="split">
             <section class="left">
                 <form action="index.php" method="post">
                     <?php Error::print_admin_message($error, $executed, $succes); ?>
                     <fieldset>
-                        <legend>Factureringsadres</legend>
+                        <legend><?= _['billing_address'] ?></legend>
                         <table>
                             <tr>
-                                <td><label class="required" for="purchase_country">Land</label></td>
+                                <td><label class="required" for="purchase_country"><?= _['country'] ?></label></td>
                                 <td><input required type="text" name="purchase_country" id="purchase_country" autocomplete="no"
                                            value="<?= $purchase_country_id ? $purchase_country : "" ?>">
                                     <input type="hidden" name="purchase_country_id" id="purchase_country_id" autocomplete="no" value="<?= $purchase_country_id ?>"></td>
@@ -148,31 +148,31 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label class="required" for="purchase_township">Gemeente Postcode</label></td>
+                                <td><label class="required" for="purchase_township"><?= _['postal_code'] ?></label></td>
                                 <td><input required type="text" name="purchase_township" id="purchase_township" autocomplete="no" maxlength="7" value="<?= $purchase_township ?>">
                                 </td>
                             </tr>
                             <tr>
-                                <td><label class="required" for="purchase_street">Straat</label></td>
+                                <td><label class="required" for="purchase_street"><?= _['street'] ?></label></td>
                                 <td><input required type="text" name="purchase_street" id="purchase_street" autocomplete="no" value="<?= $purchase_street ?>"></td>
                             </tr>
                             <tr>
-                                <td><label class="required" for="purchase_streetNumber">Nummer</label></td>
+                                <td><label class="required" for="purchase_streetNumber"><?= _['number'] ?></label></td>
                                 <td><input required type="number" min="1" name="purchase_streetNumber" id="purchase_streetNumber" autocomplete="no"
                                            value="<?= $purchase_streetNumber ?>"></td>
                             </tr>
                         </table>
                     </fieldset>
                     <fieldset>
-                        <legend>Leveringsadres</legend>
+                        <legend><?= _['delivery_address'] ?></legend>
                         <label>
-                            Leveringsadres en factureringsadres zijn hetzelfde:
+                            <?= _['same_address'] ?>
                             <input type="checkbox" name="same_address" id="same-address">
                             <span class="checkbox-custom"></span>
                         </label>
                         <table id="delivery-address-table">
                             <tr>
-                                <td><label class="required" for="delivery_country">Land</label></td>
+                                <td><label class="required" for="delivery_country"><?= _['country'] ?></label></td>
                                 <td><input required type="text" name="delivery_country" id="delivery_country" autocomplete="no"
                                            value="<?= $delivery_country_id ? $delivery_country : "" ?>">
                                     <input type="hidden" name="delivery_country_id" id="delivery_country_id" autocomplete="no" value="<?= $delivery_country_id ?>"></td>
@@ -185,22 +185,22 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><label class="required" for="delivery_township">Gemeente Postcode</label></td>
+                                <td><label class="required" for="delivery_township"><?= _['postal_code'] ?></label></td>
                                 <td><input required type="text" name="delivery_township" id="delivery_township" autocomplete="no" maxlength="7" value="<?= $delivery_township ?>">
                                 </td>
                             </tr>
                             <tr>
-                                <td><label class="required" for="delivery_street">Straat</label></td>
+                                <td><label class="required" for="delivery_street"><?= _['street'] ?></label></td>
                                 <td><input required type="text" name="delivery_street" id="delivery_street" autocomplete="no" value="<?= $delivery_street ?>"></td>
                             </tr>
                             <tr>
-                                <td><label class="required" for="delivery_streetNumber">Nummer</label></td>
+                                <td><label class="required" for="delivery_streetNumber"><?= _['number'] ?></label></td>
                                 <td><input required type="number" min="1" name="delivery_streetNumber" id="delivery_streetNumber" autocomplete="no"
                                            value="<?= $delivery_streetNumber ?>"></td>
                             </tr>
                         </table>
                     </fieldset>
-                    <button class="btn-blue" type="submit">Bestel</button>
+                    <button class="btn-blue" type="submit"><?= _['order'] ?></button>
                 </form>
             </section>
             <aside class="right">
@@ -212,7 +212,7 @@
                             <p><?= $item['name'] ?></p>
                         </div>
                         <div class="right">
-                            Aantal <span><?= $item['amount'] ?></span>
+                            <?= _['amount'] ?> <span><?= $item['amount'] ?></span>
                         </div>
                     </article>
                 <?php endforeach; ?>
