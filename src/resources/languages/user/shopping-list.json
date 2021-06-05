@@ -1,0 +1,35 @@
+{
+  "d": {
+    "title": "Winkelmand",
+    "article": "Artikel",
+    "unit_cost": "Stukprijs",
+    "total_price": "Prijs totaal",
+    "amount": "Aantal",
+    "total": "Totaal",
+    "order": "Bestellen",
+    "change": "Verander",
+    "quantity": "Hoeveelheid"
+  },
+  "f": {
+    "title": "Panier",
+    "article": "Article",
+    "unit_cost": "Prix unitaire",
+    "total_price": "Prix total",
+    "amount": "Nombre",
+    "total": "Total",
+    "order": "Commander",
+    "change": "Changer",
+    "quantity": "Quantité"
+  },
+  "e": {
+    "title": "Shopping cart",
+    "article": "Article",
+    "unit_cost": "Unit Cost",
+    "total_price": "Total Price",
+    "amount": "Amount",
+    "total": "Total",
+    "order": "Order",
+    "change": "Change",
+    "quantity": "Quantity"
+  }
+}
