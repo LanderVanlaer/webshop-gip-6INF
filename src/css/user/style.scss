@@ -2,9 +2,12 @@
     margin: 2rem;
 }
 
+.history, .liked, .orders {
+    border-top: 1px solid rgba(0, 0, 0, 0.41);
+}
+
 main section.history, main section.liked {
     display: block;
-    border-top: 1px solid rgba(0, 0, 0, 0.41);
     padding: 2rem 1rem;
 
     h2 {
