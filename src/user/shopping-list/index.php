@@ -69,8 +69,8 @@
                                            style="background-image: url('/images/articles/<?= $item['image_path'] ?>')"></a>
                                     </td>
                                     <td class="name"><span><?= $item['name'] ?></span></td>
-                                    <td class="price-unit center">&euro;&nbsp;<?= $item['price'] ?></td>
-                                    <td class="price-total center">&euro;&nbsp;<?= $item['price_total'] ?></td>
+                                    <td data-table-column-name="<?= _['unit_cost'] ?>:&nbsp;" class="price-unit center">&euro;&nbsp;<?= $item['price'] ?></td>
+                                    <td data-table-column-name="<?= _['total_price'] ?>:&nbsp;" class="price-total center">&euro;&nbsp;<?= $item['price_total'] ?></td>
                                     <td class="amount">
                                         <form action="/user/shopping-list/update" method="get">
                                             <label>

@@ -83,3 +83,195 @@ main {
         }
     }
 }
+
+@media (max-width: 1200px) {
+    main {
+        .divide {
+            > div {
+                width: 80%;
+
+                table#shoppinglist-items {
+                    thead tr th {
+                        &.article-img-name {
+                            width: 40%;
+                        }
+                    }
+
+                    tbody tr td {
+                        &.name {
+                            width: 30%;
+                        }
+
+                        &.amount {
+                            width: calc(60% - 14rem)
+                        }
+                    }
+                }
+            }
+
+            aside {
+                width: 20%;
+            }
+        }
+    }
+}
+
+@media (max-width: 1050px) {
+    main {
+        .divide {
+            aside, > div {
+                display: block;
+                width: 100%;
+            }
+
+            > div {
+                table#shoppinglist-items {
+                    thead tr th {
+                        &.article-img-name {
+                            width: 50%;
+                        }
+                    }
+
+                    tbody tr td {
+                        &.name {
+                            width: 30%;
+                        }
+
+                        &.amount {
+                            width: calc(50% - 14rem)
+                        }
+                    }
+                }
+            }
+
+            aside {
+                margin-top: 6rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    main {
+        .divide {
+            > div {
+                table#shoppinglist-items {
+                    a {
+                        height: 30px;
+                        padding: 4.5px;
+
+                        img {
+                            width: 100%;
+                            max-height: 100%;
+                        }
+                    }
+
+                    button {
+                        font-size: 1rem;
+                    }
+
+                    thead tr th {
+                        &.article-img-name {
+                            width: 40%;
+                        }
+                    }
+
+                    tbody tr td {
+                        &.name {
+                            width: 20%;
+                        }
+
+                        &.amount {
+                            width: calc(60% - 14rem)
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 650px) {
+    main {
+        .divide {
+            > div {
+                table#shoppinglist-items {
+                    button {
+                        padding: 7px;
+                        font-size: 1.5rem;
+                    }
+
+                    thead tr th {
+                        &.price-unit {
+                            display: none;
+                        }
+                    }
+
+                    tbody tr td {
+                        &.price-unit {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 510px) {
+    main {
+        .divide {
+            > div {
+                table#shoppinglist-items {
+                    thead {
+                        display: none;
+                    }
+
+                    tbody {
+                        tr {
+                            padding-left: 3px;
+                            border-bottom: 1px solid black;
+                            font-size: 0;
+                            display: block;
+
+                            td, td.price-unit {
+                                font-size: initial;
+                                border: none;
+                                display: inline-block;
+
+                                &.article-img {
+                                    width: 15%;
+                                }
+
+                                &.name {
+                                    width: 85%;
+
+                                    span {
+                                        max-width: none;
+                                    }
+                                }
+
+                                &.price-unit, &.price-total {
+                                    width: 50%;
+                                    text-align: left;
+
+                                    &::before {
+                                        content: attr(data-table-column-name);
+                                        display: inline-block;
+                                    }
+                                }
+
+                                &.amount {
+                                    display: block;
+                                    width: 93%;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
