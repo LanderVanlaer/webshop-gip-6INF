@@ -99,19 +99,10 @@ article {
         margin-right: 2%;
         height: 350px;
 
-        a {
-            div.thumbnail {
-            }
-        }
-
         div {
             a {
                 h4.product-name {
                     font-size: 2rem;
-                }
-
-                div.brand {
-
                 }
 
                 div.description {
@@ -119,13 +110,6 @@ article {
                 }
             }
 
-            div.bottom {
-                .price {
-                }
-
-                .basket {
-                }
-            }
         }
     }
 }
@@ -134,37 +118,16 @@ article {
     article {
         height: 380px;
 
-        a {
-            div.thumbnail {
-            }
-        }
-
         div {
             a {
-                h4.product-name {
-                }
-
-                div.brand {
-
-                }
-
                 div.description {
                     height: 125px;
-                }
-            }
-
-            div.bottom {
-                .price {
-                }
-
-                .basket {
                 }
             }
         }
     }
 }
 
-//MMMMMMMMMM MMMMMMMMMM MMMMMMMMMM
 @media (max-width: 1000px) {
     article {
         width: 100%;
@@ -172,11 +135,6 @@ article {
 
         &.visible {
             display: block;
-        }
-
-        a {
-            div.thumbnail {
-            }
         }
 
         div {
@@ -187,20 +145,8 @@ article {
                     font-size: 2.2rem;
                 }
 
-                div.brand {
-
-                }
-
                 div.description {
                     font-size: 1.9rem;
-                }
-            }
-
-            div.bottom {
-                .price {
-                }
-
-                .basket {
                 }
             }
         }
