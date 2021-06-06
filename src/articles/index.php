@@ -1,6 +1,6 @@
 <?php
     include_once "../includes/basicFunctions.inc.php";
-    
+
     $category_id = $_GET['id'];
     $category_name = $_GET['name'] ?? '';
     
@@ -118,7 +118,7 @@
                     <!-- BRAND-->
                     <li>
                         <fieldset name="brand">
-                            <legend>Merk</legend>
+                            <legend><?= _['brand'] ?></legend>
                             <ul>
                                 <?php foreach ($brands as $brand) {
                                     ?>
