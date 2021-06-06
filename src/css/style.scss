@@ -189,4 +189,19 @@ a.btn-blue {
     html {
         font-size: 2vw;
     }
+    main {
+        padding: .3rem;
+    }
+}
+
+@media (max-height: 1200px) {
+    main {
+        min-height: 81vh;
+    }
+}
+
+@media (max-height: 700px) {
+    main {
+        min-height: 75vh;
+    }
 }

@@ -175,8 +175,8 @@
                 </div>
             </section>
         <?php else: ?>
-            <a class="btn-blue" href="register">Registreren</a>
-            <a class="btn-blue" href="login">Aanmelden</a>
+            <a class="btn-blue" href="register"><?= _['register'] ?></a>
+            <a class="btn-blue" href="login"><?= _['sign_up'] ?></a>
         <?php endif; ?>
     </main>
     <?php include "../resources/footer.php" ?>

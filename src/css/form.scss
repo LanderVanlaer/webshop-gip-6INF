@@ -78,3 +78,49 @@ form {
         display: none;
     }
 }
+
+@media (max-width: 500px) {
+    form {
+        font-size: 4rem;
+        margin: 0;
+        padding: 0;
+
+        &.margin {
+            margin: 5px 10px;
+        }
+
+        fieldset {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        input {
+            font-size: 3rem;
+        }
+
+        table.responsive {
+            width: 100%;
+
+            > tbody, > thead, > tfoot {
+                > tr {
+                    > td {
+                        padding: .75rem;
+                    }
+
+                    &, > td, > th {
+                        display: block;
+                        width: 100%;
+
+                        input {
+                            width: 100%;
+                        }
+
+                        .h-captcha {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

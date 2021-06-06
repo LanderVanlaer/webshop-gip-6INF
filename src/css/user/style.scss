@@ -78,3 +78,15 @@ main section.orders {
         }
     }
 }
+
+@media (max-width: 1000px) {
+    main section.orders .tables {
+        div {
+            display: block;
+
+            &, table {
+                width: 100%;
+            }
+        }
+    }
+}

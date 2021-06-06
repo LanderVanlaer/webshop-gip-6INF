@@ -127,7 +127,7 @@
                 } ?>
             <fieldset>
                 <legend><?= _['info'] ?></legend>
-                <table>
+                <table class="responsive">
                     <tbody>
                         <tr>
                             <td><label class="required" for="email"><?= _['email'] ?></label></td>
@@ -154,14 +154,14 @@
             </fieldset>
             <fieldset>
                 <legend><?= _['address'] ?></legend>
-                <table>
+                <table class="responsive">
                     <tr>
                         <td><label class="required" for="country"><?= _['country'] ?></label></td>
                         <td><input required type="text" name="country" id="country" autocomplete="no" value="<?= $country_id ? $country : "" ?>">
                             <input type="hidden" name="country_id" id="country_id" autocomplete="no" value="<?= $country_id ?>"></td>
                     </tr>
                     <tr>
-                        <td colspan=" 2">
+                        <td colspan="2">
                             <table id="country-dynamic">
                                 <!--API-COUNTRY-->
                             </table>

@@ -90,7 +90,7 @@
                     Error::print_message(_['email_send']);
                 }
             ?>
-            <table class="margin-center">
+            <table class="margin-center responsive">
                 <tr>
                     <td><label class="required" for="email"><?= _['email'] ?>: </label></td>
                     <td><input id="email" name="email" required type="email" value="<?= $email ?>"></td>

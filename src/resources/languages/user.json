@@ -16,7 +16,9 @@
     "old_password": "Oude wachtwoord",
     "new_password": "Nieuwe wachtwoord",
     "confirm_password": "Bevestiging",
-    "wishlist": "Verlanglijstje"
+    "wishlist": "Verlanglijstje",
+    "sign_up": "Aanmelden",
+    "register": "Registreren"
   },
   "f": {
     "title": "Utilisateur",
@@ -35,7 +37,9 @@
     "old_password": "Ancien mot de passe",
     "new_password": "Nouveau mot de passe",
     "confirm_password": "Confirmation",
-    "wishlist": "Liste de souhaits"
+    "wishlist": "Liste de souhaits",
+    "sign_up": "S'inscrire",
+    "register": "S'enregistrer"
   },
   "e": {
     "title": "User",
@@ -54,6 +58,8 @@
     "old_password": "Old password",
     "new_password": "New password",
     "confirm_password": "Confirm",
-    "wishlist": "Wishlist"
+    "wishlist": "Wishlist",
+    "sign_up": "Sign Up",
+    "register": "Register"
   }
 }

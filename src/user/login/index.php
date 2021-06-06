@@ -102,7 +102,7 @@
                     Error::print_message("er is zojuist een nieuwe mail verstuurd naar {$row["email"]}");
                 }
             ?>
-            <table class="margin-center">
+            <table class="margin-center responsive">
                 <tr>
                     <td><label for="username"><?= _['username'] ?></label></td>
                     <td><input type="text" name="username" id="username"></td>
@@ -121,11 +121,13 @@
                         <button class="btn-blue" type="submit"><?= _['login'] ?></button>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <a class="btn-blue" href="forgot-password"><?= _['forgot'] ?></a>
+                    </td>
+                </tr>
             </table>
         </form>
-        <div class="center">
-            <a class="btn-blue" href="forgot-password"><?= _['forgot'] ?></a>
-        </div>
     </main>
     <?php include "../../resources/footer.php"; ?>
 </body>

@@ -16,7 +16,7 @@
                     ""
                     : var_validate($_POST["code"]))
             : var_validate($_GET["code"]);
-    
+
     if (empty($code))
         redirect("/user");
 
@@ -84,7 +84,7 @@
                 }
             ?>
             <input type="hidden" name="code" value="<?= $code ?>">
-            <table class="margin-center">
+            <table class="margin-center responsive">
                 <tr>
                     <td><label class="required" for="password"><?= _['password'] ?>: </label></td>
                     <td><input id="password" name="password" required type="password"></td>
