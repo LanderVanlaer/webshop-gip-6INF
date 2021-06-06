@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About</title>
+    <title><?= _['title'] ?></title>
     <?php include "../resources/head.html" ?>
     <style>
         main {
@@ -27,23 +27,22 @@
 <body>
     <?php include "../resources/header.php" ?>
     <main>
-        <h1>About</h1>
+        <h1><?= _['title'] ?></h1>
         <p>Click <a href="/Ondernemingsplan.pdf" target="_blank">HERE</a> to get the PDF!</p>
         <object data="/Ondernemingsplan.pdf" type="application/pdf">
             <p>Click <a href="/Ondernemingsplan.pdf" target="_blank">HERE</a> to get the PDF!</p>
         </object>
         <section class="mission-vision">
             <section class="mission">
-                <h3>Mission</h3>
+                <h3><?= _['mission_title'] ?></h3>
                 <p>
-                    Het helpen en het beste bieden voor de foto’s van de professionele en hobbyfotograaf.
+                    <?= _['mission_text'] ?>
                 </p>
             </section>
             <section class="vision">
-                <h3>Vission</h3>
+                <h3><?= _['vision_title'] ?></h3>
                 <p>
-                    Wij willen zo veel mogelijk kwalitatieve foto geassocieerde producten verkopen, zodat elke fotograaf met zijn/haar budget de benodigde producten vindt
-                    op één gezamenlijke plek.
+                    <?= _['vision_text'] ?>
                 </p>
             </section>
         </section>
