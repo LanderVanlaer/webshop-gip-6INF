@@ -51,11 +51,11 @@
     <main>
         <div class="top">
             <h1>GigaCam</h1>
-            <h2>alles voor jouw foto’s</h2>
+            <h2><?= _['baseline'] ?></h2>
             <img class="logo" src="/images/logo_basic.svg" alt="Logo GigaCam">
         </div>
         <section class="categories">
-            <h2>Categorieën</h2>
+            <h2><?= _['category'] ?></h2>
             <nav>
                 <ul>
                     <?php foreach ($categories as $category): ?>
@@ -66,7 +66,7 @@
         </section>
         <?php if (isLoggedIn()): ?>
             <section class="history">
-                <h2>History</h2>
+                <h2><?= _['history'] ?></h2>
                 <div>
                     <div class="split" style="width: <?= 25 * count($historyArticles) ?>rem">
                         <?php foreach ($historyArticles as $article) : ?>
