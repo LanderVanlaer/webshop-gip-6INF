@@ -93,7 +93,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GigaCam <?= $product["name"] ?> &#9866; <?= $product["brand"]["name"] ?></title>
+    <title>GigaCam - <?= $product["name"] ?> &#9866; <?= $product["brand"]["name"] ?></title>
     <link rel="stylesheet" href="/css/article.css">
     <?php include "../resources/head.html" ?>
 </head>
@@ -144,7 +144,7 @@
                     <form action="/user/shopping-list/add">
                         <input type="hidden" name="id" value="<?= $product['id'] ?>">
                         <label>
-                            Hoeveelheid:
+                            <?= _['amount'] ?>:
                             <input type="number" name="amount" min="1" max="99" size="2" value="1">
                         </label>
                         <button type="submit" class="btn-blue">
