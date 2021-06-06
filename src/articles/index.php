@@ -106,12 +106,21 @@
             font-size: 5rem;
         }
     </style>
+    <script>
+        addEventListener('load', () => {
+            const main = document.querySelector('main');
+            document.querySelector('#show-filter').addEventListener('click', () => main.classList.toggle('show-filters'));
+        });
+    </script>
 </head>
 
 <body>
     <?php include "../resources/header.php" ?>
     <main>
         <h1><?= $category["name"] ?></h1>
+        <div class="show-filters-div-btn">
+            <button class="btn-blue" id="show-filter"><?= _['show_filters'] ?></button>
+        </div>
         <aside>
             <form name="properties" method="GET">
                 <ul>

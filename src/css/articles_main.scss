@@ -7,6 +7,10 @@ main {
         font-size: medium;
     }
 
+    div.show-filters-div-btn {
+        display: none;
+    }
+
     aside,
     section {
         display: inline-block;
@@ -52,7 +56,49 @@ main {
 
     section {
         width: calc(100% - #{$aside-width});
-        padding: 2.5rem 2.5rem 2.5rem 0;
+        font-size: 0;
         @import "articles-article-block";
+    }
+}
+
+@media (max-width: 950px) {
+    $aside-width: 300px;
+    main {
+        aside {
+            width: $aside-width;
+        }
+
+        section {
+            width: calc(100% - #{$aside-width});
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    main {
+        div.show-filters-div-btn {
+            display: block;
+            text-align: center;
+            margin: 2rem;
+
+            button {
+                font-size: 2rem;
+            }
+        }
+
+        aside {
+            display: none;
+        }
+
+        &.show-filters {
+            aside {
+                display: block;
+            }
+        }
+
+        section {
+            display: block;
+            width: 100%;
+        }
     }
 }

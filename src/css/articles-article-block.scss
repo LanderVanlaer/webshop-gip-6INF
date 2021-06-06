@@ -1,13 +1,17 @@
 article {
     //background-color: #09BDEA;
-    display: inline-block;
+    display: none;
     width: 280px;
     height: 410px;
-    margin: 0 7rem 5rem 0;
+    margin: 0 1.5rem 5rem 0;
     border-radius: 15px;
     padding: 1rem;
     background-color: rgba(0, 0, 0, 0.03);
     vertical-align: top;
+
+    &.visible {
+        display: inline-block;
+    }
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.03);
@@ -23,7 +27,7 @@ article {
         .thumbnail {
             background-color: white;
             display: block;
-            width: 256px;
+            width: 100%;
             height: 129px;
             margin: 0 auto;
         }
@@ -83,6 +87,120 @@ article {
                     margin: 3px 0;
                     float: right;
                     width: 60px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1300px) {
+    article {
+        width: 48%;
+        margin-right: 2%;
+        height: 350px;
+
+        a {
+            div.thumbnail {
+            }
+        }
+
+        div {
+            a {
+                h4.product-name {
+                    font-size: 2rem;
+                }
+
+                div.brand {
+
+                }
+
+                div.description {
+                    height: 100px;
+                }
+            }
+
+            div.bottom {
+                .price {
+                }
+
+                .basket {
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    article {
+        height: 380px;
+
+        a {
+            div.thumbnail {
+            }
+        }
+
+        div {
+            a {
+                h4.product-name {
+                }
+
+                div.brand {
+
+                }
+
+                div.description {
+                    height: 125px;
+                }
+            }
+
+            div.bottom {
+                .price {
+                }
+
+                .basket {
+                }
+            }
+        }
+    }
+}
+
+//MMMMMMMMMM MMMMMMMMMM MMMMMMMMMM
+@media (max-width: 1000px) {
+    article {
+        width: 100%;
+        margin-right: 0;
+
+        &.visible {
+            display: block;
+        }
+
+        a {
+            div.thumbnail {
+            }
+        }
+
+        div {
+            margin-top: .4rem;
+
+            a {
+                h4.product-name {
+                    font-size: 2.2rem;
+                }
+
+                div.brand {
+
+                }
+
+                div.description {
+                    font-size: 1.9rem;
+                }
+            }
+
+            div.bottom {
+                .price {
+                }
+
+                .basket {
                 }
             }
         }

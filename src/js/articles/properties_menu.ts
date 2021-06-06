@@ -45,7 +45,11 @@ const updateFilterArticles = (): void => {
             }
         });
 
-        article.style.display = show ? 'inline-block' : 'none';
+        if (show) {
+            article.classList.add('visible');
+        } else {
+            article.classList.remove('visible');
+        }
     });
 };
 

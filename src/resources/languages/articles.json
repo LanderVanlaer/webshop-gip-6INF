@@ -1,11 +1,14 @@
 {
   "d": {
-    "brand": "Merk"
+    "brand": "Merk",
+    "show_filters": "Filter"
   },
   "f": {
-    "brand": "Marque"
+    "brand": "Marque",
+    "show_filters": "Filtrer"
   },
   "e": {
-    "brand": "Brand"
+    "brand": "Brand",
+    "show_filters": "Filter"
   }
 }
