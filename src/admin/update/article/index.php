@@ -102,7 +102,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Update Article</title>
-    <?php include "../../../resources/admin/head.php"; ?>
+    <?php include "../../../resources/admin/head.html"; ?>
     <link rel="stylesheet" href="/css/form.css">
     <style>
         #images img {

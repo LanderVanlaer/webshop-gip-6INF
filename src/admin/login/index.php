@@ -66,7 +66,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/admin/admin.css">
     <link rel="stylesheet" href="/css/form.css">
-    <?php include "../../resources/admin/head.php"; ?>
+    <?php include "../../resources/admin/head.html"; ?>
     <script src='https://www.hCaptcha.com/1/api.js' async defer></script>
 </head>
 
