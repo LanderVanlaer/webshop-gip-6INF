@@ -172,3 +172,21 @@ a.btn-blue {
 
 @import 'header';
 @import 'footer';
+
+@media (max-width: 800px) {
+    html {
+        font-size: 1.25vw;
+    }
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 1.5vw;
+    }
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 2vw;
+    }
+}
