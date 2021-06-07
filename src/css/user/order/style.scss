@@ -53,6 +53,13 @@ aside {
                 width: 3rem;
                 aspect-ratio: 16 / 9;
             }
+
+            p {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
+            }
         }
 
         > div.right {
@@ -72,6 +79,20 @@ aside {
                 }
             }
 
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    main div.split {
+        > .left, > .right {
+            display: block;
+            width: 100%;
+        }
+
+        > .right {
+            margin-top: 10rem;
+            padding: 3px;
         }
     }
 }
