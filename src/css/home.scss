@@ -107,3 +107,26 @@ main {
         }
     }
 }
+
+@media (max-width: 400px) {
+    main {
+        div.top {
+            > h2 {
+                display: inline-block;
+                width: 75%;
+            }
+
+            img {
+                width: 25%;
+            }
+        }
+
+        .categories {
+            nav ul {
+                &, li, a, a:active {
+                    display: block;
+                }
+            }
+        }
+    }
+}
