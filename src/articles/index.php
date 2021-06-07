@@ -34,6 +34,7 @@
         $query_product_specification->execute();
         $product_spec_res = $query_product_specification->get_result();
         while ($product_spec = $product_spec_res->fetch_assoc()) {
+//            $product_specifications[$product_spec['specification_id']] = str_replace('&quot;', '\"', $product_spec['value']);
             $product_specifications[$product_spec['specification_id']] = $product_spec['value'];
         }
 
@@ -156,7 +157,7 @@
                                                 ?>
                                                 <li>
                                                     <label>
-                                                        <input type="checkbox" name="<?= urlencode("{$specification["id"]}_$value") ?>">
+                                                        <input type="checkbox" name="<?= urlencode("{$specification["id"]}_" . str_replace("&quot;", "\"", $value)) ?>">
                                                         <span class="checkbox-custom"></span>
                                                         <?php
                                                             echo yes_no_to_unicode($value);
