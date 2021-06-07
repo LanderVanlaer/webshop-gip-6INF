@@ -75,7 +75,10 @@
     <main>
         <h1>Admin login</h1>
         <form name="login" action="#" method="post">
-            <?php Error::print_admin_message($error); ?>
+            <?php
+                Error::print_admin_message($error);
+                Error::print_message("De admin-pagina's zijn niet ontwikkeld voor kleine schermen zoals een smartphone/tablet");
+            ?>
             <table>
                 <tr>
                     <td><label for="username">Username</label></td>
