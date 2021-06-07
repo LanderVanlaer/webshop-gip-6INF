@@ -17,7 +17,6 @@
         <h1>Update</h1>
         <nav>
             <ul>
-                <li><a class="btn-blue" href="category">Categorie</a></li>
                 <li><a class="btn-blue" href="brand">Merk</a></li>
                 <li><a class="btn-blue" href="article">Article</a></li>
                 <li><a class="btn-blue" href="employee">Employe / me</a></li>

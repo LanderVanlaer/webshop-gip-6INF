@@ -9,7 +9,7 @@
     print_r($_POST);
 
     $article_id = var_validate($_POST['article-id']);
-    $name = var_validate($_POST['name']);
+    $name = str_replace("/", "", var_validate($_POST["name"]));
     $price = var_validate($_POST['price']);
     $descriptionD = var_validate($_POST['descriptionD']);
     $descriptionF = var_validate($_POST['descriptionF']);
