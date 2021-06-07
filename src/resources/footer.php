@@ -8,6 +8,7 @@
             <img src="/images/Icon_shield.svg" alt="Shield Icon">
             <a href="/privacy"><?= _['footer_privacy'] ?></a>
             <a href="/about"><?= _['footer_about'] ?></a>
+            <a href="https://github.com/LanderVanlaer/webshop-gip-6INF">GitHub</a>
         </div>
         |
         <div class="languages">
