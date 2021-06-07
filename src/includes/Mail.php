@@ -12,7 +12,7 @@
         $link = "http://{$_SERVER['SERVER_NAME']}/user/activate?code=$registration_code";
         return mail(
             $to_email,
-            "Registratie gigacam.be",
+            json_decode(file_get_contents(__DIR__ . '\\..\\resources\\languages\\mail.subjects.json'), true)[language()]['activate'],
 //                "Beste <i>$firstname $lastname</i><br>gelieve deze email te valideren via onderstaande link:\n\t<a href='$link'>$link</a>",
             str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents(__DIR__ . "/../resources/mail/activate/" . language() . ".html"))),
             $header
@@ -28,7 +28,7 @@
         $link = "http://{$_SERVER['SERVER_NAME']}/user/login/forgot-password/reset?code=$registration_code";
         return mail(
             $to_email,
-            "Wachtwoord herstellen",
+            json_decode(file_get_contents(__DIR__ . '\\..\\resources\\languages\\mail.subjects.json'), true)[language()]['password_recovery'],
             str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents(__DIR__ . "/../resources/mail/password-reset/" . language() . ".html"))),
             $header
         );
