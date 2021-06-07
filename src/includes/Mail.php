@@ -14,7 +14,7 @@
             $to_email,
             "Registratie gigacam.be",
 //                "Beste <i>$firstname $lastname</i><br>gelieve deze email te valideren via onderstaande link:\n\t<a href='$link'>$link</a>",
-            str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents(__DIR__ . "/../resources/mail/activate/nl.html"))),
+            str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents(__DIR__ . "/../resources/mail/activate/" . language() . ".html"))),
             $header
         );
     }
@@ -29,7 +29,7 @@
         return mail(
             $to_email,
             "Wachtwoord herstellen",
-            str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents(__DIR__ . "/../resources/mail/password-reset/nl.html"))),
+            str_replace("{{name}}", "$firstname $lastname", str_replace("{{activation_link}}", $link, file_get_contents(__DIR__ . "/../resources/mail/password-reset/" . language() . ".html"))),
             $header
         );
     }

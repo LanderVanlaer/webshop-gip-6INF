@@ -99,7 +99,7 @@
         <form name="login" action="#" method="post">
             <?php Error::print_admin_message($error);
                 if ($resend_mail) {
-                    Error::print_message("er is zojuist een nieuwe mail verstuurd naar {$row["email"]}");
+                    Error::print_message(str_replace("{email}", $row["email"], _['resend_mail']));
                 }
             ?>
             <table class="margin-center responsive">

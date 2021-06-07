@@ -1,0 +1,14 @@
+{
+  "d": {
+    "activate": "Registratie gigacam.be",
+    "password_recovery": "Wachtwoord herstellen"
+  },
+  "f": {
+    "activate": "Enregistrement gigacam.be",
+    "password_recovery": "Réinitialiser le mot de passe"
+  },
+  "e": {
+    "activate": "Registration gigacam.be",
+    "password_recovery": "Recover password"
+  }
+}

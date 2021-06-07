@@ -4,20 +4,23 @@
     "password": "Wachtwoord",
     "login": "Log in",
     "forgot": "Wachtwoord vergeten",
-    "title": "Gebruiker inloggen"
+    "title": "Gebruiker inloggen",
+    "resend_mail": "er is zojuist een nieuwe mail verstuurd naar {email}"
   },
   "f": {
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",
     "login": "Me connecter",
     "forgot": "Mot de passe oublié",
-    "title": "Utilisateur en ligne"
+    "title": "Utilisateur en ligne",
+    "resend_mail": "un nouveau mail vient d'être envoyé à {email}"
   },
   "e": {
     "username": "Username",
     "password": "Password",
     "login": "Login",
     "forgot": "Forgot your password",
-    "title": "User login"
+    "title": "User login",
+    "resend_mail": "a new mail has just been sent to {email}"
   }
 }
