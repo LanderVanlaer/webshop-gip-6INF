@@ -21,6 +21,16 @@
         redirect('/user/login');
 
     include_once '../../../includes/connection.inc.php';
+
+    $query = $con->prepare(file_get_contents("../../../sql/customer/shopping-list/shopping-list-article.customer.article.select.sql"));
+    $query->bind_param('ii', $_SESSION['user']['id'], $article_id);
+    $query->execute();
+    $res = $query->get_result();
+    $row = $res->fetch_assoc();
+
+    if ($row['amount'] + $article_amount > 99)
+        $article_amount = 99 - $row['amount'];
+
     $query = $con->prepare(file_get_contents("../../../sql/customer/shopping-list/shopping-list-article.customer-article.insert.sql"));
     $query->bind_param("iii", $_SESSION['user']['id'], $article_id, $article_amount);
     $query->execute();
